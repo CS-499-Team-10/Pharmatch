@@ -2,9 +2,11 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+// using System;
 
 public class SceneController : MonoBehaviour {
-	private List<HashSet<string>> drugs = new List<HashSet<string>>();
+	private List<List<string>> drugs = new List<List<string>>();
+	// private List<string>[] drugs;
 
 	public const int gridRows = 4;
 	public const int gridCols = 4;
@@ -27,9 +29,9 @@ public class SceneController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
-		// drugs = new List<HashSet<string>>();
-		HashSet<string> firstSet = new HashSet<string>();
-		HashSet<string> secondSet = new HashSet<string>();
+		// drugs = new List<List<string>>();
+		List<string> firstSet = new List<string>();
+		List<string> secondSet = new List<string>();
 		firstSet.Add("triangle");
 		firstSet.Add("three");
 		drugs.Add(firstSet);
@@ -46,10 +48,15 @@ public class SceneController : MonoBehaviour {
 		// place cards in a grid
 		for (int i = 0; i < gridCols; i++) {
 			for (int j = 0; j < gridRows; j++) {
-				DrugTile card;
-				// TextMesh name;
-				// name.text = "test";
-				
+				DrugTile card;	
+
+				// MyElement = Elements[Random.Range(0,Elements.Length)];
+				List<string> randomSet = drugs[Random.Range(0, 2)];
+
+				// var random = new Random();
+				// var list = new List<string>{ "one","two","three","four"};
+				// int index = random.Next(list.Count);
+				// Console.WriteLine(list[index]);		
 
 				// use the original for the first grid space
 				if (i == 0 && j == 0) {
@@ -57,7 +64,7 @@ public class SceneController : MonoBehaviour {
 				} else {
 					card = Instantiate(originalCard) as DrugTile;
 				}
-				card.nameLabel.text = "test";
+				card.nameLabel.text = randomSet[Random.Range(0, 2)];
 
 				// next card in the list for each grid space
 				int index = j * gridCols + i;
