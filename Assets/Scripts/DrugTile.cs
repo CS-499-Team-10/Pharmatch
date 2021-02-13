@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DrugTile : MonoBehaviour {
 	// [SerializeField] private GameObject cardBack;
+
+	[SerializeField] public HashSet<string> drugMatches;
 	[SerializeField] private SceneController controller;
 
 	private int _id;
