@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-// using System;
 
 public class SceneController : MonoBehaviour {
 	private List<List<string>> drugs = new List<List<string>>();
@@ -13,14 +12,12 @@ public class SceneController : MonoBehaviour {
 	public const float offsetX = 200f;
 	public const float offsetY = 250f;
 
-	// public IDictionary<int, string> numberNames = new Dictionary<int, string>();
-// List<Part> parts = new List<Part>();
 	[SerializeField] private DrugTile originalCard;
 	// [SerializeField] private Sprite[] images;
 	// [SerializeField] private TextMesh scoreLabel;
 	
-	// private MemoryCard _firstRevealed;
-	// private MemoryCard _secondRevealed;
+	private DrugTile _firstRevealed;
+	private DrugTile _secondRevealed;
 	private int _score = 0;
 
 	// public bool canReveal {
@@ -29,6 +26,7 @@ public class SceneController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
+		Debug.Log("start");
 		// drugs = new List<List<string>>();
 		List<string> firstSet = new List<string>();
 		List<string> secondSet = new List<string>();
@@ -38,7 +36,6 @@ public class SceneController : MonoBehaviour {
 		secondSet.Add("square");
 		secondSet.Add("four");
 		drugs.Add(secondSet);
-		// Vector3 startPos = originalCard.transform.position;
 		Vector3 startPos = new Vector3(0, 0, -10);
 
 		// create shuffled list of cards
@@ -51,12 +48,7 @@ public class SceneController : MonoBehaviour {
 				DrugTile card;	
 
 				// MyElement = Elements[Random.Range(0,Elements.Length)];
-				List<string> randomSet = drugs[Random.Range(0, 2)];
-
-				// var random = new Random();
-				// var list = new List<string>{ "one","two","three","four"};
-				// int index = random.Next(list.Count);
-				// Console.WriteLine(list[index]);		
+				List<string> randomSet = drugs[Random.Range(0, 2)];	
 
 				// use the original for the first grid space
 				if (i == 0 && j == 0) {
@@ -64,6 +56,7 @@ public class SceneController : MonoBehaviour {
 				} else {
 					card = Instantiate(originalCard) as DrugTile;
 				}
+				card.drugMatches = randomSet;
 				card.nameLabel.text = randomSet[Random.Range(0, 2)];
 
 				// next card in the list for each grid space
@@ -90,34 +83,37 @@ public class SceneController : MonoBehaviour {
 		return newArray;
 	}
 
-	// public void CardRevealed(MemoryCard card) {
-	// 	if (_firstRevealed == null) {
-	// 		_firstRevealed = card;
-	// 	} else {
-	// 		_secondRevealed = card;
-	// 		StartCoroutine(CheckMatch());
-	// 	}
-	// }
+	public void CardRevealed(DrugTile card) {
+		if (_firstRevealed == null) {
+			_firstRevealed = card;
+		} else {
+			_secondRevealed = card;
+			StartCoroutine(CheckMatch());
+		}
+	}
 	
-	// private IEnumerator CheckMatch() {
+	private IEnumerator CheckMatch() {
 
-	// 	// increment score if the cards match
-	// 	if (_firstRevealed.id == _secondRevealed.id) {
-	// 		_score++;
-	// 		scoreLabel.text = "Score: " + _score;
-	// 	}
+		// increment score if the cards match
+		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabel.text)) {
+			_score++;
+			Debug.Log(_score);
+			// scoreLabel.text = "Score: " + _score;
+		}
 
-	// 	// otherwise turn them back over after .5s pause
-	// 	else {
-	// 		yield return new WaitForSeconds(.5f);
+		// otherwise turn them back over after .5s pause
+		else {
+			yield return new WaitForSeconds(.5f);
 
-	// 		_firstRevealed.Unreveal();
-	// 		_secondRevealed.Unreveal();
-	// 	}
+			_firstRevealed.Unreveal();
+			_secondRevealed.Unreveal();
+
+			Debug.Log("no");
+		}
 		
-	// 	_firstRevealed = null;
-	// 	_secondRevealed = null;
-	// }
+		_firstRevealed = null;
+		_secondRevealed = null;
+	}
 
 	public void Restart() {
 		SceneManager.LoadScene("Scene");

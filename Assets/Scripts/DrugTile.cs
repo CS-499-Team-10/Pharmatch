@@ -6,7 +6,7 @@ public class DrugTile : MonoBehaviour {
 	// [SerializeField] private GameObject cardBack;
 	[SerializeField] public TextMesh nameLabel;
 
-	[SerializeField] public HashSet<string> drugMatches;
+	[SerializeField] public List<string> drugMatches;
 	[SerializeField] private SceneController controller;
 
 	private int _id;
@@ -25,6 +25,8 @@ public class DrugTile : MonoBehaviour {
 		// 	cardBack.SetActive(false);
 		// 	// controller.CardRevealed(this);
 		// }
+		Debug.Log("clicked " + nameLabel);
+		controller.CardRevealed(this);
 	}
 
 	public void Unreveal() {
