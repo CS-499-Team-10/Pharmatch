@@ -47,6 +47,9 @@ public class SceneController : MonoBehaviour {
 		for (int i = 0; i < gridCols; i++) {
 			for (int j = 0; j < gridRows; j++) {
 				DrugTile card;
+				// TextMesh name;
+				// name.text = "test";
+				
 
 				// use the original for the first grid space
 				if (i == 0 && j == 0) {
@@ -54,6 +57,7 @@ public class SceneController : MonoBehaviour {
 				} else {
 					card = Instantiate(originalCard) as DrugTile;
 				}
+				card.nameLabel.text = "test";
 
 				// next card in the list for each grid space
 				int index = j * gridCols + i;

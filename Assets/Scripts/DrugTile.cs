@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class DrugTile : MonoBehaviour {
 	// [SerializeField] private GameObject cardBack;
+	[SerializeField] public TextMesh nameLabel;
 
 	[SerializeField] public HashSet<string> drugMatches;
 	[SerializeField] private SceneController controller;
