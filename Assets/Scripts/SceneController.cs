@@ -118,6 +118,8 @@ public class SceneController : MonoBehaviour {
 			secondReplace.nameLabelTMP.text = randomSet2[Random.Range(0, 2)];
 			firstReplace.transform.position = card1pos;
 			secondReplace.transform.position = card2pos;
+			firstReplace.controller = this;
+			secondReplace.controller = this;
 		}
 
 		// otherwise turn them back over after .5s pause
