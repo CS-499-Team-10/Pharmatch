@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class DrugTile : MonoBehaviour {
 	// [SerializeField] private GameObject cardBack;
-	[SerializeField] public TextMesh nameLabel;
+	// [SerializeField] public TextMesh nameLabel;
+	public TMP_Text nameLabelTMP;
 
 	[SerializeField] public List<string> drugMatches;
 	[SerializeField] private SceneController controller;
@@ -13,6 +15,10 @@ public class DrugTile : MonoBehaviour {
 	public int id {
 		get {return _id;}
 	}
+	
+	// void Start(){
+	// 	nameLabelTMP = GetComponent<TMP_Text>();
+	// }
 
 	public void SetCard(int id, Sprite image) {
 		_id = id;
@@ -25,7 +31,7 @@ public class DrugTile : MonoBehaviour {
 		// 	cardBack.SetActive(false);
 		// 	// controller.CardRevealed(this);
 		// }
-		Debug.Log("clicked " + nameLabel);
+		Debug.Log("clicked " + nameLabelTMP);
 		controller.CardRevealed(this);
 	}
 

@@ -57,7 +57,7 @@ public class SceneController : MonoBehaviour {
 					card = Instantiate(originalCard) as DrugTile;
 				}
 				card.drugMatches = randomSet;
-				card.nameLabel.text = randomSet[Random.Range(0, 2)];
+				card.nameLabelTMP.text = randomSet[Random.Range(0, 2)];
 
 				// next card in the list for each grid space
 				int index = j * gridCols + i;
@@ -95,7 +95,7 @@ public class SceneController : MonoBehaviour {
 	private IEnumerator CheckMatch() {
 
 		// increment score if the cards match
-		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabel.text)) {
+		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text)) {
 			_score++;
 			Debug.Log(_score);
 			// scoreLabel.text = "Score: " + _score;
