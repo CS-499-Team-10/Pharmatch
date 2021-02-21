@@ -106,8 +106,8 @@ public class SceneController : MonoBehaviour {
 			card1pos = _firstRevealed.transform.position;
 			card2pos = _secondRevealed.transform.position;
 
-			Destroy(_firstRevealed);
-			Destroy(_secondRevealed);
+			Destroy(_firstRevealed.gameObject);
+			Destroy(_secondRevealed.gameObject);
 
 		}
 
