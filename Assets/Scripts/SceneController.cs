@@ -98,6 +98,7 @@ public class SceneController : MonoBehaviour {
 
 		// increment score if the cards match
 		Vector3 card1pos, card2pos;
+		
 		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text)) {
 			_score++;
 			Debug.Log(_score);
@@ -109,6 +110,16 @@ public class SceneController : MonoBehaviour {
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
+			List<string> randomSet = drugs[Random.Range(0, 2)];
+			DrugTile firstReplace, secondReplace;
+			firstReplace = Instantiate(originalCard) as DrugTile;
+			secondReplace = Instantiate(originalCard) as DrugTile;
+			firstReplace.drugMatches = randomSet;
+			firstReplace.nameLabelTMP.text = randomSet[Random.Range(0, 2)];
+			secondReplace.drugMatches = randomSet;
+			secondReplace.nameLabelTMP.text = randomSet[Random.Range(0, 2)];
+			firstReplace.transform.position = card1pos;
+			secondReplace.transform.position = card2pos;
 		}
 
 		// otherwise turn them back over after .5s pause
