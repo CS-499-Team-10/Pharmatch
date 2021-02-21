@@ -9,7 +9,7 @@ public class DrugTile : MonoBehaviour {
 	public TMP_Text nameLabelTMP;
 
 	[SerializeField] public List<string> drugMatches;
-	[SerializeField] private SceneController controller;
+	[SerializeField] public SceneController controller;
 
 	private int _id;
 	public int id {
@@ -23,6 +23,7 @@ public class DrugTile : MonoBehaviour {
 	public void SetCard(int id, Sprite image) {
 		_id = id;
 		GetComponent<SpriteRenderer>().sprite = image;
+		// controller = 
 	}
 
 	public void OnMouseDown() {
