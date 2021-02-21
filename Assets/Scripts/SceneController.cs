@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using TMPro;
 
 public class SceneController : MonoBehaviour {
 	private List<List<string>> drugs = new List<List<string>>();
@@ -19,6 +20,7 @@ public class SceneController : MonoBehaviour {
 	private DrugTile _firstRevealed;
 	private DrugTile _secondRevealed;
 	private int _score = 0;
+	[SerializeField] private TMP_Text scoreText;
 
 	// public bool canReveal {
 	// 	// get {return _secondRevealed == null;}
@@ -98,7 +100,7 @@ public class SceneController : MonoBehaviour {
 		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text)) {
 			_score++;
 			Debug.Log(_score);
-			// scoreLabel.text = "Score: " + _score;
+			scoreText.text = "Score: " + _score;
 		}
 
 		// otherwise turn them back over after .5s pause
