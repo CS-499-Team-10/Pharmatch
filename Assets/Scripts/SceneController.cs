@@ -9,8 +9,8 @@ public class SceneController : MonoBehaviour {
 
 	public const int gridRows = 4;
 	public const int gridCols = 4;
-	public const float offsetX = 2.00f;
-	public const float offsetY = 2.50f;
+	public const float offsetX = 3.00f;
+	public const float offsetY = 3.50f;
 
 	[SerializeField] private DrugTile originalCard;
 	// [SerializeField] private Sprite[] images;
@@ -36,7 +36,7 @@ public class SceneController : MonoBehaviour {
 		secondSet.Add("square");
 		secondSet.Add("four");
 		drugs.Add(secondSet);
-		Vector3 startPos = new Vector3(0, 0, -10);
+		Vector3 startPos = new Vector3(-4, 4, -10);
 
 		// create shuffled list of cards
 		int[] numbers = {0, 0, 1, 1, 2, 2, 3, 3, 0, 0, 1, 1, 2, 2, 3, 3};
