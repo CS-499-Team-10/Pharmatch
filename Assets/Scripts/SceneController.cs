@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ public class SceneController : MonoBehaviour {
 
 	public const int gridRows = 4;
 	public const int gridCols = 4;
-	public const float offsetX = 3.00f;
+	public const float offsetX = 2.70f;
 	public const float offsetY = 3.50f;
 
 	[SerializeField] private DrugTile originalCard;

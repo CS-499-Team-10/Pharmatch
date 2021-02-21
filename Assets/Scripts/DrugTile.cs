@@ -26,11 +26,6 @@ public class DrugTile : MonoBehaviour {
 	}
 
 	public void OnMouseDown() {
-		// if (cardBack.activeSelf && controller.canReveal) {
-		// // if (cardBack.activeSelf){
-		// 	cardBack.SetActive(false);
-		// 	// controller.CardRevealed(this);
-		// }
 		Debug.Log("clicked " + nameLabelTMP);
 		controller.CardRevealed(this);
 	}
