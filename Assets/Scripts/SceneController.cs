@@ -25,7 +25,19 @@ public class SceneController : MonoBehaviour {
 	// public bool canReveal {
 	// 	// get {return _secondRevealed == null;}
 	// }
+	DrugTile createCard(Vector3 newPosition)
+    {
+		DrugTile newCard;
 
+		List<string> randomSet1 = drugs[Random.Range(0, 2)];
+		newCard = Instantiate(originalCard) as DrugTile;
+		newCard.drugMatches = randomSet1;
+		newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
+		newCard.controller = this;
+		newCard.transform.position = newPosition;
+
+		return newCard;
+	}
 	// Use this for initialization
 	void Start() {
 		Debug.Log("start");
@@ -47,16 +59,16 @@ public class SceneController : MonoBehaviour {
 		// place cards in a grid
 		for (int i = 0; i < gridCols; i++) {
 			for (int j = 0; j < gridRows; j++) {
-				DrugTile card;	
+				//DrugTile card = createCard;	
 
 				// MyElement = Elements[Random.Range(0,Elements.Length)];
-				List<string> randomSet = drugs[Random.Range(0, 2)];	
+				//List<string> randomSet = drugs[Random.Range(0, 2)];	
 
 				// use the original for the first grid space
-				card = Instantiate(originalCard) as DrugTile;
-				card.drugMatches = randomSet;
-				card.nameLabelTMP.text = randomSet[Random.Range(0, 2)];
-				card.controller = this;
+				//card = Instantiate(originalCard) as DrugTile;
+				//card.drugMatches = randomSet;
+				//card.nameLabelTMP.text = randomSet[Random.Range(0, 2)];
+				//card.controller = this;
 
 				// next card in the list for each grid space
 				int index = j * gridCols + i;
@@ -65,7 +77,9 @@ public class SceneController : MonoBehaviour {
 
 				float posX = (offsetX * i) + startPos.x;
 				float posY = -(offsetY * j) + startPos.y;
-				card.transform.position = new Vector3(posX, posY, startPos.z);
+				//card.transform.position = new Vector3(posX, posY, startPos.z);
+
+				DrugTile card = createCard(new Vector3(posX, posY, startPos.z));
 			}
 		}
 	}
@@ -107,19 +121,8 @@ public class SceneController : MonoBehaviour {
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
-			List<string> randomSet1 = drugs[Random.Range(0, 2)];
-			List<string> randomSet2 = drugs[Random.Range(0, 2)];
-			DrugTile firstReplace, secondReplace;
-			firstReplace = Instantiate(originalCard) as DrugTile;
-			secondReplace = Instantiate(originalCard) as DrugTile;
-			firstReplace.drugMatches = randomSet1;
-			firstReplace.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
-			secondReplace.drugMatches = randomSet2;
-			secondReplace.nameLabelTMP.text = randomSet2[Random.Range(0, 2)];
-			firstReplace.transform.position = card1pos;
-			secondReplace.transform.position = card2pos;
-			firstReplace.controller = this;
-			secondReplace.controller = this;
+			DrugTile firstReplace = createCard(card1pos);
+			DrugTile secondReplace = createCard(card2pos);
 		}
 
 		// otherwise turn them back over after .5s pause
