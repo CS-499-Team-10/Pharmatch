@@ -53,13 +53,10 @@ public class SceneController : MonoBehaviour {
 				List<string> randomSet = drugs[Random.Range(0, 2)];	
 
 				// use the original for the first grid space
-				if (i == 0 && j == 0) {
-					card = originalCard;
-				} else {
-					card = Instantiate(originalCard) as DrugTile;
-				}
+				card = Instantiate(originalCard) as DrugTile;
 				card.drugMatches = randomSet;
 				card.nameLabelTMP.text = randomSet[Random.Range(0, 2)];
+				card.controller = this;
 
 				// next card in the list for each grid space
 				int index = j * gridCols + i;
@@ -110,14 +107,15 @@ public class SceneController : MonoBehaviour {
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
-			List<string> randomSet = drugs[Random.Range(0, 2)];
+			List<string> randomSet1 = drugs[Random.Range(0, 2)];
+			List<string> randomSet2 = drugs[Random.Range(0, 2)];
 			DrugTile firstReplace, secondReplace;
 			firstReplace = Instantiate(originalCard) as DrugTile;
 			secondReplace = Instantiate(originalCard) as DrugTile;
-			firstReplace.drugMatches = randomSet;
-			firstReplace.nameLabelTMP.text = randomSet[Random.Range(0, 2)];
-			secondReplace.drugMatches = randomSet;
-			secondReplace.nameLabelTMP.text = randomSet[Random.Range(0, 2)];
+			firstReplace.drugMatches = randomSet1;
+			firstReplace.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
+			secondReplace.drugMatches = randomSet2;
+			secondReplace.nameLabelTMP.text = randomSet2[Random.Range(0, 2)];
 			firstReplace.transform.position = card1pos;
 			secondReplace.transform.position = card2pos;
 		}
