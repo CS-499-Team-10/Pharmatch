@@ -97,10 +97,18 @@ public class SceneController : MonoBehaviour {
 	private IEnumerator CheckMatch() {
 
 		// increment score if the cards match
+		Vector3 card1pos, card2pos;
 		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text)) {
 			_score++;
 			Debug.Log(_score);
 			scoreText.text = "Score: " + _score;
+
+			card1pos = _firstRevealed.transform.position;
+			card2pos = _secondRevealed.transform.position;
+
+			Destroy(_firstRevealed);
+			Destroy(_secondRevealed);
+
 		}
 
 		// otherwise turn them back over after .5s pause
