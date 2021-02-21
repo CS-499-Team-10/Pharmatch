@@ -9,8 +9,8 @@ public class SceneController : MonoBehaviour {
 
 	public const int gridRows = 4;
 	public const int gridCols = 4;
-	public const float offsetX = 200f;
-	public const float offsetY = 250f;
+	public const float offsetX = 2.00f;
+	public const float offsetY = 2.50f;
 
 	[SerializeField] private DrugTile originalCard;
 	// [SerializeField] private Sprite[] images;
