@@ -20,7 +20,7 @@ public class ReadInCSV : MonoBehaviour
         TestGenericAsKey(genericDrugsKey);
     }
 
-    void TestBrandAsKey(Dictionary<string, List<string>> testBrandDic)
+    private void TestBrandAsKey(Dictionary<string, List<string>> testBrandDic)
     {
         string output = "";
         foreach(KeyValuePair<string, List<string>> x in testBrandDic)
@@ -34,7 +34,7 @@ public class ReadInCSV : MonoBehaviour
         }
     }
 
-    void TestGenericAsKey(Dictionary<string, List<string>> testGenericDic)
+    private void TestGenericAsKey(Dictionary<string, List<string>> testGenericDic)
     {
         string output = "";
         foreach (KeyValuePair<string, List<string>> x in testGenericDic)
@@ -58,7 +58,7 @@ public class ReadInCSV : MonoBehaviour
     //function takes as input filePath - the name of the file to read in, keyVal - whether the brand name or generic name is the key of the dictionary
     //keyVal - 0: brand name is the key
     //          1: generic name is the key
-    Dictionary<string, List<string>> PopulateDictionary(string filePath, int keyVal)
+    public Dictionary<string, List<string>> PopulateDictionary(string filePath, int keyVal)
     {
         //close file just in case
         //Read drugs in from CSV, key is brand name of the drugs
