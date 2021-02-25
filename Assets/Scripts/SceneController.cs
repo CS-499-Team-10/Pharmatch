@@ -110,7 +110,7 @@ public class SceneController : MonoBehaviour {
 		// increment score if the cards match
 		Vector3 card1pos, card2pos;
 		
-		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text)) {
+		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text) && _firstRevealed.nameLabelTMP.text != _secondRevealed.nameLabelTMP.text) {
 			_score++;
 			Debug.Log(_score);
 			scoreText.text = "Score: " + _score;
