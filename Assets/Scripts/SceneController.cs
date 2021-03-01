@@ -34,16 +34,24 @@ public class SceneController : MonoBehaviour {
 	void createCard()
     {
 		DrugTile newCard;
-
-		int whichCell = Random.Range(0, cells.Length);
-		if(cells[whichCell].childCount != 0)
+		Transform newCell = null;
+		foreach (Transform cell in cells)
 		{
-			Debug.Log(whichCell);
-			createCard();
-			return;
+			if(cell.childCount == 0)
+			{
+				newCell = cell;
+			}
 		}
+
+		// int whichCell = Random.Range(0, cells.Length);
+		// if(cells[whichCell].childCount != 0)
+		// {
+		// 	Debug.Log(whichCell);
+		// 	createCard();
+		// 	return;
+		// }
 		List<string> randomSet1 = drugs[Random.Range(0, 2)];
-		newCard = Instantiate(drugPrefab, cells[whichCell]) as DrugTile;
+		newCard = Instantiate(drugPrefab, newCell) as DrugTile;
 		newCard.drugMatches = randomSet1;
 		newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
 		newCard.controller = this;
@@ -109,15 +117,12 @@ public class SceneController : MonoBehaviour {
 	private void CheckMatch() {
 
 		// increment score if the cards match
-		Vector3 card1pos, card2pos;
+		// Vector3 card1pos, card2pos;
 		
 		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text) && _firstRevealed.nameLabelTMP.text != _secondRevealed.nameLabelTMP.text) {
 			_score++;
 			Debug.Log(_score);
 			scoreText.text = "Score: " + _score;
-
-			card1pos = _firstRevealed.transform.position;
-			card2pos = _secondRevealed.transform.position;
 
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
@@ -130,8 +135,8 @@ public class SceneController : MonoBehaviour {
 		else {
 			// yield return new WaitForSeconds(.5f);
 
-			_firstRevealed.Unreveal();
-			_secondRevealed.Unreveal();
+			// _firstRevealed.Unreveal();
+			// _secondRevealed.Unreveal();
 
 			Debug.Log("no");
 			// return 0;
