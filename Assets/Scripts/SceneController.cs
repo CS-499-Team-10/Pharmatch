@@ -10,10 +10,11 @@ public class SceneController : MonoBehaviour {
 
 	public const int gridRows = 4;
 	public const int gridCols = 4;
-	public const float offsetX = 2.70f;
-	public const float offsetY = 3.50f;
+	// public const float offsetX = 2.70f;
+	// public const float offsetY = 3.50f;
 
-	[SerializeField] private DrugTile originalCard;
+	[SerializeField] private DrugTile drugPrefab;
+	[SerializeField] private Transform[] cells;
 	// [SerializeField] private Sprite[] images;
 	// [SerializeField] private TextMesh scoreLabel;
 	
@@ -22,19 +23,28 @@ public class SceneController : MonoBehaviour {
 	private int _score = 0;
 	[SerializeField] private TMP_Text scoreText;
 
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			createCard();
+		}
+	}
+
 	// public bool canReveal {
 	// 	// get {return _secondRevealed == null;}
 	// }
-	DrugTile createCard(Vector3 newPosition)
+	DrugTile createCard()
     {
 		DrugTile newCard;
 
+		int whichCell = Random.Range(0, cells.Length);
 		List<string> randomSet1 = drugs[Random.Range(0, 2)];
-		newCard = Instantiate(originalCard) as DrugTile;
+		newCard = Instantiate(drugPrefab, cells[whichCell]) as DrugTile;
 		newCard.drugMatches = randomSet1;
 		newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
 		newCard.controller = this;
-		newCard.transform.position = newPosition;
+		// newCard.transform.position = newPosition;
 
 		return newCard;
 	}
@@ -75,11 +85,11 @@ public class SceneController : MonoBehaviour {
 				int id = numbers[index];
 				// card.SetCard(id, images[id]);
 
-				float posX = (offsetX * i) + startPos.x;
-				float posY = -(offsetY * j) + startPos.y;
+				// float posX = (offsetX * i) + startPos.x;
+				// float posY = -(offsetY * j) + startPos.y;
 				//card.transform.position = new Vector3(posX, posY, startPos.z);
 
-				DrugTile card = createCard(new Vector3(posX, posY, startPos.z));
+				// DrugTile card = createCard(new Vector3(posX, posY, startPos.z));
 			}
 		}
 	}
@@ -121,8 +131,8 @@ public class SceneController : MonoBehaviour {
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
-			DrugTile firstReplace = createCard(card1pos);
-			DrugTile secondReplace = createCard(card2pos);
+			// DrugTile firstReplace = createCard(card1pos);
+			// DrugTile secondReplace = createCard(card2pos);
 		}
 
 		// otherwise turn them back over after .5s pause
