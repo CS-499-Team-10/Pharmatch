@@ -26,8 +26,9 @@ public class DrugTile : MonoBehaviour {
 		// controller = 
 	}
 
-	public void OnMouseDown() {
+	public void Tapped() {
 		Debug.Log("clicked " + nameLabelTMP);
+		// Destroy(this.gameObject);
 		controller.CardRevealed(this);
 	}
 

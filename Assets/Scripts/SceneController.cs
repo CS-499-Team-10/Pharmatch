@@ -69,17 +69,6 @@ public class SceneController : MonoBehaviour {
 		// place cards in a grid
 		for (int i = 0; i < gridCols; i++) {
 			for (int j = 0; j < gridRows; j++) {
-				//DrugTile card = createCard;	
-
-				// MyElement = Elements[Random.Range(0,Elements.Length)];
-				//List<string> randomSet = drugs[Random.Range(0, 2)];	
-
-				// use the original for the first grid space
-				//card = Instantiate(originalCard) as DrugTile;
-				//card.drugMatches = randomSet;
-				//card.nameLabelTMP.text = randomSet[Random.Range(0, 2)];
-				//card.controller = this;
-
 				// next card in the list for each grid space
 				int index = j * gridCols + i;
 				int id = numbers[index];
