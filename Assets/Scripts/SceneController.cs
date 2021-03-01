@@ -10,13 +10,10 @@ public class SceneController : MonoBehaviour {
 
 	public const int gridRows = 4;
 	public const int gridCols = 4;
-	// public const float offsetX = 2.70f;
-	// public const float offsetY = 3.50f;
 
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
 	// [SerializeField] private Sprite[] images;
-	// [SerializeField] private TextMesh scoreLabel;
 	
 	private DrugTile _firstRevealed;
 	private DrugTile _secondRevealed;
@@ -34,19 +31,24 @@ public class SceneController : MonoBehaviour {
 	// public bool canReveal {
 	// 	// get {return _secondRevealed == null;}
 	// }
-	DrugTile createCard()
+	void createCard()
     {
 		DrugTile newCard;
 
 		int whichCell = Random.Range(0, cells.Length);
+		if(cells[whichCell].childCount != 0)
+		{
+			Debug.Log(whichCell);
+			createCard();
+			return;
+		}
 		List<string> randomSet1 = drugs[Random.Range(0, 2)];
 		newCard = Instantiate(drugPrefab, cells[whichCell]) as DrugTile;
 		newCard.drugMatches = randomSet1;
 		newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
 		newCard.controller = this;
-		// newCard.transform.position = newPosition;
 
-		return newCard;
+		// return newCard;
 	}
 	// Use this for initialization
 	void Start() {
@@ -100,11 +102,11 @@ public class SceneController : MonoBehaviour {
 			_firstRevealed = card;
 		} else {
 			_secondRevealed = card;
-			StartCoroutine(CheckMatch());
+			CheckMatch();
 		}
 	}
 	
-	private IEnumerator CheckMatch() {
+	private void CheckMatch() {
 
 		// increment score if the cards match
 		Vector3 card1pos, card2pos;
@@ -126,12 +128,13 @@ public class SceneController : MonoBehaviour {
 
 		// otherwise turn them back over after .5s pause
 		else {
-			yield return new WaitForSeconds(.5f);
+			// yield return new WaitForSeconds(.5f);
 
 			_firstRevealed.Unreveal();
 			_secondRevealed.Unreveal();
 
 			Debug.Log("no");
+			// return 0;
 		}
 		
 		_firstRevealed = null;
