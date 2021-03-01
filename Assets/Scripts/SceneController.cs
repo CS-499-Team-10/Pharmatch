@@ -72,15 +72,15 @@ public class SceneController : MonoBehaviour {
 		for (int i = 0; i < gridCols; i++) {
 			for (int j = 0; j < gridRows; j++) {
 				// next card in the list for each grid space
-				int index = j * gridCols + i;
-				int id = numbers[index];
+				// int index = j * gridCols + i;
+				// int id = numbers[index];
 				// card.SetCard(id, images[id]);
 
 				// float posX = (offsetX * i) + startPos.x;
 				// float posY = -(offsetY * j) + startPos.y;
 				//card.transform.position = new Vector3(posX, posY, startPos.z);
 
-				// DrugTile card = createCard(new Vector3(posX, posY, startPos.z));
+				createCard();
 			}
 		}
 	}
@@ -122,8 +122,8 @@ public class SceneController : MonoBehaviour {
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
-			// DrugTile firstReplace = createCard(card1pos);
-			// DrugTile secondReplace = createCard(card2pos);
+			createCard();
+			createCard();
 		}
 
 		// otherwise turn them back over after .5s pause

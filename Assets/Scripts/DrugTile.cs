@@ -23,7 +23,6 @@ public class DrugTile : MonoBehaviour {
 	public void SetCard(int id, Sprite image) {
 		_id = id;
 		GetComponent<SpriteRenderer>().sprite = image;
-		// controller = 
 	}
 
 	public void Tapped() {
