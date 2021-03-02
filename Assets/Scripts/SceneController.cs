@@ -42,11 +42,15 @@ public class SceneController : MonoBehaviour {
 		// 	createCard();
 		// 	return;
 		// }
-		List<string> randomSet1 = drugs[Random.Range(0, 2)];
-		newCard = Instantiate(drugPrefab, newCell) as DrugTile;
-		newCard.drugMatches = randomSet1;
-		newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
-		newCard.controller = this;
+		if(newCell != null)
+		{
+			List<string> randomSet1 = drugs[Random.Range(0, 2)];
+			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
+			newCard.drugMatches = randomSet1;
+			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
+			newCard.controller = this;
+		}
+		
 	}
 
 	// Use this for initialization
