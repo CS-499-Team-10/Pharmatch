@@ -6,14 +6,9 @@ using TMPro;
 
 public class SceneController : MonoBehaviour {
 	private List<List<string>> drugs = new List<List<string>>();
-	// private List<string>[] drugs;
-
-	public const int gridRows = 4;
-	public const int gridCols = 4;
 
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
-	// [SerializeField] private Sprite[] images;
 	
 	private DrugTile _firstRevealed;
 	private DrugTile _secondRevealed;
@@ -28,9 +23,6 @@ public class SceneController : MonoBehaviour {
 		}
 	}
 
-	// public bool canReveal {
-	// 	// get {return _secondRevealed == null;}
-	// }
 	void createCard()
     {
 		DrugTile newCard;
@@ -55,9 +47,8 @@ public class SceneController : MonoBehaviour {
 		newCard.drugMatches = randomSet1;
 		newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
 		newCard.controller = this;
-
-		// return newCard;
 	}
+
 	// Use this for initialization
 	void Start() {
 		Debug.Log("start");
@@ -70,26 +61,10 @@ public class SceneController : MonoBehaviour {
 		secondSet.Add("square");
 		secondSet.Add("four");
 		drugs.Add(secondSet);
-		Vector3 startPos = new Vector3(-4, 4, -10);
-
-		// create shuffled list of cards
-		int[] numbers = {0, 0, 1, 1, 2, 2, 3, 3, 0, 0, 1, 1, 2, 2, 3, 3};
-		numbers = ShuffleArray(numbers);
 
 		// place cards in a grid
-		for (int i = 0; i < gridCols; i++) {
-			for (int j = 0; j < gridRows; j++) {
-				// next card in the list for each grid space
-				// int index = j * gridCols + i;
-				// int id = numbers[index];
-				// card.SetCard(id, images[id]);
-
-				// float posX = (offsetX * i) + startPos.x;
-				// float posY = -(offsetY * j) + startPos.y;
-				//card.transform.position = new Vector3(posX, posY, startPos.z);
-
-				createCard();
-			}
+		for (int i = 0; i < 16; i++) {
+			createCard();
 		}
 	}
 
@@ -116,9 +91,7 @@ public class SceneController : MonoBehaviour {
 	
 	private void CheckMatch() {
 
-		// increment score if the cards match
-		// Vector3 card1pos, card2pos;
-		
+		// increment score if the cards match		
 		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text) && _firstRevealed.nameLabelTMP.text != _secondRevealed.nameLabelTMP.text) {
 			_score++;
 			Debug.Log(_score);
@@ -134,9 +107,6 @@ public class SceneController : MonoBehaviour {
 		// otherwise turn them back over after .5s pause
 		else {
 			// yield return new WaitForSeconds(.5f);
-
-			// _firstRevealed.Unreveal();
-			// _secondRevealed.Unreveal();
 
 			Debug.Log("no");
 			// return 0;
