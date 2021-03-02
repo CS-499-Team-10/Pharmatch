@@ -38,7 +38,11 @@ public class SceneController : MonoBehaviour {
         //temporary addition to test LoadDrugs
         TestLoadDrugs();
 		Debug.Log("start");
-		// drugs = new List<List<string>>();
+        // drugs = new List<List<string>>();
+        string fp = "Assets/DrugInfo/60DrugNames.csv";
+        drugs = LoadDrugs(fp);
+        int drugsSize = drugs.Count;
+        /*
 		List<string> firstSet = new List<string>();
 		List<string> secondSet = new List<string>();
 		firstSet.Add("triangle");
@@ -47,6 +51,7 @@ public class SceneController : MonoBehaviour {
 		secondSet.Add("square");
 		secondSet.Add("four");
 		drugs.Add(secondSet);
+        */
 		Vector3 startPos = new Vector3(-4, 4, -10);
 
 		// create shuffled list of cards
@@ -104,6 +109,8 @@ public class SceneController : MonoBehaviour {
 
 		// increment score if the cards match
 		Vector3 card1pos, card2pos;
+
+        //int drugsSize = GetDrugsSize();
 		
 		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text)) {
 			_score++;
@@ -201,7 +208,7 @@ public class SceneController : MonoBehaviour {
         string line = "";
         using (StreamReader sr = new StreamReader(@fp))
         {
-            line = sr.ReadLine();
+            line = sr.ReadLine(); //ignore first line with column labels
             while (sr.Peek() != -1)
             {
                 line = sr.ReadLine();
@@ -220,23 +227,23 @@ public class SceneController : MonoBehaviour {
                     toAdd.Add(splitted[2]); //alternate trade name added
 
                 drugs.Add(toAdd); //add to list of lists
-
             }
         }
-
 
         return drugs;
     }
 
 
-    public void TestLoadDrugs()
-    {
+    private int GetDrugsSize() {
+        return drugs.Count;
+    }
+
+
+    public void TestLoadDrugs() {
         string fp = "Assets/DrugInfo/60DrugNames.csv";
         List<List<string>> testDrugs = LoadDrugs(fp);
 
-        //print list of lists
-        foreach(List<string> l in testDrugs)
-        {
+        foreach(List<string> l in testDrugs) {
             string output = string.Join(",", l);
 
             Debug.Log(output);
