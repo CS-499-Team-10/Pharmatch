@@ -15,13 +15,13 @@ public class SceneController : MonoBehaviour {
 	private int _score = 0;
 	[SerializeField] private TMP_Text scoreText;
 
-	void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			createCard();
-		}
-	}
+	// void Update()
+	// {
+	// 	if(Input.GetKeyDown(KeyCode.Space))
+	// 	{
+	// 		createCard();
+	// 	}
+	// }
 
 	void createCard()
     {
@@ -57,6 +57,7 @@ public class SceneController : MonoBehaviour {
 	void Start() {
 		Debug.Log("start");
 		// drugs = new List<List<string>>();
+		// drugs = List from read csv
 		List<string> firstSet = new List<string>();
 		List<string> secondSet = new List<string>();
 		firstSet.Add("triangle");
@@ -104,8 +105,10 @@ public class SceneController : MonoBehaviour {
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
-			createCard();
-			createCard();
+			Invoke("createCard", 0.001f);
+			Invoke("createCard", 0.001f);
+			// createCard();
+			// createCard();
 		}
 
 		// otherwise turn them back over after .5s pause
