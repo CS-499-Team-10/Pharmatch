@@ -52,7 +52,7 @@ public class SceneController : MonoBehaviour {
 		// }
 		if(newCell != null)
 		{
-			List<string> randomSet1 = drugs[Random.Range(0, 2)];
+			List<string> randomSet1 = drugs[Random.Range(0, 3)];
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
 			newCard.drugMatches = randomSet1;
 			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
@@ -77,17 +77,7 @@ public class SceneController : MonoBehaviour {
 
         drugs = LoadDrugs(fp);
         int drugsSize = drugs.Count;
-        /*
-		List<string> firstSet = new List<string>();
-		List<string> secondSet = new List<string>();
-		firstSet.Add("triangle");
-		firstSet.Add("three");
-		drugs.Add(firstSet);
-		secondSet.Add("square");
-		secondSet.Add("four");
-		drugs.Add(secondSet);
-        */
-		Vector3 startPos = new Vector3(-4, 4, -10);
+		// Vector3 startPos = new Vector3(-4, 4, -10);
 
 		// place cards in a grid
 		for (int i = 0; i < 16; i++) {
@@ -121,7 +111,7 @@ public class SceneController : MonoBehaviour {
 		// increment score if the cards match		
 		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text) && _firstRevealed.nameLabelTMP.text != _secondRevealed.nameLabelTMP.text) {
 		// increment score if the cards match
-		Vector3 card1pos, card2pos;
+		// Vector3 card1pos, card2pos;
 
         //int drugsSize = GetDrugsSize();
 		
@@ -135,8 +125,7 @@ public class SceneController : MonoBehaviour {
 
 			Invoke("createCard", 0.001f);
 			Invoke("createCard", 0.001f);
-			// createCard();
-			// createCard();
+
 		}
 
 		// otherwise turn them back over after .5s pause
@@ -211,11 +200,11 @@ public class SceneController : MonoBehaviour {
     }
 
 
-    private int GetDrugsSize() {
+    // private int GetDrugsSize() {
 
-        return drugs.Count;
+    //     return drugs.Count;
 
-    }
+    // }
 
 
     public void TestLoadDrugs() {
