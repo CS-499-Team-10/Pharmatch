@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 
 public class DrugTile : MonoBehaviour {
-	// [SerializeField] private GameObject cardBack;
-	// [SerializeField] public TextMesh nameLabel;
 	public TMP_Text nameLabelTMP;
 
 	[SerializeField] public List<string> drugMatches;
@@ -23,15 +21,10 @@ public class DrugTile : MonoBehaviour {
 	public void SetCard(int id, Sprite image) {
 		_id = id;
 		GetComponent<SpriteRenderer>().sprite = image;
-		// controller = 
 	}
 
-	public void OnMouseDown() {
+	public void Tapped() {
 		Debug.Log("clicked " + nameLabelTMP);
 		controller.CardRevealed(this);
-	}
-
-	public void Unreveal() {
-		// cardBack.SetActive(true);
 	}
 }
