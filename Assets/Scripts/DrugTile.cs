@@ -12,4 +12,16 @@ public class DrugTile : MonoBehaviour {
 		Debug.Log("clicked " + nameLabelTMP);
 		controller.CardRevealed(this);
 	}
+
+	public bool checkMatch(DrugTile other) {
+		if (drugMatches.Contains(other.nameLabelTMP.text) && nameLabelTMP.text != other.nameLabelTMP.text) {
+			if (drugMatches.Contains(other.nameLabelTMP.text)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
+	}
 }

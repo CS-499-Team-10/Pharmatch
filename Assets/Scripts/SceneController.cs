@@ -76,37 +76,36 @@ public class SceneController : MonoBehaviour {
 			_firstRevealed = card;
 		} else {
 			_secondRevealed = card;
-			CheckMatch();
+			tryMatch();
 		}
 	}
+
+	public void incrementScore(int addedScore) {
+		_score += addedScore;
+		Debug.Log(_score);
+		scoreText.text = "Score: " + _score;
+	}
 	
-	private void CheckMatch() {
+	private void tryMatch() {
+		if (_firstRevealed.checkMatch(_secondRevealed)) {
+			incrementScore(1);
 
-		// increment score if the cards match		
-		if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text) && _firstRevealed.nameLabelTMP.text != _secondRevealed.nameLabelTMP.text) {
-			if (_firstRevealed.drugMatches.Contains(_secondRevealed.nameLabelTMP.text)) {
-				_score++;
-				Debug.Log(_score);
-				scoreText.text = "Score: " + _score;
+			Destroy(_firstRevealed.gameObject);
+			Destroy(_secondRevealed.gameObject);
 
-				Destroy(_firstRevealed.gameObject);
-				Destroy(_secondRevealed.gameObject);
-
-				Invoke("createCard", 0.001f);
-				Invoke("createCard", 0.001f);
-
-			}
-
-			// otherwise turn them back over after .5s pause
-			else {
-				// yield return new WaitForSeconds(.5f);
-
-				Debug.Log("no");
-				// return 0;
-			}
-			_firstRevealed = null;
-			_secondRevealed = null;
+			Invoke("createCard", 0.001f);
+			Invoke("createCard", 0.001f);
 		}
+
+		// otherwise turn them back over after .5s pause
+		else {
+			// yield return new WaitForSeconds(.5f);
+
+			Debug.Log("no");
+			// return 0;
+		}
+		_firstRevealed = null;
+		_secondRevealed = null;
 	}
 
     List<List<string>> LoadDrugs(string fp) {
