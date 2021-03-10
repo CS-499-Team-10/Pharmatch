@@ -13,10 +13,6 @@ public class DrugTile : MonoBehaviour {
 	public int id {
 		get {return _id;}
 	}
-	
-	// void Start(){
-	// 	nameLabelTMP = GetComponent<TMP_Text>();
-	// }
 
 	public void SetCard(int id, Sprite image) {
 		_id = id;
