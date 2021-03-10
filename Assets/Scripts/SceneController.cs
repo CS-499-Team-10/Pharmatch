@@ -25,11 +25,11 @@ public class SceneController : MonoBehaviour {
 	// {
 	// 	if(Input.GetKeyDown(KeyCode.Space))
 	// 	{
-	// 		createCard();
+	// 		CreateCard();
 	// 	}
 	// }
 
-	void createCard()
+	void CreateCard()
     {
 		DrugTile newCard;
 		Transform newCell = null;
@@ -45,12 +45,12 @@ public class SceneController : MonoBehaviour {
 		// if(cells[whichCell].childCount != 0)
 		// {
 		// 	Debug.Log(whichCell);
-		// 	createCard();
+		// 	CreateCard();
 		// 	return;
 		// }
 		if(newCell != null)
 		{
-			List<string> randomSet1 = drugs[Random.Range(0, 3)];
+			List<string> randomSet1 = drugs[Random.Range(0, 2)];
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
 			newCard.drugMatches = randomSet1;
 			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
@@ -67,42 +67,43 @@ public class SceneController : MonoBehaviour {
 
 		// place cards in a grid
 		for (int i = 0; i < cells.Length; i++) {
-			createCard();
+			CreateCard();
 		}
 	}
 
 	public void CardRevealed(DrugTile card) {
 		if (_firstRevealed == null) {
 			_firstRevealed = card;
+			_firstRevealed.Select();
 		} else {
 			_secondRevealed = card;
-			tryMatch();
+			_secondRevealed.Select();
+			TryMatch();
 		}
 	}
 
-	public void incrementScore(int addedScore) {
+	public void IncrementScore(int addedScore) {
 		_score += addedScore;
 		Debug.Log(_score);
 		scoreText.text = "Score: " + _score;
 	}
 	
-	private void tryMatch() {
-		if (_firstRevealed.checkMatch(_secondRevealed)) {
-			incrementScore(1);
+	private void TryMatch() {
+		if (_firstRevealed.CheckMatch(_secondRevealed)) {
+			IncrementScore(1);
 
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
-			Invoke("createCard", 0.001f);
-			Invoke("createCard", 0.001f);
+			Invoke("CreateCard", 0.001f);
+			Invoke("CreateCard", 0.001f);
 		}
-
-		// otherwise turn them back over after .5s pause
 		else {
 			// yield return new WaitForSeconds(.5f);
-
 			Debug.Log("no");
 			// return 0;
+			_firstRevealed.UnSelect();
+			_secondRevealed.UnSelect();
 		}
 		_firstRevealed = null;
 		_secondRevealed = null;
