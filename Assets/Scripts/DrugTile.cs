@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,13 +15,10 @@ public class DrugTile : MonoBehaviour {
 
 	public bool checkMatch(DrugTile other) {
 		if (drugMatches.Contains(other.nameLabelTMP.text) && nameLabelTMP.text != other.nameLabelTMP.text) {
-			if (drugMatches.Contains(other.nameLabelTMP.text)) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			return true;
 		}
-		return false;
+		else return false;
+	}
+
 	}
 }
