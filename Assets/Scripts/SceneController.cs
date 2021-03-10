@@ -56,7 +56,6 @@ public class SceneController : MonoBehaviour {
 			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
 			newCard.controller = this;
 		}
-		
 	}
 
 	// Use this for initialization
