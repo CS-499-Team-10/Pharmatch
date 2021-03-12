@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GridPosition : MonoBehaviour
 {
-    [SerializeField] GameObject left = null;
-    [SerializeField] GameObject right = null;
-    [SerializeField] GameObject up = null;
-    [SerializeField] GameObject down = null;
+    [SerializeField] public GameObject left = null;
+    [SerializeField] public GameObject right = null;
+    [SerializeField] public GameObject up = null;
+    [SerializeField] public GameObject down = null;
 
     // Start is called before the first frame update
     void Start()
