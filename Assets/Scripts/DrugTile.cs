@@ -9,10 +9,18 @@ public class DrugTile : MonoBehaviour {
 	[SerializeField] public List<string> drugMatches;
 	[SerializeField] public SceneController controller;
 
+	public enum Direction
+	{
+		Up,
+		Down,
+		Left,
+		Right
+	}
+
 	public void Tapped() {
 		// Debug.Log("clicked " + nameLabelTMP);
 		// controller.CardRevealed(this);
-		SlideUp();
+		Slide(Direction.Up);
 	}
 
 	public bool CheckMatch(DrugTile other) {
@@ -30,15 +38,29 @@ public class DrugTile : MonoBehaviour {
 		GetComponent<Image>().color = new Color(186F/255F, 195F/255F, 121F/255F);
 	}
 
-	public void SlideUp() {
-		RectTransform newCell = transform.parent.gameObject.GetComponent<GridPosition>().up.GetComponent<RectTransform>();
-		if(newCell) {
+	public void Slide(Direction dir) {
+		GridPosition myPos = transform.parent.gameObject.GetComponent<GridPosition>();
+		GridPosition newPos = null;
+		switch (dir)
+		{
+		case Direction.Up:
+			newPos = myPos.up;
+			break;
+		case Direction.Down:
+			newPos = myPos.down;
+			break;
+		case Direction.Left:
+			newPos = myPos.left;
+			break;
+		case Direction.Right:
+			newPos = myPos.right;
+			break;
+		}
+		if(newPos) {
+			RectTransform newCell = newPos.GetComponent<RectTransform>();
 			transform.parent = newCell;
 			GetComponent<RectTransform>().offsetMin = new Vector2(-0, 0);
 			GetComponent<RectTransform>().offsetMax = new Vector2(-0, 0);
 		}
-		// newCell.offsetMax = new Vector2(0, -0);
-		// newCell.offsetMin = new Vector2(-0, 0);
-		
 	}
 }

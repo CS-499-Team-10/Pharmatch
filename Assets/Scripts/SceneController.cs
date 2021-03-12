@@ -27,6 +27,10 @@ public class SceneController : MonoBehaviour {
 		{
 			CreateCard();
 		}
+		if(Input.GetKeyDown(KeyCode.UpArrow))
+		{
+			SlideUp();
+		}
 	}
 
 	void CreateCard()
@@ -55,6 +59,22 @@ public class SceneController : MonoBehaviour {
 			newCard.drugMatches = randomSet1;
 			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
 			newCard.controller = this;
+		}
+	}
+
+	void SlideUp() {
+		foreach (Transform cell in cells)
+		{
+			GridPosition pos = cell.GetComponentInParent<GridPosition>();
+			if (!pos.up) {
+				for (GridPosition nextMover = pos.down; nextMover != null; nextMover = nextMover.down)
+				{	
+					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
+					if (tileToMove != null) {
+						tileToMove.Slide(DrugTile.Direction.Up);
+					}
+				}
+			}
 		}
 	}
 
