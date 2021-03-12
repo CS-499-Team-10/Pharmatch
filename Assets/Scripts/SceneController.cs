@@ -21,13 +21,13 @@ public class SceneController : MonoBehaviour {
 	private int _score = 0;
 	[SerializeField] private TMP_Text scoreText;
 
-	// void Update()
-	// {
-	// 	if(Input.GetKeyDown(KeyCode.Space))
-	// 	{
-	// 		CreateCard();
-	// 	}
-	// }
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			CreateCard();
+		}
+	}
 
 	void CreateCard()
     {
@@ -66,9 +66,9 @@ public class SceneController : MonoBehaviour {
         drugs = LoadDrugs("Assets/DrugInfo/60DrugNames.csv");
 
 		// place cards in a grid
-		for (int i = 0; i < cells.Length; i++) {
-			CreateCard();
-		}
+		// for (int i = 0; i < cells.Length; i++) {
+		// 	CreateCard();
+		// }
 	}
 
 	public void CardRevealed(DrugTile card) {
@@ -95,8 +95,8 @@ public class SceneController : MonoBehaviour {
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
-			Invoke("CreateCard", 0.001f);
-			Invoke("CreateCard", 0.001f);
+			// Invoke("CreateCard", 0.001f);
+			// Invoke("CreateCard", 0.001f);
 		}
 		else {
 			// yield return new WaitForSeconds(.5f);
