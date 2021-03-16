@@ -17,12 +17,19 @@ public class DrugTile : MonoBehaviour {
 		Right
 	}
 
+	private void Update() {
+		if(transform.localPosition != Vector3.zero) {
+			transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, 2500F * Time.deltaTime);
+		}
+	}
+
 	public void Tapped() {
 		// Debug.Log("clicked " + nameLabelTMP);
 		// controller.CardRevealed(this);
 		Slide(Direction.Up);
 	}
 
+	// returns true if this drug matches another drugtile
 	public bool CheckMatch(DrugTile other) {
 		if (drugMatches.Contains(other.nameLabelTMP.text) && nameLabelTMP.text != other.nameLabelTMP.text) {
 			return true;
@@ -38,7 +45,9 @@ public class DrugTile : MonoBehaviour {
 		GetComponent<Image>().color = new Color(186F/255F, 195F/255F, 121F/255F);
 	}
 
-	public void Slide(Direction dir) {
+	// slides a tile in given direction
+	// returns true if the tile slides into a match, false otherwise
+	public bool Slide(Direction dir) {
 		GridPosition myPos = transform.parent.gameObject.GetComponent<GridPosition>();
 		GridPosition newPos = null;
 		switch (dir)
@@ -58,9 +67,19 @@ public class DrugTile : MonoBehaviour {
 		}
 		if(newPos) {
 			RectTransform newCell = newPos.GetComponent<RectTransform>();
-			transform.parent = newCell;
-			GetComponent<RectTransform>().offsetMin = new Vector2(-0, 0);
-			GetComponent<RectTransform>().offsetMax = new Vector2(-0, 0);
+			if(newCell.childCount < 1) { // if there isn't a tile in the next cell
+				transform.parent = newCell;
+				// GetComponent<RectTransform>().offsetMin = new Vector2(-0, 0);
+				// GetComponent<RectTransform>().offsetMax = new Vector2(-0, 0);
+			}
+			else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) { // if there is a tile and they match
+				foreach (Transform child in newCell) {
+     				GameObject.Destroy(child.gameObject);
+ 				}
+				GameObject.Destroy(this.gameObject);
+				return true;
+			}
 		}
+		return false;
 	}
 }
