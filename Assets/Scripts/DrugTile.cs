@@ -9,6 +9,9 @@ public class DrugTile : MonoBehaviour {
 	[SerializeField] public List<string> drugMatches;
 	[SerializeField] public SceneController controller;
 
+	private const float moveSpeed = 2500;
+	private const float scaleSpeed = 10;
+
 	public enum Direction
 	{
 		Up,
@@ -19,7 +22,10 @@ public class DrugTile : MonoBehaviour {
 
 	private void Update() {
 		if(transform.localPosition != Vector3.zero) {
-			transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, 2500F * Time.deltaTime);
+			transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);
+		}
+		if(transform.localScale != Vector3.one) {
+			transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one, scaleSpeed * Time.deltaTime);
 		}
 	}
 
