@@ -53,27 +53,28 @@ public class SceneController : MonoBehaviour {
     {
 		DrugTile newCard;
 		Transform newCell = null;
+		List<Transform> activeCells = new List<Transform>();
 		foreach (Transform cell in cells)
 		{
 			if(cell.childCount == 0)
 			{
-				newCell = cell;
+				activeCells.Add(cell);
 			}
 		}
 
-		// int whichCell = Random.Range(0, cells.Length);
-		// if(cells[whichCell].childCount != 0)
-		// {
-		// 	Debug.Log(whichCell);
-		// 	CreateCard();
-		// 	return;
-		// }
+		if (activeCells.Count > 0)
+		{
+			int whichCell = Random.Range(0, activeCells.Count);
+			newCell = activeCells[whichCell];
+		}
+
 		if(newCell != null)
 		{
-			List<string> randomSet1 = drugs[Random.Range(0, 2)];
+			List<string> randomSet1 = drugs[Random.Range(0, drugs.Count)];
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
+			newCard.transform.localScale = Vector3.zero;
 			newCard.drugMatches = randomSet1;
-			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
+			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, randomSet1.Count)];
 			newCard.controller = this;
 		}
 	}
