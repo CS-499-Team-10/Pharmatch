@@ -76,11 +76,11 @@ public class SceneController : MonoBehaviour {
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
 			newCard.transform.localScale = Vector3.zero;
 			newCard.drugMatches = randomSet1;
-			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
+			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, randomSet1.Count)];
 			//List<string> randomSet1 = drugs[Random.Range(0, 2)];
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
 			newCard.transform.localScale = Vector3.zero;
-			if (Random.Range(0, 9) > 1) //if we hit the 80% chance
+			if (Random.Range(0, 9) > 1 && tilesOnScreen.Count != 0) //if we hit the 80% chance
 			{
 				holder = tilesOnScreen[Random.Range(0, tilesOnScreen.Count)];
 				newCard.drugMatches = holder.drugMatches;
@@ -98,8 +98,6 @@ public class SceneController : MonoBehaviour {
 				newCard.drugMatches = randomSet1;
 				newCard.nameLabelTMP.text = randomSet1[Random.Range(0, randomSet1.Count)];
 			}
-			
-			
 			newCard.controller = this;
 			tilesOnScreen.Add(newCard);
 		}
