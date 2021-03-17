@@ -12,6 +12,8 @@ using Random = UnityEngine.Random; //to distinguish between UnityEngine.Random a
 
 public class SceneController : MonoBehaviour {
 	private List<List<string>> drugs = new List<List<string>>();
+	public List<DrugTile> tilesOnScreen = new List<DrugTile>(); //list of all the tiles currently in the game
+    private DrugTile holder;
 
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
@@ -74,8 +76,32 @@ public class SceneController : MonoBehaviour {
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
 			newCard.transform.localScale = Vector3.zero;
 			newCard.drugMatches = randomSet1;
-			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, randomSet1.Count)];
+			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
+			//List<string> randomSet1 = drugs[Random.Range(0, 2)];
+			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
+			newCard.transform.localScale = Vector3.zero;
+			if (Random.Range(0, 9) > 1) //if we hit the 80% chance
+			{
+				holder = tilesOnScreen[Random.Range(0, tilesOnScreen.Count)];
+				newCard.drugMatches = holder.drugMatches;
+				if (holder.nameLabelTMP.text == holder.drugMatches[0]) //set our new card to match the randomly selected one
+				{
+					newCard.nameLabelTMP.text = holder.drugMatches[1];
+				}
+				else 
+				{
+					newCard.nameLabelTMP.text = holder.drugMatches[0];
+				}
+			} 
+			else //otherwise add a random card
+			{
+				newCard.drugMatches = randomSet1;
+				newCard.nameLabelTMP.text = randomSet1[Random.Range(0, randomSet1.Count)];
+			}
+			
+			
 			newCard.controller = this;
+			tilesOnScreen.Add(newCard);
 		}
 	}
 
@@ -88,7 +114,11 @@ public class SceneController : MonoBehaviour {
 				{
 					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
 					if (tileToMove != null) {
-						tileToMove.Slide(DrugTile.Direction.Up);
+						if (tileToMove.Slide(DrugTile.Direction.Up))
+                        {
+							_score++;
+							scoreText.text = "Score: " + _score;
+						}							
 					}
 				}
 			}
@@ -104,7 +134,11 @@ public class SceneController : MonoBehaviour {
 				{
 					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
 					if (tileToMove != null) {
-						tileToMove.Slide(DrugTile.Direction.Down);
+						if (tileToMove.Slide(DrugTile.Direction.Down))
+						{
+							_score++;
+							scoreText.text = "Score: " + _score;
+						}
 					}
 				}
 			}
@@ -120,7 +154,11 @@ public class SceneController : MonoBehaviour {
 				{
 					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
 					if (tileToMove != null) {
-						tileToMove.Slide(DrugTile.Direction.Right);
+						if (tileToMove.Slide(DrugTile.Direction.Right))
+						{
+							_score++;
+							scoreText.text = "Score: " + _score;
+						}
 					}
 				}
 			}
@@ -136,7 +174,11 @@ public class SceneController : MonoBehaviour {
 				{
 					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
 					if (tileToMove != null) {
-						tileToMove.Slide(DrugTile.Direction.Left);
+						if (tileToMove.Slide(DrugTile.Direction.Left))
+						{
+							_score++;
+							scoreText.text = "Score: " + _score;
+						}
 					}
 				}
 			}
@@ -177,9 +219,15 @@ public class SceneController : MonoBehaviour {
 		if (_firstRevealed.CheckMatch(_secondRevealed)) {
 			IncrementScore(1);
 
+			tilesOnScreen.Remove(_firstRevealed);
+			tilesOnScreen.Remove(_secondRevealed);
+
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
+			Invoke("CreateCard", 0.001f);
+			Invoke("CreateCard", 0.001f);
+			
 			// Invoke("CreateCard", 0.001f);
 			// Invoke("CreateCard", 0.001f);
 		}

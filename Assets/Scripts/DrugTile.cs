@@ -80,9 +80,11 @@ public class DrugTile : MonoBehaviour {
 			}
 			else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) { // if there is a tile and they match
 				foreach (Transform child in newCell) {
-     				GameObject.Destroy(child.gameObject);
+					newCell.GetComponentInChildren<DrugTile>().controller.tilesOnScreen.Remove(newCell.GetComponentInChildren<DrugTile>()); //remove this tile from the list of active tiles
+					GameObject.Destroy(child.gameObject); //and destroy it
  				}
-				GameObject.Destroy(this.gameObject);
+				this.controller.tilesOnScreen.Remove(this); //remove this card from the list of active cards
+				GameObject.Destroy(this.gameObject); //and destroy it
 				return true;
 			}
 		}
