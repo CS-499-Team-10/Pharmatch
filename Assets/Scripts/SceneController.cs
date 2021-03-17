@@ -52,13 +52,10 @@ public class SceneController : MonoBehaviour {
 		// }
 		if(newCell != null)
 		{
-<<<<<<< Updated upstream
 			List<string> randomSet1 = drugs[Random.Range(0, 2)];
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
 			newCard.drugMatches = randomSet1;
 			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
-=======
-			List<string> randomSet1 = drugs[Random.Range(0, drugs.Count)];
 			//List<string> randomSet1 = drugs[Random.Range(0, 2)];
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
 			newCard.transform.localScale = Vector3.zero;
@@ -82,14 +79,11 @@ public class SceneController : MonoBehaviour {
 			}
 			
 			
->>>>>>> Stashed changes
 			newCard.controller = this;
 			tilesOnScreen.Add(newCard);
 		}
 	}
 
-<<<<<<< Updated upstream
-=======
 	void SlideUp() {
 		foreach (Transform cell in cells)
 		{
@@ -170,7 +164,6 @@ public class SceneController : MonoBehaviour {
 		}
 	}
 
->>>>>>> Stashed changes
 	// Use this for initialization
 	void Start() {
         // //temporary addition to test LoadDrugs
@@ -211,14 +204,11 @@ public class SceneController : MonoBehaviour {
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
-<<<<<<< Updated upstream
 			Invoke("CreateCard", 0.001f);
 			Invoke("CreateCard", 0.001f);
-=======
 			
 			// Invoke("CreateCard", 0.001f);
 			// Invoke("CreateCard", 0.001f);
->>>>>>> Stashed changes
 		}
 		else {
 			// yield return new WaitForSeconds(.5f);

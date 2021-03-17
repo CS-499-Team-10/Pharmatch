@@ -28,8 +28,6 @@ public class DrugTile : MonoBehaviour {
 	public void UnSelect() {
 		GetComponent<Image>().color = new Color(186F/255F, 195F/255F, 121F/255F);
 	}
-<<<<<<< Updated upstream
-=======
 
 	// slides a tile in given direction
 	// returns true if the tile slides into a match, false otherwise
@@ -70,5 +68,4 @@ public class DrugTile : MonoBehaviour {
 		}
 		return false;
 	}
->>>>>>> Stashed changes
 }
