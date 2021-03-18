@@ -12,6 +12,8 @@ using Random = UnityEngine.Random; //to distinguish between UnityEngine.Random a
 
 public class SceneController : MonoBehaviour {
 	private List<List<string>> drugs = new List<List<string>>();
+	public List<DrugTile> tilesOnScreen = new List<DrugTile>(); //list of all the tiles currently in the game
+    private DrugTile holder;
 
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
@@ -21,40 +23,159 @@ public class SceneController : MonoBehaviour {
 	private int _score = 0;
 	[SerializeField] private TMP_Text scoreText;
 
-	// void Update()
-	// {
-	// 	if(Input.GetKeyDown(KeyCode.Space))
-	// 	{
-	// 		CreateCard();
-	// 	}
-	// }
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			CreateCard();
+		}
+		if(Input.GetKeyDown(KeyCode.UpArrow))
+		{
+			SlideUp();
+			Invoke("CreateCard", 0.001f);
+		}
+		if(Input.GetKeyDown(KeyCode.DownArrow))
+		{
+			SlideDown();
+			Invoke("CreateCard", 0.001f);
+		}
+		if(Input.GetKeyDown(KeyCode.LeftArrow))
+		{
+			SlideLeft();
+			Invoke("CreateCard", 0.001f);
+		}
+		if(Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			SlideRight();
+			Invoke("CreateCard", 0.001f);
+		}
+	}
 
 	void CreateCard()
     {
 		DrugTile newCard;
 		Transform newCell = null;
+		List<Transform> activeCells = new List<Transform>();
 		foreach (Transform cell in cells)
 		{
 			if(cell.childCount == 0)
 			{
-				newCell = cell;
+				activeCells.Add(cell);
 			}
 		}
 
-		// int whichCell = Random.Range(0, cells.Length);
-		// if(cells[whichCell].childCount != 0)
-		// {
-		// 	Debug.Log(whichCell);
-		// 	CreateCard();
-		// 	return;
-		// }
+		if (activeCells.Count > 0)
+		{
+			int whichCell = Random.Range(0, activeCells.Count);
+			newCell = activeCells[whichCell];
+		}
+
 		if(newCell != null)
 		{
-			List<string> randomSet1 = drugs[Random.Range(0, 2)];
+			List<string> randomSet1 = drugs[Random.Range(0, drugs.Count)];
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
-			newCard.drugMatches = randomSet1;
-			newCard.nameLabelTMP.text = randomSet1[Random.Range(0, 2)];
+			newCard.transform.localScale = Vector3.zero;
+			//List<string> randomSet1 = drugs[Random.Range(0, 2)];
+			if (Random.Range(0, 9) > 1 && tilesOnScreen.Count != 0) //if we hit the 80% chance
+			{
+				holder = tilesOnScreen[Random.Range(0, tilesOnScreen.Count)];
+				newCard.drugMatches = holder.drugMatches;
+				if (holder.nameLabelTMP.text == holder.drugMatches[0]) //set our new card to match the randomly selected one
+				{
+					newCard.nameLabelTMP.text = holder.drugMatches[1];
+				}
+				else 
+				{
+					newCard.nameLabelTMP.text = holder.drugMatches[0];
+				}
+			} 
+			else //otherwise add a random card
+			{
+				newCard.drugMatches = randomSet1;
+				newCard.nameLabelTMP.text = randomSet1[Random.Range(0, randomSet1.Count)];
+			}
 			newCard.controller = this;
+			tilesOnScreen.Add(newCard);
+		}
+	}
+
+	void SlideUp() {
+		foreach (Transform cell in cells)
+		{
+			GridPosition pos = cell.GetComponentInParent<GridPosition>();
+			if (!pos.up) {
+				for (GridPosition nextMover = pos.down; nextMover != null; nextMover = nextMover.down)
+				{
+					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
+					if (tileToMove != null) {
+						if (tileToMove.Slide(DrugTile.Direction.Up))
+                        {
+							_score++;
+							scoreText.text = "Score: " + _score;
+						}							
+					}
+				}
+			}
+		}
+	}
+
+	void SlideDown() {
+		foreach (Transform cell in cells)
+		{
+			GridPosition pos = cell.GetComponentInParent<GridPosition>();
+			if (!pos.down) {
+				for (GridPosition nextMover = pos.up; nextMover != null; nextMover = nextMover.up)
+				{
+					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
+					if (tileToMove != null) {
+						if (tileToMove.Slide(DrugTile.Direction.Down))
+						{
+							_score++;
+							scoreText.text = "Score: " + _score;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void SlideRight() {
+		foreach (Transform cell in cells)
+		{
+			GridPosition pos = cell.GetComponentInParent<GridPosition>();
+			if (!pos.right) {
+				for (GridPosition nextMover = pos.left; nextMover != null; nextMover = nextMover.left)
+				{
+					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
+					if (tileToMove != null) {
+						if (tileToMove.Slide(DrugTile.Direction.Right))
+						{
+							_score++;
+							scoreText.text = "Score: " + _score;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void SlideLeft() {
+		foreach (Transform cell in cells)
+		{
+			GridPosition pos = cell.GetComponentInParent<GridPosition>();
+			if (!pos.left) {
+				for (GridPosition nextMover = pos.right; nextMover != null; nextMover = nextMover.right)
+				{
+					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
+					if (tileToMove != null) {
+						if (tileToMove.Slide(DrugTile.Direction.Left))
+						{
+							_score++;
+							scoreText.text = "Score: " + _score;
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -66,9 +187,9 @@ public class SceneController : MonoBehaviour {
         drugs = LoadDrugs("Assets/DrugInfo/60DrugNames.csv");
 
 		// place cards in a grid
-		for (int i = 0; i < cells.Length; i++) {
-			CreateCard();
-		}
+		// for (int i = 0; i < cells.Length; i++) {
+		// 	CreateCard();
+		// }
 	}
 
 	public void CardRevealed(DrugTile card) {
@@ -92,11 +213,17 @@ public class SceneController : MonoBehaviour {
 		if (_firstRevealed.CheckMatch(_secondRevealed)) {
 			IncrementScore(1);
 
+			tilesOnScreen.Remove(_firstRevealed);
+			tilesOnScreen.Remove(_secondRevealed);
+
 			Destroy(_firstRevealed.gameObject);
 			Destroy(_secondRevealed.gameObject);
 
 			Invoke("CreateCard", 0.001f);
 			Invoke("CreateCard", 0.001f);
+			
+			// Invoke("CreateCard", 0.001f);
+			// Invoke("CreateCard", 0.001f);
 		}
 		else {
 			// yield return new WaitForSeconds(.5f);
