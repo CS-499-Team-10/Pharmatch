@@ -32,8 +32,8 @@ public class DrugTile : MonoBehaviour {
 	}
 
 	public void Tapped() {
-		// Debug.Log("clicked " + nameLabelTMP);
-		// controller.CardRevealed(this);
+		Debug.Log("clicked " + nameLabelTMP);
+		controller.CardTapped(this);
 		// Slide(Direction.Up);
 	}
 

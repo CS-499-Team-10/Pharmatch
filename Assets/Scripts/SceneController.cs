@@ -18,8 +18,6 @@ public class SceneController : MonoBehaviour {
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
 	
-	private DrugTile _firstRevealed;
-	private DrugTile _secondRevealed;
 	private int _score = 0;
 	[SerializeField] private TMP_Text scoreText;
 
@@ -82,7 +80,7 @@ public class SceneController : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start() {
+	protected virtual void Start() {
         // //temporary addition to test LoadDrugs
         // TestLoadDrugs();
 
@@ -94,15 +92,16 @@ public class SceneController : MonoBehaviour {
 		// }
 	}
 
-	public void CardRevealed(DrugTile card) {
-		if (_firstRevealed == null) {
-			_firstRevealed = card;
-			_firstRevealed.Select();
-		} else {
-			_secondRevealed = card;
-			_secondRevealed.Select();
-			TryMatch();
-		}
+	public virtual void CardTapped(DrugTile card) {
+		Debug.Log("wrong");
+		// if (_firstRevealed == null) {
+		// 	_firstRevealed = card;
+		// 	_firstRevealed.Select();
+		// } else {
+		// 	_secondRevealed = card;
+		// 	_secondRevealed.Select();
+		// 	TryMatch();
+		// }
 	}
 
 	public void IncrementScore(int addedScore) {
@@ -111,28 +110,28 @@ public class SceneController : MonoBehaviour {
 		scoreText.text = "Score: " + _score;
 	}
 	
-	private void TryMatch() {
-		if (_firstRevealed.CheckMatch(_secondRevealed)) {
-			IncrementScore(1);
+	// private void TryMatch() {
+	// 	if (_firstRevealed.CheckMatch(_secondRevealed)) {
+	// 		IncrementScore(1);
 
-			tilesOnScreen.Remove(_firstRevealed);
-			tilesOnScreen.Remove(_secondRevealed);
+	// 		tilesOnScreen.Remove(_firstRevealed);
+	// 		tilesOnScreen.Remove(_secondRevealed);
 
-			Destroy(_firstRevealed.gameObject);
-			Destroy(_secondRevealed.gameObject);
+	// 		Destroy(_firstRevealed.gameObject);
+	// 		Destroy(_secondRevealed.gameObject);
 
-			Invoke("CreateCard", 0.001f);
-			Invoke("CreateCard", 0.001f);
-		}
-		else {
-			// yield return new WaitForSeconds(.5f);
-			Debug.Log("no");
-			_firstRevealed.UnSelect();
-			_secondRevealed.UnSelect();
-		}
-		_firstRevealed = null;
-		_secondRevealed = null;
-	}
+	// 		Invoke("CreateCard", 0.001f);
+	// 		Invoke("CreateCard", 0.001f);
+	// 	}
+	// 	else {
+	// 		// yield return new WaitForSeconds(.5f);
+	// 		Debug.Log("no");
+	// 		_firstRevealed.UnSelect();
+	// 		_secondRevealed.UnSelect();
+	// 	}
+	// 	_firstRevealed = null;
+	// 	_secondRevealed = null;
+	// }
 
     List<List<string>> LoadDrugs(string fp) {
         List<List<string>> drugs = new List<List<string>>();
