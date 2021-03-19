@@ -21,9 +21,11 @@ public class DrugTile : MonoBehaviour {
 	}
 
 	private void Update() {
+		// update position of tile when it is moved/changes parent
 		if(transform.localPosition != Vector3.zero) {
 			transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);
 		}
+		// tiles are spawned at scale 0 and grow to 1
 		if(transform.localScale != Vector3.one) {
 			transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one, scaleSpeed * Time.deltaTime);
 		}
@@ -32,7 +34,7 @@ public class DrugTile : MonoBehaviour {
 	public void Tapped() {
 		// Debug.Log("clicked " + nameLabelTMP);
 		// controller.CardRevealed(this);
-		Slide(Direction.Up);
+		// Slide(Direction.Up);
 	}
 
 	// returns true if this drug matches another drugtile
@@ -75,15 +77,13 @@ public class DrugTile : MonoBehaviour {
 			RectTransform newCell = newPos.GetComponent<RectTransform>();
 			if(newCell.childCount < 1) { // if there isn't a tile in the next cell
 				transform.parent = newCell;
-				// GetComponent<RectTransform>().offsetMin = new Vector2(-0, 0);
-				// GetComponent<RectTransform>().offsetMax = new Vector2(-0, 0);
 			}
 			else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) { // if there is a tile and they match
 				foreach (Transform child in newCell) {
-					newCell.GetComponentInChildren<DrugTile>().controller.tilesOnScreen.Remove(newCell.GetComponentInChildren<DrugTile>()); //remove this tile from the list of active tiles
+					controller.tilesOnScreen.Remove(newCell.GetComponentInChildren<DrugTile>()); //remove this tile from the list of active tiles
 					GameObject.Destroy(child.gameObject); //and destroy it
  				}
-				this.controller.tilesOnScreen.Remove(this); //remove this card from the list of active cards
+				controller.tilesOnScreen.Remove(this); //remove this card from the list of active cards
 				GameObject.Destroy(this.gameObject); //and destroy it
 				return true;
 			}

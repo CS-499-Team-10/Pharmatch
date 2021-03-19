@@ -221,14 +221,10 @@ public class SceneController : MonoBehaviour {
 
 			Invoke("CreateCard", 0.001f);
 			Invoke("CreateCard", 0.001f);
-			
-			// Invoke("CreateCard", 0.001f);
-			// Invoke("CreateCard", 0.001f);
 		}
 		else {
 			// yield return new WaitForSeconds(.5f);
 			Debug.Log("no");
-			// return 0;
 			_firstRevealed.UnSelect();
 			_secondRevealed.UnSelect();
 		}
