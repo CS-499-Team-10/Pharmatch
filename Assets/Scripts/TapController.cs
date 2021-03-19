@@ -14,8 +14,8 @@ public class TapController : SceneController
         }
     }
 
-    private DrugTile _firstRevealed;
-	private DrugTile _secondRevealed;
+    private DrugTile firstSelected;
+	private DrugTile secondSelected;
 
     // Update is called once per frame
     void Update()
@@ -24,36 +24,35 @@ public class TapController : SceneController
     }
 
     public override void CardTapped(DrugTile card) {
-		if (_firstRevealed == null) {
-			_firstRevealed = card;
-			_firstRevealed.Select();
+		if (firstSelected == null) {
+			firstSelected = card;
+			firstSelected.Select();
 		} else {
-			_secondRevealed = card;
-			_secondRevealed.Select();
+			secondSelected = card;
+			secondSelected.Select();
 			TryMatch();
 		}
 	}
 
     private void TryMatch() {
-		if (_firstRevealed.CheckMatch(_secondRevealed)) {
+		if (firstSelected.CheckMatch(secondSelected)) {
 			IncrementScore(1);
 
-			tilesOnScreen.Remove(_firstRevealed);
-			tilesOnScreen.Remove(_secondRevealed);
+			tilesOnScreen.Remove(firstSelected);
+			tilesOnScreen.Remove(secondSelected);
 
-			Destroy(_firstRevealed.gameObject);
-			Destroy(_secondRevealed.gameObject);
+			Destroy(firstSelected.gameObject);
+			Destroy(secondSelected.gameObject);
 
 			Invoke("CreateCard", 0.001f);
 			Invoke("CreateCard", 0.001f);
 		}
 		else {
-			// yield return new WaitForSeconds(.5f);
 			Debug.Log("no");
-			_firstRevealed.UnSelect();
-			_secondRevealed.UnSelect();
+			firstSelected.UnSelect();
+			secondSelected.UnSelect();
 		}
-		_firstRevealed = null;
-		_secondRevealed = null;
+		firstSelected = null;
+		secondSelected = null;
 	}
 }
