@@ -18,40 +18,20 @@ public class SceneController : MonoBehaviour {
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
 	
-	private DrugTile _firstRevealed;
-	private DrugTile _secondRevealed;
 	private int _score = 0;
 	[SerializeField] private TMP_Text scoreText;
 
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			CreateCard();
-		}
-		if(Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			SlideUp();
-			Invoke("CreateCard", 0.001f);
-		}
-		if(Input.GetKeyDown(KeyCode.DownArrow))
-		{
-			SlideDown();
-			Invoke("CreateCard", 0.001f);
-		}
-		if(Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			SlideLeft();
-			Invoke("CreateCard", 0.001f);
-		}
-		if(Input.GetKeyDown(KeyCode.RightArrow))
-		{
-			SlideRight();
-			Invoke("CreateCard", 0.001f);
-		}
+		// if(Input.GetKeyDown(KeyCode.Space))
+		// {
+		// 	CreateCard();
+		// }
 	}
 
-	void CreateCard()
+	protected Transform[] GetCells() {return cells;}
+
+	public void CreateCard()
     {
 		DrugTile newCard;
 		Transform newCell = null;
@@ -99,88 +79,8 @@ public class SceneController : MonoBehaviour {
 		}
 	}
 
-	void SlideUp() {
-		foreach (Transform cell in cells)
-		{
-			GridPosition pos = cell.GetComponentInParent<GridPosition>();
-			if (!pos.up) {
-				for (GridPosition nextMover = pos.down; nextMover != null; nextMover = nextMover.down)
-				{
-					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
-					if (tileToMove != null) {
-						if (tileToMove.Slide(DrugTile.Direction.Up))
-                        {
-							_score++;
-							scoreText.text = "Score: " + _score;
-						}							
-					}
-				}
-			}
-		}
-	}
-
-	void SlideDown() {
-		foreach (Transform cell in cells)
-		{
-			GridPosition pos = cell.GetComponentInParent<GridPosition>();
-			if (!pos.down) {
-				for (GridPosition nextMover = pos.up; nextMover != null; nextMover = nextMover.up)
-				{
-					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
-					if (tileToMove != null) {
-						if (tileToMove.Slide(DrugTile.Direction.Down))
-						{
-							_score++;
-							scoreText.text = "Score: " + _score;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	void SlideRight() {
-		foreach (Transform cell in cells)
-		{
-			GridPosition pos = cell.GetComponentInParent<GridPosition>();
-			if (!pos.right) {
-				for (GridPosition nextMover = pos.left; nextMover != null; nextMover = nextMover.left)
-				{
-					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
-					if (tileToMove != null) {
-						if (tileToMove.Slide(DrugTile.Direction.Right))
-						{
-							_score++;
-							scoreText.text = "Score: " + _score;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	void SlideLeft() {
-		foreach (Transform cell in cells)
-		{
-			GridPosition pos = cell.GetComponentInParent<GridPosition>();
-			if (!pos.left) {
-				for (GridPosition nextMover = pos.right; nextMover != null; nextMover = nextMover.right)
-				{
-					DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
-					if (tileToMove != null) {
-						if (tileToMove.Slide(DrugTile.Direction.Left))
-						{
-							_score++;
-							scoreText.text = "Score: " + _score;
-						}
-					}
-				}
-			}
-		}
-	}
-
 	// Use this for initialization
-	void Start() {
+	protected virtual void Start() {
         // //temporary addition to test LoadDrugs
         // TestLoadDrugs();
 
@@ -192,15 +92,16 @@ public class SceneController : MonoBehaviour {
 		// }
 	}
 
-	public void CardRevealed(DrugTile card) {
-		if (_firstRevealed == null) {
-			_firstRevealed = card;
-			_firstRevealed.Select();
-		} else {
-			_secondRevealed = card;
-			_secondRevealed.Select();
-			TryMatch();
-		}
+	public virtual void CardTapped(DrugTile card) {
+		Debug.Log("wrong");
+		// if (_firstRevealed == null) {
+		// 	_firstRevealed = card;
+		// 	_firstRevealed.Select();
+		// } else {
+		// 	_secondRevealed = card;
+		// 	_secondRevealed.Select();
+		// 	TryMatch();
+		// }
 	}
 
 	public void IncrementScore(int addedScore) {
@@ -209,28 +110,28 @@ public class SceneController : MonoBehaviour {
 		scoreText.text = "Score: " + _score;
 	}
 	
-	private void TryMatch() {
-		if (_firstRevealed.CheckMatch(_secondRevealed)) {
-			IncrementScore(1);
+	// private void TryMatch() {
+	// 	if (_firstRevealed.CheckMatch(_secondRevealed)) {
+	// 		IncrementScore(1);
 
-			tilesOnScreen.Remove(_firstRevealed);
-			tilesOnScreen.Remove(_secondRevealed);
+	// 		tilesOnScreen.Remove(_firstRevealed);
+	// 		tilesOnScreen.Remove(_secondRevealed);
 
-			Destroy(_firstRevealed.gameObject);
-			Destroy(_secondRevealed.gameObject);
+	// 		Destroy(_firstRevealed.gameObject);
+	// 		Destroy(_secondRevealed.gameObject);
 
-			Invoke("CreateCard", 0.001f);
-			Invoke("CreateCard", 0.001f);
-		}
-		else {
-			// yield return new WaitForSeconds(.5f);
-			Debug.Log("no");
-			_firstRevealed.UnSelect();
-			_secondRevealed.UnSelect();
-		}
-		_firstRevealed = null;
-		_secondRevealed = null;
-	}
+	// 		Invoke("CreateCard", 0.001f);
+	// 		Invoke("CreateCard", 0.001f);
+	// 	}
+	// 	else {
+	// 		// yield return new WaitForSeconds(.5f);
+	// 		Debug.Log("no");
+	// 		_firstRevealed.UnSelect();
+	// 		_secondRevealed.UnSelect();
+	// 	}
+	// 	_firstRevealed = null;
+	// 	_secondRevealed = null;
+	// }
 
     List<List<string>> LoadDrugs(string fp) {
         List<List<string>> drugs = new List<List<string>>();
