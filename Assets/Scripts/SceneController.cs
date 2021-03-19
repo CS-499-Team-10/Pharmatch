@@ -55,7 +55,6 @@ public class SceneController : MonoBehaviour {
 			List<string> randomSet1 = drugs[Random.Range(0, drugs.Count)];
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
 			newCard.transform.localScale = Vector3.zero;
-			//List<string> randomSet1 = drugs[Random.Range(0, 2)];
 			if (Random.Range(0, 9) > 1 && tilesOnScreen.Count != 0) //if we hit the 80% chance
 			{
 				holder = tilesOnScreen[Random.Range(0, tilesOnScreen.Count)];
@@ -94,14 +93,6 @@ public class SceneController : MonoBehaviour {
 
 	public virtual void CardTapped(DrugTile card) {
 		Debug.Log("wrong");
-		// if (_firstRevealed == null) {
-		// 	_firstRevealed = card;
-		// 	_firstRevealed.Select();
-		// } else {
-		// 	_secondRevealed = card;
-		// 	_secondRevealed.Select();
-		// 	TryMatch();
-		// }
 	}
 
 	public void IncrementScore(int addedScore) {
@@ -109,29 +100,6 @@ public class SceneController : MonoBehaviour {
 		Debug.Log(_score);
 		scoreText.text = "Score: " + _score;
 	}
-	
-	// private void TryMatch() {
-	// 	if (_firstRevealed.CheckMatch(_secondRevealed)) {
-	// 		IncrementScore(1);
-
-	// 		tilesOnScreen.Remove(_firstRevealed);
-	// 		tilesOnScreen.Remove(_secondRevealed);
-
-	// 		Destroy(_firstRevealed.gameObject);
-	// 		Destroy(_secondRevealed.gameObject);
-
-	// 		Invoke("CreateCard", 0.001f);
-	// 		Invoke("CreateCard", 0.001f);
-	// 	}
-	// 	else {
-	// 		// yield return new WaitForSeconds(.5f);
-	// 		Debug.Log("no");
-	// 		_firstRevealed.UnSelect();
-	// 		_secondRevealed.UnSelect();
-	// 	}
-	// 	_firstRevealed = null;
-	// 	_secondRevealed = null;
-	// }
 
     List<List<string>> LoadDrugs(string fp) {
         List<List<string>> drugs = new List<List<string>>();
