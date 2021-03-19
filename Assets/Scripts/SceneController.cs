@@ -249,11 +249,11 @@ public class SceneController : MonoBehaviour {
 
                 List<string> toAdd = new List<string>();
                 if (splitted[0] != "")
-                    toAdd.Add(splitted[0]); //generic name added
+                    toAdd.Add(splitted[0].ToUpper()); //generic name added
                 if (splitted[1] != "")
-                    toAdd.Add(splitted[1]); //trade name added
+                    toAdd.Add(splitted[1].ToUpper()); //trade name added
                 if (splitted[2] != "")
-                    toAdd.Add(splitted[2]); //alternate trade name added
+                    toAdd.Add(splitted[2].ToUpper()); //alternate trade name added
                 drugs.Add(toAdd); //add to list of lists
             }
         }
