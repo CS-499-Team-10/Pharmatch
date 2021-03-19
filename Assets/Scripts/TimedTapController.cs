@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TapController : SceneController
+public class TimedTapController : SceneController
 {
+    protected DrugTile firstSelected;
+	protected DrugTile secondSelected;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        for (int i = 0; i < GetCells().Length; i++)
+        for (int i = 0; i < GetCells().Length/2; i++)
         {
             CreateCard();
         }
+        InvokeRepeating("CreateCard", 1, 1);
     }
-
-    protected DrugTile firstSelected;
-	protected DrugTile secondSelected;
-
     public override void CardTapped(DrugTile card) {
 		if (firstSelected == null) {
 			firstSelected = card;
@@ -37,9 +37,6 @@ public class TapController : SceneController
 
 			Destroy(firstSelected.gameObject);
 			Destroy(secondSelected.gameObject);
-
-			Invoke("CreateCard", 0.001f);
-			Invoke("CreateCard", 0.001f);
 		}
 		else {
 			Debug.Log("no");
@@ -48,5 +45,5 @@ public class TapController : SceneController
 		}
 		firstSelected = null;
 		secondSelected = null;
-	}
+    }
 }

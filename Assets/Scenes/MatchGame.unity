@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 212828944}
   - component: {fileID: 212828945}
   - component: {fileID: 212828946}
+  - component: {fileID: 212828943}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -230,6 +231,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &212828943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212828942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ade327f784cab4ea1461044f27fc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilesOnScreen: []
+  drugPrefab: {fileID: 5662546081437337688, guid: 6b2961be55b3b56459c56efbd711fc8e,
+    type: 3}
+  cells:
+  - {fileID: 1079689907}
+  - {fileID: 1227281524}
+  - {fileID: 2073533019}
+  - {fileID: 57101271}
+  - {fileID: 1626857115}
+  - {fileID: 2056933922}
+  - {fileID: 1089957268}
+  - {fileID: 1149839655}
+  - {fileID: 2113969869}
+  - {fileID: 2139402140}
+  - {fileID: 391088397}
+  - {fileID: 1055528127}
+  - {fileID: 1890848328}
+  - {fileID: 787754518}
+  - {fileID: 578332806}
+  - {fileID: 329282020}
+  scoreText: {fileID: 1516131442}
 --- !u!4 &212828944
 Transform:
   m_ObjectHideFlags: 0
@@ -251,7 +285,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212828942}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0eea1cb755ebfd04ca270b4381cb16bb, type: 3}
   m_Name: 

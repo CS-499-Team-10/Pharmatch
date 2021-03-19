@@ -84,11 +84,6 @@ public class SceneController : MonoBehaviour {
         // TestLoadDrugs();
 
         drugs = LoadDrugs("Assets/DrugInfo/60DrugNames.csv");
-
-		// place cards in a grid
-		// for (int i = 0; i < cells.Length; i++) {
-		// 	CreateCard();
-		// }
 	}
 
 	public virtual void CardTapped(DrugTile card) {
