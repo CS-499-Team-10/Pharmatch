@@ -221,7 +221,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 212828944}
-  - component: {fileID: 212828943}
+  - component: {fileID: 212828945}
+  - component: {fileID: 212828946}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -229,7 +230,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &212828943
+--- !u!4 &212828944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212828942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &212828945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,9 +253,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 212828942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 092247726ce43074292f8df5aff2d6a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0eea1cb755ebfd04ca270b4381cb16bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilesOnScreen: []
   drugPrefab: {fileID: 5662546081437337688, guid: 6b2961be55b3b56459c56efbd711fc8e,
     type: 3}
   cells:
@@ -261,20 +277,39 @@ MonoBehaviour:
   - {fileID: 578332806}
   - {fileID: 329282020}
   scoreText: {fileID: 1516131442}
---- !u!4 &212828944
-Transform:
+--- !u!114 &212828946
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212828942}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f669a222d24043bf973d0c8fc04f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilesOnScreen: []
+  drugPrefab: {fileID: 5662546081437337688, guid: 6b2961be55b3b56459c56efbd711fc8e,
+    type: 3}
+  cells:
+  - {fileID: 1079689907}
+  - {fileID: 1227281524}
+  - {fileID: 2073533019}
+  - {fileID: 57101271}
+  - {fileID: 1626857115}
+  - {fileID: 2056933922}
+  - {fileID: 1089957268}
+  - {fileID: 1149839655}
+  - {fileID: 2113969869}
+  - {fileID: 2139402140}
+  - {fileID: 391088397}
+  - {fileID: 1055528127}
+  - {fileID: 1890848328}
+  - {fileID: 787754518}
+  - {fileID: 578332806}
+  - {fileID: 329282020}
+  scoreText: {fileID: 1516131442}
 --- !u!1 &329282019
 GameObject:
   m_ObjectHideFlags: 0

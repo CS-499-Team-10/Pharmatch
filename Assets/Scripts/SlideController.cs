@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class SlideController : SceneController
 {
-    // [SerializeField] SceneController sceneController;
-
     // Start is called before the first frame update
-    // void Start()
-    // {
-        
-    // }
+    protected override void Start()
+    {
+        base.Start();
+        for (int i = 0; i < 3; i++)
+        {
+            CreateCard();
+        }
+    }
 
     // Update is called once per frame
     void Update()
