@@ -53,6 +53,21 @@ public class DrugTile : MonoBehaviour {
 		GetComponent<Image>().color = new Color(186F/255F, 195F/255F, 121F/255F);
 	}
 
+    IEnumerator wait(RectTransform newCell)
+    {
+        controller.audios.Play();
+        yield return new WaitForEndOfFrame();
+        transform.parent = newCell;
+        while (transform.localScale.x > .1f && transform.localScale.y > .1f)
+        {
+            transform.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
+            yield return new WaitForEndOfFrame();
+        }
+        this.controller.tilesOnScreen.Remove(this); //remove this card from the list of active cards
+        GameObject.Destroy(this.gameObject); //and destroy it
+        yield return 0;
+    }
+
 	// slides a tile in given direction
 	// returns true if the tile slides into a match, false otherwise
 	public bool Slide(Direction dir) {
@@ -83,8 +98,7 @@ public class DrugTile : MonoBehaviour {
 					controller.tilesOnScreen.Remove(newCell.GetComponentInChildren<DrugTile>()); //remove this tile from the list of active tiles
 					GameObject.Destroy(child.gameObject); //and destroy it
  				}
-				controller.tilesOnScreen.Remove(this); //remove this card from the list of active cards
-				GameObject.Destroy(this.gameObject); //and destroy it
+                StartCoroutine(wait(newCell));
 				return true;
 			}
 		}

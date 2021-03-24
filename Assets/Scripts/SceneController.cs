@@ -15,6 +15,7 @@ public class SceneController : MonoBehaviour {
 	public List<DrugTile> tilesOnScreen = new List<DrugTile>(); //list of all the tiles currently in the game
     private DrugTile holder;
 
+    [SerializeField] public AudioSource audios;
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
 	
