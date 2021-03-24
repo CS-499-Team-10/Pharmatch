@@ -60,7 +60,7 @@ public class DrugTile : MonoBehaviour {
         transform.parent = newCell;
         while (transform.localScale.x > .1f && transform.localScale.y > .1f)
         {
-            transform.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
+            transform.localScale -= new Vector3(0.2f, 0.2f, 0.2f);
             yield return new WaitForEndOfFrame();
         }
         this.controller.tilesOnScreen.Remove(this); //remove this card from the list of active cards
