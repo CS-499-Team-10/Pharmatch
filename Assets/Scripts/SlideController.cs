@@ -16,7 +16,7 @@ public class SlideController : SceneController
 
     protected override void PopulateTile(DrugTile newTile)
     {
-        if ((Random.Range(0, 9) > 5 && tilesOnScreen.Count != 0) || (GetDrugFamilyCount() > 4)) //if we hit the 80% chance
+        if ((Random.Range(0, 9) > 5 && tilesOnScreen.Count != 0) || (GetDrugFamilyCount() > 4))
 		{
 			List<string> names = new List<string>();
 			foreach (DrugTile tile in tilesOnScreen)
