@@ -18,6 +18,8 @@ public class SceneController : MonoBehaviour {
     [SerializeField] public AudioSource audios;
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
+
+	[SerializeField] private String drugFilename = "testDrugNames.csv";
 	
 	private int _score = 0;
 	[SerializeField] private TMP_Text scoreText;
@@ -84,7 +86,7 @@ public class SceneController : MonoBehaviour {
         // //temporary addition to test LoadDrugs
         // TestLoadDrugs();
 
-        drugs = LoadDrugs("Assets/DrugInfo/60DrugNames.csv");
+        drugs = LoadDrugs("Assets/DrugInfo/" + drugFilename);
 	}
 
 	public virtual void CardTapped(DrugTile card) {
@@ -126,7 +128,7 @@ public class SceneController : MonoBehaviour {
     }
 
     public void TestLoadDrugs() {
-        string fp = "Assets/DrugInfo/60DrugNames.csv";
+        string fp = "Assets/DrugInfo/" + drugFilename;
         List<List<string>> testDrugs = LoadDrugs(fp);
 
         foreach(List<string> l in testDrugs) {
