@@ -149,4 +149,38 @@ public class SceneController : MonoBehaviour {
 	public void Restart() {
 		SceneManager.LoadScene("Scene");
 	}
+
+	// returns number of drug "families" currently on the board.
+	protected int GetDrugFamilyCount() {
+		Dictionary<List<string>,int> counts = new Dictionary<List<string>,int>();
+		int unique = 0;
+		foreach(DrugTile tile in tilesOnScreen){
+			if (counts.ContainsKey(tile.drugMatches)){
+				counts[tile.drugMatches] = counts[tile.drugMatches]+1;
+			} else {
+				counts[tile.drugMatches] = 1;
+				unique += 1;
+			}
+		}
+		Debug.Log("Unique classes: " + unique);
+		return unique;
+	}
+
+	// given two drug names, returns the name of the one which occurs on the board fewer times.
+	protected string FewerOccurences(string name1, string name2) {
+		int count1 = 0;
+		int count2 = 0;
+
+		foreach(DrugTile tile in tilesOnScreen){
+			if (tile.nameLabelTMP.text == name1) {
+				count1 += 1;
+			}
+			else if (tile.nameLabelTMP.text == name2){
+				count2 += 1;
+			}
+		}
+
+		if (count2 < count1) return name2;
+		else return name1;
+	}
 }
