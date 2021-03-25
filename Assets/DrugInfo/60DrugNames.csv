@@ -1,7 +1,7 @@
 ﻿Generic Name (all lower case letters),Trade (Brand) Name  (ALWAYS with a Capital Letter),Alternative Brand Name,Type of Analgesic,Street Name
 bromfenac,Bromday,Prolensa,Nonsteroidal anti-inflammatory (NSAID),
 diclofenac,Voltaren,Zorvolex,Nonsteroidal anti-inflammatory (NSAID),
-diflunisal,Dolobid,,Nonsteroidal anti-inflammatory (NSAID),
+diflunisal,Dolobid,,Nonsteroidal anti-inflammatory (NSAID) / salicylates,
 etodolac,Lodine,,Nonsteroidal anti-inflammatory (NSAID),
 fenoprofen,Nalfon,,Nonsteroidal anti-inflammatory (NSAID),
 flurbiprofen,Ansaid,,Nonsteroidal anti-inflammatory (NSAID),
@@ -39,7 +39,6 @@ remifentanil,Ultiva,,opiod,
 hydrocodone,Hysingla,,opiod,Vike; Watsons; Watson-387; Vics; Vicos; Hydros; Lorris; Fluff; Scratch
 aspirin,Bayer,Asriptin,salicylates,
 salsalate,Disalcid,,salicylates,
-Diflunisal,Dolobid,,salicylates,
 erenumab-aooe,Aimovig,,Calcitonin gene-related peptide inhibors (CGRP),
 fremanezumab,Ajoby,,Calcitonin gene-related peptide inhibors (CGRP),
 galcanezumab-gnlm,Emgality,,Calcitonin gene-related peptide inhibors (CGRP),
