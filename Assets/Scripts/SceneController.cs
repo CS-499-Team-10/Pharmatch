@@ -38,7 +38,9 @@ public class SceneController : MonoBehaviour {
     {
 		DrugTile newCard;
 		Transform newCell = null;
-		List<Transform> activeCells = new List<Transform>();
+
+		// create a list of empty cells that can accept a new tile
+		List<Transform> activeCells = new List<Transform>(); 
 		foreach (Transform cell in cells)
 		{
 			if(cell.childCount == 0)
@@ -47,6 +49,7 @@ public class SceneController : MonoBehaviour {
 			}
 		}
 
+		// if there is space to generate a new card, pick an index
 		if (activeCells.Count > 0)
 		{
 			int whichCell = Random.Range(0, activeCells.Count);
