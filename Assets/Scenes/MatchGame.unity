@@ -239,11 +239,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212828942}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68ade327f784cab4ea1461044f27fc09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDrugs: []
   tilesOnScreen: []
   audios: {fileID: 536822492}
   drugPrefab: {fileID: 5662546081437337688, guid: 6b2961be55b3b56459c56efbd711fc8e,
@@ -265,7 +266,7 @@ MonoBehaviour:
   - {fileID: 787754518}
   - {fileID: 578332806}
   - {fileID: 329282020}
-  drugFilename: testDrugNames.csv
+  useDebugNames: 0
   scoreText: {fileID: 1516131442}
 --- !u!4 &212828944
 Transform:
@@ -288,11 +289,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212828942}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0eea1cb755ebfd04ca270b4381cb16bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDrugs: []
   tilesOnScreen: []
   audios: {fileID: 536822492}
   drugPrefab: {fileID: 5662546081437337688, guid: 6b2961be55b3b56459c56efbd711fc8e,
@@ -314,7 +316,7 @@ MonoBehaviour:
   - {fileID: 787754518}
   - {fileID: 578332806}
   - {fileID: 329282020}
-  drugFilename: testDrugNames.csv
+  useDebugNames: 0
   scoreText: {fileID: 1516131442}
 --- !u!114 &212828946
 MonoBehaviour:
@@ -328,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307f669a222d24043bf973d0c8fc04f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDrugs: []
   tilesOnScreen: []
   audios: {fileID: 536822492}
   drugPrefab: {fileID: 5662546081437337688, guid: 6b2961be55b3b56459c56efbd711fc8e,
@@ -349,7 +352,7 @@ MonoBehaviour:
   - {fileID: 787754518}
   - {fileID: 578332806}
   - {fileID: 329282020}
-  drugFilename: testDrugNames.csv
+  useDebugNames: 0
   scoreText: {fileID: 1516131442}
 --- !u!114 &212828947
 MonoBehaviour:

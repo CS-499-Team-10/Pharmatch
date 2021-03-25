@@ -11,28 +11,20 @@ using System.Text;
 using Random = UnityEngine.Random; //to distinguish between UnityEngine.Random and System.Random
 
 public class SceneController : MonoBehaviour {
-	protected List<List<string>> drugs = new List<List<string>>();
-	public List<DrugTile> tilesOnScreen = new List<DrugTile>(); //list of all the tiles currently in the game
-    protected DrugTile holder;
+	protected List<List<string>> drugs = new List<List<string>>(); // master list of all drugs loaded in from the .csv
+	[SerializeField] private List<string> currentDrugs = new List<string>();
+	public List<DrugTile> tilesOnScreen = new List<DrugTile>(); // list of all the tiles currently in the game
 
-	protected Dictionary<string, List<string>> drugnameToMatches = new Dictionary<string, List<string>>();
+	protected Dictionary<string, List<string>> drugnameToMatches = new Dictionary<string, List<string>>(); // maps a string containing a drug name to a list of its matches
 
     [SerializeField] public AudioSource audios;
 	[SerializeField] private DrugTile drugPrefab;
-	[SerializeField] private Transform[] cells;
+	[SerializeField] private Transform[] cells; // list of cells on the board
 
-	[SerializeField] private bool useDebugNames = false;
+	[SerializeField] private bool useDebugNames = false; // set to true to use debug names for drugs
 	
 	private int _score = 0;
 	[SerializeField] private TMP_Text scoreText;
-
-	void Update()
-	{
-		// if(Input.GetKeyDown(KeyCode.Space))
-		// {
-		// 	CreateCard();
-		// }
-	}
 
 	protected Transform[] GetCells() {return cells;}
 
@@ -72,25 +64,12 @@ public class SceneController : MonoBehaviour {
 	// populate a new drug tile with a new drug
 	// can be overloaded for different behavior in various game modes
 	protected virtual void PopulateTile(DrugTile newTile) {
-		if (Random.Range(0, 9) > 1 && tilesOnScreen.Count != 0) //if we hit the 80% chance
-		{
-			holder = tilesOnScreen[Random.Range(0, tilesOnScreen.Count)];
-			newTile.drugMatches = holder.drugMatches;
-			if (holder.nameLabelTMP.text == holder.drugMatches[0]) //set our new card to match the randomly selected one
-			{
-				newTile.nameLabelTMP.text = holder.drugMatches[1];
-			}
-			else 
-			{
-				newTile.nameLabelTMP.text = holder.drugMatches[0];
-			}
-		}
-		else //otherwise add a random card
-		{
-			List<string> drugFamily = drugs[Random.Range(0, drugs.Count)];
-			newTile.drugMatches = drugFamily;
-			newTile.nameLabelTMP.text = drugFamily[Random.Range(0, drugFamily.Count)];
-		}
+		int index = Random.Range(0, currentDrugs.Count);
+		string newName = currentDrugs[index];
+		currentDrugs.RemoveAt(index);
+		if (currentDrugs.Count == 0) currentDrugs = SampleDrugs(8);
+		newTile.nameLabelTMP.text = newName;
+		newTile.drugMatches = drugnameToMatches[newName];
 	}
 
 	// Use this for initialization
@@ -108,6 +87,9 @@ public class SceneController : MonoBehaviour {
 				drugnameToMatches.Add(drug, list);
 			}
 		}
+
+		currentDrugs = SampleDrugs(8);
+		Debug.Log(currentDrugs.Count);
 	}
 
 	public virtual void CardTapped(DrugTile card) {
@@ -118,6 +100,24 @@ public class SceneController : MonoBehaviour {
 		_score += addedScore;
 		Debug.Log(_score);
 		scoreText.text = "Score: " + _score;
+	}
+
+	// returns a randomly sampled list of 2*drugfamilyCount drugs from drugfamilyCount families
+	// https://stackoverflow.com/questions/48087/select-n-random-elements-from-a-listt-in-c-sharp
+	private List<string> SampleDrugs(int drugfamilyCount) {
+		List<string> returnList = new List<string>();
+		int index = 0;
+		foreach (var matchList in drugs)
+		{
+			if(Random.Range(0f, drugs.Count - index) < (drugfamilyCount - returnList.Count/2))
+			{
+				returnList.Add(matchList[0]);
+				returnList.Add(matchList[1]);
+			}
+			if(returnList.Count >= (2*drugfamilyCount)) return returnList;
+			index += 1;
+		}
+		return returnList;
 	}
 
     List<List<string>> LoadDrugs(string fp) {
