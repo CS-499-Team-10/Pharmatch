@@ -57,7 +57,7 @@ public class DrugTile : MonoBehaviour {
     {
         controller.audios.Play();
         yield return new WaitForEndOfFrame();
-        transform.parent = newCell;
+        // transform.parent = newCell;
         while (transform.localScale.x > .1f && transform.localScale.y > .1f)
         {
             transform.localScale -= new Vector3(0.2f, 0.2f, 0.2f);
@@ -94,6 +94,7 @@ public class DrugTile : MonoBehaviour {
 				transform.parent = newCell;
 			}
 			else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) { // if there is a tile and they match
+				transform.parent = newCell;
 				foreach (Transform child in newCell) {
 					controller.tilesOnScreen.Remove(newCell.GetComponentInChildren<DrugTile>()); //remove this tile from the list of active tiles
 					GameObject.Destroy(child.gameObject); //and destroy it
