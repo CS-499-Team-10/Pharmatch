@@ -265,6 +265,7 @@ MonoBehaviour:
   - {fileID: 787754518}
   - {fileID: 578332806}
   - {fileID: 329282020}
+  drugFilename: testDrugNames.csv
   scoreText: {fileID: 1516131442}
 --- !u!4 &212828944
 Transform:
@@ -313,6 +314,7 @@ MonoBehaviour:
   - {fileID: 787754518}
   - {fileID: 578332806}
   - {fileID: 329282020}
+  drugFilename: testDrugNames.csv
   scoreText: {fileID: 1516131442}
 --- !u!114 &212828946
 MonoBehaviour:
@@ -347,6 +349,7 @@ MonoBehaviour:
   - {fileID: 787754518}
   - {fileID: 578332806}
   - {fileID: 329282020}
+  drugFilename: testDrugNames.csv
   scoreText: {fileID: 1516131442}
 --- !u!114 &212828947
 MonoBehaviour:
