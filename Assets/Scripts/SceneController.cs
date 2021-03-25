@@ -98,8 +98,8 @@ public class SceneController : MonoBehaviour {
         // //temporary addition to test LoadDrugs
         // TestLoadDrugs();
 
-		string fp = "Assets/DrugInfo/60DrugNames.csv";
-		if(useDebugNames) fp = "Assets/DrugInfo/testDrugNames.csv";
+		string fp = "60DrugNames";
+		if(useDebugNames) fp = "testDrugNames";
         drugs = LoadDrugs(fp);
 		foreach (var list in drugs)
 		{
@@ -123,7 +123,11 @@ public class SceneController : MonoBehaviour {
     List<List<string>> LoadDrugs(string fp) {
         List<List<string>> drugs = new List<List<string>>();
         string line = "";
-        using (StreamReader sr = new StreamReader(@fp))
+
+		TextAsset theList = (TextAsset)Resources.Load(fp) as TextAsset;
+        string txtContent = theList.text;
+
+        using (StringReader sr = new StringReader(txtContent))
         {
             line = sr.ReadLine(); //ignore first line with column labels
             while (sr.Peek() != -1)
@@ -149,8 +153,8 @@ public class SceneController : MonoBehaviour {
     }
 
     public void TestLoadDrugs() {
-        string fp = "Assets/DrugInfo/60DrugNames.csv";
-		if(useDebugNames) fp = "Assets/DrugInfo/testDrugNames.csv";
+        string fp = "60DrugNames";
+		if(useDebugNames) fp = "testDrugNames";
         List<List<string>> testDrugs = LoadDrugs(fp);
 
         foreach(List<string> l in testDrugs) {
