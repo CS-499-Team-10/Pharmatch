@@ -16,7 +16,7 @@ public class SlideController : SceneController
 
     protected override void PopulateTile(DrugTile newTile)
     {
-        if ((Random.Range(0, 9) > 1 && tilesOnScreen.Count != 0) || (GetDrugFamilyCount() > 5)) //if we hit the 80% chance
+        if ((Random.Range(0, 9) > 5 && tilesOnScreen.Count != 0) || (GetDrugFamilyCount() > 4)) //if we hit the 80% chance
 		{
 			List<string> names = new List<string>();
 			foreach (DrugTile tile in tilesOnScreen)
@@ -27,15 +27,9 @@ public class SlideController : SceneController
 				}
 			}
 
-			newTile.drugMatches = holder.drugMatches;
-			if (holder.nameLabelTMP.text == holder.drugMatches[0]) //set our new card to match the randomly selected one
-			{
-				newTile.nameLabelTMP.text = holder.drugMatches[1];
-			}
-			else
-			{
-				newTile.nameLabelTMP.text = holder.drugMatches[0];
-			}
+			string newName = names[Random.Range(0, names.Count)];
+			newTile.drugMatches = drugnameToMatches[newName];
+			newTile.nameLabelTMP.text = FewerOccurences(newTile.drugMatches[0], newTile.drugMatches[1]);
 		}
 		else //otherwise add a random card
 		{

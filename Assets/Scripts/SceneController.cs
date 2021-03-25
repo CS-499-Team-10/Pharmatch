@@ -15,6 +15,8 @@ public class SceneController : MonoBehaviour {
 	public List<DrugTile> tilesOnScreen = new List<DrugTile>(); //list of all the tiles currently in the game
     protected DrugTile holder;
 
+	protected Dictionary<string, List<string>> drugnameToMatches = new Dictionary<string, List<string>>();
+
     [SerializeField] public AudioSource audios;
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
@@ -96,6 +98,13 @@ public class SceneController : MonoBehaviour {
         // TestLoadDrugs();
 
         drugs = LoadDrugs("Assets/DrugInfo/" + drugFilename);
+		foreach (var list in drugs)
+		{
+			foreach (var drug in list)
+			{
+				drugnameToMatches.Add(drug, list);
+			}
+		}
 	}
 
 	public virtual void CardTapped(DrugTile card) {
@@ -181,6 +190,8 @@ public class SceneController : MonoBehaviour {
 		}
 
 		if (count2 < count1) return name2;
-		else return name1;
+		else if (count1 < count2) return name1;
+		else if (Random.Range(0f, 1f) > 0.5f) return name1;
+		else return name2;
 	}
 }
