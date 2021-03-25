@@ -21,7 +21,7 @@ public class SceneController : MonoBehaviour {
 	[SerializeField] private DrugTile drugPrefab;
 	[SerializeField] private Transform[] cells;
 
-	[SerializeField] private String drugFilename = "testDrugNames.csv";
+	[SerializeField] private bool useDebugNames = false;
 	
 	private int _score = 0;
 	[SerializeField] private TMP_Text scoreText;
@@ -36,6 +36,7 @@ public class SceneController : MonoBehaviour {
 
 	protected Transform[] GetCells() {return cells;}
 
+	// create a drug tile and place it in the game
 	public void CreateCard()
     {
 		DrugTile newCard;
@@ -97,7 +98,9 @@ public class SceneController : MonoBehaviour {
         // //temporary addition to test LoadDrugs
         // TestLoadDrugs();
 
-        drugs = LoadDrugs("Assets/DrugInfo/" + drugFilename);
+		string fp = "Assets/DrugInfo/60DrugNames.csv";
+		if(useDebugNames) fp = "Assets/DrugInfo/testDrugNames.csv";
+        drugs = LoadDrugs(fp);
 		foreach (var list in drugs)
 		{
 			foreach (var drug in list)
@@ -146,7 +149,8 @@ public class SceneController : MonoBehaviour {
     }
 
     public void TestLoadDrugs() {
-        string fp = "Assets/DrugInfo/" + drugFilename;
+        string fp = "Assets/DrugInfo/60DrugNames.csv";
+		if(useDebugNames) fp = "Assets/DrugInfo/testDrugNames.csv";
         List<List<string>> testDrugs = LoadDrugs(fp);
 
         foreach(List<string> l in testDrugs) {
