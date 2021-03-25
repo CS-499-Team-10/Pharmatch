@@ -14,6 +14,38 @@ public class SlideController : SceneController
         }
     }
 
+    protected override void PopulateTile(DrugTile newTile)
+    {
+        if ((Random.Range(0, 9) > 1 && tilesOnScreen.Count != 0) || (GetDrugFamilyCount() > 5)) //if we hit the 80% chance
+		{
+			List<string> names = new List<string>();
+			foreach (DrugTile tile in tilesOnScreen)
+			{
+				if (!names.Contains(tile.nameLabelTMP.text))
+				{
+					names.Add(tile.nameLabelTMP.text);
+				}
+			}
+
+			newTile.drugMatches = holder.drugMatches;
+			if (holder.nameLabelTMP.text == holder.drugMatches[0]) //set our new card to match the randomly selected one
+			{
+				newTile.nameLabelTMP.text = holder.drugMatches[1];
+			}
+			else
+			{
+				newTile.nameLabelTMP.text = holder.drugMatches[0];
+			}
+		}
+		else //otherwise add a random card
+		{
+			List<string> drugFamily = drugs[Random.Range(0, drugs.Count)];
+			newTile.drugMatches = drugFamily;
+			newTile.nameLabelTMP.text = drugFamily[Random.Range(0, drugFamily.Count)];
+		}
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -38,10 +70,6 @@ public class SlideController : SceneController
 			Invoke("CreateCard", 0.001f);
 		}
     }
-
-    // void CreateCard() {
-    //     CreateCard();
-    // }
 
     void SlideUp() {
 		foreach (Transform cell in GetCells())

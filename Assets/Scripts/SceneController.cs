@@ -11,9 +11,9 @@ using System.Text;
 using Random = UnityEngine.Random; //to distinguish between UnityEngine.Random and System.Random
 
 public class SceneController : MonoBehaviour {
-	private List<List<string>> drugs = new List<List<string>>();
+	protected List<List<string>> drugs = new List<List<string>>();
 	public List<DrugTile> tilesOnScreen = new List<DrugTile>(); //list of all the tiles currently in the game
-    private DrugTile holder;
+    protected DrugTile holder;
 
     [SerializeField] public AudioSource audios;
 	[SerializeField] private DrugTile drugPrefab;
