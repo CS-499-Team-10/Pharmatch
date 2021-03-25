@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using TMPro;
 
 public class DrugTile : MonoBehaviour {
-	public TMP_Text nameLabelTMP;
-	[SerializeField] public List<string> drugMatches;
-	[SerializeField] public SceneController controller;
+	public TMP_Text nameLabelTMP; // label containing drug name
+	[SerializeField] public List<string> drugMatches; // list of drugs that this drug matches with
+	[SerializeField] public SceneController controller; // controller managing gameplay
 
-	public bool markedToDestroy = false;
+	public bool markedToDestroy = false; // when set, shrink this tile then destroy it
 
+	// speeds to move and scale tile
 	private const float moveSpeed = 2500;
 	private const float scaleSpeed = 10;
 
@@ -32,19 +33,19 @@ public class DrugTile : MonoBehaviour {
 			transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one, scaleSpeed * Time.deltaTime);
 		}
 
+		// when a tile is matched, shrink it
 		if(markedToDestroy && (transform.localScale != Vector3.zero)) {
 			transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.zero, scaleSpeed * Time.deltaTime);
 		}
 
+		// destroy it when its scale hits 0
 		if(markedToDestroy && (transform.localScale == Vector3.zero)) {
 			GameObject.Destroy(this.gameObject);
 		}
 	}
 
 	public void Tapped() {
-		Debug.Log("clicked " + nameLabelTMP);
-		controller.CardTapped(this);
-		// Slide(Direction.Up);
+		controller.CardTapped(this); // alert controller
 	}
 
 	// returns true if this drug matches another drugtile

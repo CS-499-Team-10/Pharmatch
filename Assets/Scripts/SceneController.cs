@@ -12,7 +12,7 @@ using Random = UnityEngine.Random; //to distinguish between UnityEngine.Random a
 
 public class SceneController : MonoBehaviour {
 	protected List<List<string>> drugs = new List<List<string>>(); // master list of all drugs loaded in from the .csv
-	[SerializeField] private List<string> currentDrugs = new List<string>();
+	[SerializeField] private List<string> currentDrugs = new List<string>(); // subset of drugs to cycle through for tapping games
 	public List<DrugTile> tilesOnScreen = new List<DrugTile>(); // list of all the tiles currently in the game
 
 	protected Dictionary<string, List<string>> drugnameToMatches = new Dictionary<string, List<string>>(); // maps a string containing a drug name to a list of its matches

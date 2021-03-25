@@ -16,8 +16,10 @@ public class SlideController : SceneController
 
     protected override void PopulateTile(DrugTile newTile)
     {
-        if ((Random.Range(0, 9) > 5 && tilesOnScreen.Count != 0) || (GetDrugFamilyCount() > 4))
+		// with a % chance, or always if either the board is empty or the number of drug families is greater than a certain amount
+        if ((Random.Range(0f, 1f) > 0.5f && tilesOnScreen.Count != 0) || (GetDrugFamilyCount() > 4))
 		{
+			// create a unique set of tiles on the board
 			List<string> names = new List<string>();
 			foreach (DrugTile tile in tilesOnScreen)
 			{
@@ -27,6 +29,7 @@ public class SlideController : SceneController
 				}
 			}
 
+			// pick a name from the set
 			string newName = names[Random.Range(0, names.Count)];
 			newTile.drugMatches = drugnameToMatches[newName];
 			newTile.nameLabelTMP.text = FewerOccurences(newTile.drugMatches[0], newTile.drugMatches[1]);
@@ -46,22 +49,26 @@ public class SlideController : SceneController
         if(SwipeInput.swipedUp)
 		{
 			SlideUp();
-			Invoke("CreateCard", 0.001f);
+			// Invoke("CreateCard", 0.001f);
+			CreateCard();
 		}
 		if(SwipeInput.swipedDown)
 		{
 			SlideDown();
-			Invoke("CreateCard", 0.001f);
+			// Invoke("CreateCard", 0.001f);
+			CreateCard();
 		}
 		if(SwipeInput.swipedLeft)
 		{
 			SlideLeft();
-			Invoke("CreateCard", 0.001f);
+			// Invoke("CreateCard", 0.001f);
+			CreateCard();
 		}
 		if(SwipeInput.swipedRight)
 		{
 			SlideRight();
-			Invoke("CreateCard", 0.001f);
+			// Invoke("CreateCard", 0.001f);
+			CreateCard();
 		}
     }
 
