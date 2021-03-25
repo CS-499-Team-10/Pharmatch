@@ -17,22 +17,22 @@ public class SlideController : SceneController
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if(SwipeInput.swipedUp)
 		{
 			SlideUp();
 			Invoke("CreateCard", 0.001f);
 		}
-		if(Input.GetKeyDown(KeyCode.DownArrow))
+		if(SwipeInput.swipedDown)
 		{
 			SlideDown();
 			Invoke("CreateCard", 0.001f);
 		}
-		if(Input.GetKeyDown(KeyCode.LeftArrow))
+		if(SwipeInput.swipedLeft)
 		{
 			SlideLeft();
 			Invoke("CreateCard", 0.001f);
 		}
-		if(Input.GetKeyDown(KeyCode.RightArrow))
+		if(SwipeInput.swipedRight)
 		{
 			SlideRight();
 			Invoke("CreateCard", 0.001f);
