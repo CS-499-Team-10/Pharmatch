@@ -58,29 +58,35 @@ public class SceneController : MonoBehaviour {
 
 		if(newCell != null)
 		{
-			List<string> randomSet1 = drugs[Random.Range(0, drugs.Count)];
 			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
-			newCard.transform.localScale = Vector3.zero;
-			if (Random.Range(0, 9) > 1 && tilesOnScreen.Count != 0) //if we hit the 80% chance
-			{
-				holder = tilesOnScreen[Random.Range(0, tilesOnScreen.Count)];
-				newCard.drugMatches = holder.drugMatches;
-				if (holder.nameLabelTMP.text == holder.drugMatches[0]) //set our new card to match the randomly selected one
-				{
-					newCard.nameLabelTMP.text = holder.drugMatches[1];
-				}
-				else 
-				{
-					newCard.nameLabelTMP.text = holder.drugMatches[0];
-				}
-			} 
-			else //otherwise add a random card
-			{
-				newCard.drugMatches = randomSet1;
-				newCard.nameLabelTMP.text = randomSet1[Random.Range(0, randomSet1.Count)];
-			}
+			newCard.transform.localScale = Vector3.zero; // start the scale at 0 and grow from there
+			PopulateTile(newCard);
 			newCard.controller = this;
 			tilesOnScreen.Add(newCard);
+		}
+	}
+
+	// populate a new drug tile with a new drug
+	// can be overloaded for different behavior in various game modes
+	protected virtual void PopulateTile(DrugTile newTile) {
+		if (Random.Range(0, 9) > 1 && tilesOnScreen.Count != 0) //if we hit the 80% chance
+		{
+			holder = tilesOnScreen[Random.Range(0, tilesOnScreen.Count)];
+			newTile.drugMatches = holder.drugMatches;
+			if (holder.nameLabelTMP.text == holder.drugMatches[0]) //set our new card to match the randomly selected one
+			{
+				newTile.nameLabelTMP.text = holder.drugMatches[1];
+			}
+			else 
+			{
+				newTile.nameLabelTMP.text = holder.drugMatches[0];
+			}
+		} 
+		else //otherwise add a random card
+		{
+			List<string> randomSet1 = drugs[Random.Range(0, drugs.Count)];
+			newTile.drugMatches = randomSet1;
+			newTile.nameLabelTMP.text = randomSet1[Random.Range(0, randomSet1.Count)];
 		}
 	}
 
