@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -96,7 +96,7 @@ public class DrugTile : MonoBehaviour {
 			else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) { // if there is a tile and they match
 				transform.parent = newCell;
 				foreach (Transform child in newCell) {
-					controller.tilesOnScreen.Remove(newCell.GetComponentInChildren<DrugTile>()); //remove this tile from the list of active tiles
+					controller.tilesOnScreen.Remove(child.GetComponent<DrugTile>()); //remove this tile from the list of active tiles
 					GameObject.Destroy(child.gameObject); //and destroy it
  				}
                 StartCoroutine(wait(newCell));
