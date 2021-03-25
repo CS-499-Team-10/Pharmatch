@@ -81,12 +81,12 @@ public class SceneController : MonoBehaviour {
 			{
 				newTile.nameLabelTMP.text = holder.drugMatches[0];
 			}
-		} 
+		}
 		else //otherwise add a random card
 		{
-			List<string> randomSet1 = drugs[Random.Range(0, drugs.Count)];
-			newTile.drugMatches = randomSet1;
-			newTile.nameLabelTMP.text = randomSet1[Random.Range(0, randomSet1.Count)];
+			List<string> drugFamily = drugs[Random.Range(0, drugs.Count)];
+			newTile.drugMatches = drugFamily;
+			newTile.nameLabelTMP.text = drugFamily[Random.Range(0, drugFamily.Count)];
 		}
 	}
 
