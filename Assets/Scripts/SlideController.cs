@@ -128,7 +128,7 @@ public class SlideController : SceneController
 
         // create a list of empty cells that can accept a new tile
         List<Transform> activeCells = new List<Transform>();
-        foreach (Transform cell in cells)
+        foreach (Transform cell in GetCells())
         {
             if (cell.childCount == 0 && !cell.GetComponent<GridPosition>().GetOpposite(dir)) // only pick cells at the opposite end from the direction
             {

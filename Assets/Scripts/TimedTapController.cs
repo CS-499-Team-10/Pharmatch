@@ -21,7 +21,7 @@ public class TimedTapController : SceneController
     protected override void CreateCard()
     {
         base.CreateCard();
-        if (tilesOnScreen.Count == cells.Length) GameOver();
+        if (tilesOnScreen.Count == GetCells().Length) GameOver();
     }
 
     public override void CardTapped(DrugTile card)

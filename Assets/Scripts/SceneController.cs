@@ -20,7 +20,7 @@ public class SceneController : MonoBehaviour
 
     [SerializeField] public AudioSource audios;
     [SerializeField] protected DrugTile drugPrefab;
-    [SerializeField] protected Transform[] cells; // list of cells on the board
+    [SerializeField] private Transform[] cells; // list of cells on the board
 
     [SerializeField] private bool useDebugNames = false; // set to true to use debug names for drugs
 
