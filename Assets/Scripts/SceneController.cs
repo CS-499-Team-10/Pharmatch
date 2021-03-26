@@ -173,7 +173,7 @@ public class SceneController : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("MatchGame");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // returns number of drug "families" currently on the board.
