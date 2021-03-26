@@ -30,7 +30,7 @@ public class SceneController : MonoBehaviour
     protected Transform[] GetCells() { return cells; }
 
     // create a drug tile and place it in the game
-    public void CreateCard()
+    protected virtual void CreateCard()
     {
         DrugTile newCard;
         Transform newCell = null;
