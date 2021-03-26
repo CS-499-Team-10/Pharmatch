@@ -39,7 +39,7 @@ public class SlideController : SceneController
             // pick a name from the set
             string newName = names[Random.Range(0, names.Count)];
             newTile.drugMatches = drugnameToMatches[newName];
-            newTile.nameLabelTMP.text = FewerOccurences(newTile.drugMatches[0], newTile.drugMatches[1]);
+            newTile.nameLabelTMP.text = FewerOccurrences(newTile.drugMatches[0], newTile.drugMatches[1]);
         }
         else //otherwise add a random card
         {

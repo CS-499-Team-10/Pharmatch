@@ -198,7 +198,7 @@ public class SceneController : MonoBehaviour
     }
 
     // given two drug names, returns the name of the one which occurs on the board fewer times.
-    protected string FewerOccurences(string name1, string name2)
+    protected string FewerOccurrences(string name1, string name2)
     {
         int count1 = 0;
         int count2 = 0;
