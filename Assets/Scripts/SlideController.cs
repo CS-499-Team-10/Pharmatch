@@ -47,7 +47,6 @@ public class SlideController : SceneController
             newTile.drugMatches = drugFamily;
             newTile.nameLabelTMP.text = drugFamily[Random.Range(0, drugFamily.Count)];
         }
-
     }
 
     // Update is called once per frame
@@ -56,22 +55,18 @@ public class SlideController : SceneController
         if (SwipeInput.swipedUp)
         {
             Slide(SlideController.Direction.Up);
-            CreateCard();
         }
         if (SwipeInput.swipedDown)
         {
             Slide(SlideController.Direction.Down);
-            CreateCard();
         }
         if (SwipeInput.swipedLeft)
         {
             Slide(SlideController.Direction.Left);
-            CreateCard();
         }
         if (SwipeInput.swipedRight)
         {
             Slide(SlideController.Direction.Right);
-            CreateCard();
         }
     }
 
@@ -94,6 +89,39 @@ public class SlideController : SceneController
                     }
                 }
             }
+        }
+        CreateCard(dir); // create a card at the opposite direction of the swipe
+    }
+
+    void CreateCard(Direction dir)
+    {
+        DrugTile newCard;
+        Transform newCell = null;
+
+        // create a list of empty cells that can accept a new tile
+        List<Transform> activeCells = new List<Transform>();
+        foreach (Transform cell in cells)
+        {
+            if (cell.childCount == 0 && !cell.GetComponent<GridPosition>().GetOpposite(dir))
+            {
+                activeCells.Add(cell);
+            }
+        }
+
+        // if there is space to generate a new card, pick an index
+        if (activeCells.Count > 0)
+        {
+            int whichCell = Random.Range(0, activeCells.Count);
+            newCell = activeCells[whichCell];
+        }
+
+        if (newCell != null)
+        {
+            newCard = Instantiate(drugPrefab, newCell) as DrugTile;
+            newCard.transform.localScale = Vector3.zero; // start the scale at 0 and grow from there
+            PopulateTile(newCard);
+            newCard.controller = this;
+            tilesOnScreen.Add(newCard);
         }
     }
 }
