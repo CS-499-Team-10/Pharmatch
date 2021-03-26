@@ -16,14 +16,6 @@ public class DrugTile : MonoBehaviour
     private const float moveSpeed = 2500;
     private const float scaleSpeed = 10;
 
-    public enum Direction
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
     private void Update()
     {
         // update position of tile when it is moved/changes parent
@@ -84,24 +76,24 @@ public class DrugTile : MonoBehaviour
         yield return 0;
     }
 
-    // slides a tile in given direction
+    // slides a tile in given SlideController.Direction
     // returns true if the tile slides into a match, false otherwise
-    public bool Slide(Direction dir)
+    public bool Slide(SlideController.Direction dir)
     {
         GridPosition myPos = transform.parent.gameObject.GetComponent<GridPosition>();
         GridPosition newPos = null;
         switch (dir)
         {
-            case Direction.Up:
+            case SlideController.Direction.Up:
                 newPos = myPos.up;
                 break;
-            case Direction.Down:
+            case SlideController.Direction.Down:
                 newPos = myPos.down;
                 break;
-            case Direction.Left:
+            case SlideController.Direction.Left:
                 newPos = myPos.left;
                 break;
-            case Direction.Right:
+            case SlideController.Direction.Right:
                 newPos = myPos.right;
                 break;
         }

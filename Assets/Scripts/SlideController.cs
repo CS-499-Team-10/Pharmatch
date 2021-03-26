@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class SlideController : SceneController
 {
-    private enum Direction
+    public enum Direction
     {
         Up,
         Down,
         Left,
         Right
     }
-
 
     protected override void Start()
     {
@@ -56,27 +55,27 @@ public class SlideController : SceneController
     {
         if (SwipeInput.swipedUp)
         {
-            Slide(DrugTile.Direction.Up);
+            Slide(SlideController.Direction.Up);
             CreateCard();
         }
         if (SwipeInput.swipedDown)
         {
-            Slide(DrugTile.Direction.Down);
+            Slide(SlideController.Direction.Down);
             CreateCard();
         }
         if (SwipeInput.swipedLeft)
         {
-            Slide(DrugTile.Direction.Left);
+            Slide(SlideController.Direction.Left);
             CreateCard();
         }
         if (SwipeInput.swipedRight)
         {
-            Slide(DrugTile.Direction.Right);
+            Slide(SlideController.Direction.Right);
             CreateCard();
         }
     }
 
-    void Slide(DrugTile.Direction dir)
+    void Slide(SlideController.Direction dir)
     {
         foreach (Transform cell in GetCells())
         {

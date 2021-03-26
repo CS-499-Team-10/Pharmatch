@@ -9,33 +9,33 @@ public class GridPosition : MonoBehaviour
     [SerializeField] public GridPosition up = null;
     [SerializeField] public GridPosition down = null;
 
-    public GridPosition GetNext(DrugTile.Direction dir)
+    public GridPosition GetNext(SlideController.Direction dir)
     {
         switch (dir)
         {
-            case DrugTile.Direction.Up:
+            case SlideController.Direction.Up:
                 return up;
-            case DrugTile.Direction.Right:
+            case SlideController.Direction.Right:
                 return right;
-            case DrugTile.Direction.Left:
+            case SlideController.Direction.Left:
                 return left;
-            case DrugTile.Direction.Down:
+            case SlideController.Direction.Down:
                 return down;
         }
         return null; // should not occur
     }
 
-    public GridPosition GetOpposite(DrugTile.Direction dir)
+    public GridPosition GetOpposite(SlideController.Direction dir)
     {
         switch (dir)
         {
-            case DrugTile.Direction.Up:
+            case SlideController.Direction.Up:
                 return down;
-            case DrugTile.Direction.Right:
+            case SlideController.Direction.Right:
                 return left;
-            case DrugTile.Direction.Left:
+            case SlideController.Direction.Left:
                 return right;
-            case DrugTile.Direction.Down:
+            case SlideController.Direction.Down:
                 return up;
         }
         return null; // should not occur
