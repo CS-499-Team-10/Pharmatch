@@ -19,8 +19,8 @@ public class SceneController : MonoBehaviour
     protected Dictionary<string, List<string>> drugnameToMatches = new Dictionary<string, List<string>>(); // maps a string containing a drug name to a list of its matches
 
     [SerializeField] public AudioSource audios;
-    [SerializeField] private DrugTile drugPrefab;
-    [SerializeField] private Transform[] cells; // list of cells on the board
+    [SerializeField] protected DrugTile drugPrefab;
+    [SerializeField] protected Transform[] cells; // list of cells on the board
 
     [SerializeField] private bool useDebugNames = false; // set to true to use debug names for drugs
 
