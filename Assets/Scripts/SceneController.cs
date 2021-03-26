@@ -10,120 +10,127 @@ using System.Text;
 
 using Random = UnityEngine.Random; //to distinguish between UnityEngine.Random and System.Random
 
-public class SceneController : MonoBehaviour {
-	protected List<List<string>> drugs = new List<List<string>>(); // master list of all drugs loaded in from the .csv
-	[SerializeField] private List<string> currentDrugs = new List<string>(); // subset of drugs to cycle through for tapping games
-	public List<DrugTile> tilesOnScreen = new List<DrugTile>(); // list of all the tiles currently in the game
+public class SceneController : MonoBehaviour
+{
+    protected List<List<string>> drugs = new List<List<string>>(); // master list of all drugs loaded in from the .csv
+    [SerializeField] private List<string> currentDrugs = new List<string>(); // subset of drugs to cycle through for tapping games
+    public List<DrugTile> tilesOnScreen = new List<DrugTile>(); // list of all the tiles currently in the game
 
-	protected Dictionary<string, List<string>> drugnameToMatches = new Dictionary<string, List<string>>(); // maps a string containing a drug name to a list of its matches
+    protected Dictionary<string, List<string>> drugnameToMatches = new Dictionary<string, List<string>>(); // maps a string containing a drug name to a list of its matches
 
     [SerializeField] public AudioSource audios;
-	[SerializeField] private DrugTile drugPrefab;
-	[SerializeField] private Transform[] cells; // list of cells on the board
+    [SerializeField] private DrugTile drugPrefab;
+    [SerializeField] private Transform[] cells; // list of cells on the board
 
-	[SerializeField] private bool useDebugNames = false; // set to true to use debug names for drugs
-	
-	private int _score = 0;
-	[SerializeField] private TMP_Text scoreText;
+    [SerializeField] private bool useDebugNames = false; // set to true to use debug names for drugs
 
-	protected Transform[] GetCells() {return cells;}
+    private int _score = 0;
+    [SerializeField] private TMP_Text scoreText;
 
-	// create a drug tile and place it in the game
-	public void CreateCard()
+    protected Transform[] GetCells() { return cells; }
+
+    // create a drug tile and place it in the game
+    public void CreateCard()
     {
-		DrugTile newCard;
-		Transform newCell = null;
+        DrugTile newCard;
+        Transform newCell = null;
 
-		// create a list of empty cells that can accept a new tile
-		List<Transform> activeCells = new List<Transform>(); 
-		foreach (Transform cell in cells)
-		{
-			if(cell.childCount == 0)
-			{
-				activeCells.Add(cell);
-			}
-		}
+        // create a list of empty cells that can accept a new tile
+        List<Transform> activeCells = new List<Transform>();
+        foreach (Transform cell in cells)
+        {
+            if (cell.childCount == 0)
+            {
+                activeCells.Add(cell);
+            }
+        }
 
-		// if there is space to generate a new card, pick an index
-		if (activeCells.Count > 0)
-		{
-			int whichCell = Random.Range(0, activeCells.Count);
-			newCell = activeCells[whichCell];
-		}
+        // if there is space to generate a new card, pick an index
+        if (activeCells.Count > 0)
+        {
+            int whichCell = Random.Range(0, activeCells.Count);
+            newCell = activeCells[whichCell];
+        }
 
-		if(newCell != null)
-		{
-			newCard = Instantiate(drugPrefab, newCell) as DrugTile;
-			newCard.transform.localScale = Vector3.zero; // start the scale at 0 and grow from there
-			PopulateTile(newCard);
-			newCard.controller = this;
-			tilesOnScreen.Add(newCard);
-		}
-	}
+        if (newCell != null)
+        {
+            newCard = Instantiate(drugPrefab, newCell) as DrugTile;
+            newCard.transform.localScale = Vector3.zero; // start the scale at 0 and grow from there
+            PopulateTile(newCard);
+            newCard.controller = this;
+            tilesOnScreen.Add(newCard);
+        }
+    }
 
-	// populate a new drug tile with a new drug
-	// can be overloaded for different behavior in various game modes
-	protected virtual void PopulateTile(DrugTile newTile) {
-		int index = Random.Range(0, currentDrugs.Count);
-		string newName = currentDrugs[index];
-		currentDrugs.RemoveAt(index);
-		if (currentDrugs.Count == 0) currentDrugs = SampleDrugs(8);
-		newTile.nameLabelTMP.text = newName;
-		newTile.drugMatches = drugnameToMatches[newName];
-	}
+    // populate a new drug tile with a new drug
+    // can be overloaded for different behavior in various game modes
+    protected virtual void PopulateTile(DrugTile newTile)
+    {
+        int index = Random.Range(0, currentDrugs.Count);
+        string newName = currentDrugs[index];
+        currentDrugs.RemoveAt(index);
+        if (currentDrugs.Count == 0) currentDrugs = SampleDrugs(8);
+        newTile.nameLabelTMP.text = newName;
+        newTile.drugMatches = drugnameToMatches[newName];
+    }
 
-	// Use this for initialization
-	protected virtual void Start() {
+    // Use this for initialization
+    protected virtual void Start()
+    {
         // //temporary addition to test LoadDrugs
         // TestLoadDrugs();
 
-		string fp = "60DrugNames";
-		if(useDebugNames) fp = "testDrugNames";
+        string fp = "60DrugNames";
+        if (useDebugNames) fp = "testDrugNames";
         drugs = LoadDrugs(fp);
-		foreach (var list in drugs)
-		{
-			foreach (var drug in list)
-			{
-				drugnameToMatches.Add(drug, list);
-			}
-		}
+        foreach (var list in drugs)
+        {
+            foreach (var drug in list)
+            {
+                drugnameToMatches.Add(drug, list);
+            }
+        }
 
-		currentDrugs = SampleDrugs(8);
-		Debug.Log(currentDrugs.Count);
-	}
+        currentDrugs = SampleDrugs(8);
+        Debug.Log(currentDrugs.Count);
+    }
 
-	public virtual void CardTapped(DrugTile card) {
-		Debug.Log("wrong");
-	}
+    public virtual void CardTapped(DrugTile card)
+    {
+        Debug.Log("wrong");
+    }
 
-	public void IncrementScore(int addedScore) {
-		_score += addedScore;
-		scoreText.text = "Score: " + _score;
-	}
+    public void IncrementScore(int addedScore)
+    {
+        _score += addedScore;
+        scoreText.text = "Score: " + _score;
+    }
 
-	// returns a randomly sampled list of 2*drugfamilyCount drugs from drugfamilyCount families
-	// https://stackoverflow.com/questions/48087/select-n-random-elements-from-a-listt-in-c-sharp
-	private List<string> SampleDrugs(int drugfamilyCount) {
-		List<string> returnList = new List<string>();
-		int index = 0;
-		foreach (var matchList in drugs)
-		{
-			if(Random.Range(0f, drugs.Count - index) < (drugfamilyCount - returnList.Count/2))
-			{
-				returnList.Add(matchList[0]);
-				returnList.Add(matchList[1]);
-			}
-			if(returnList.Count >= (2*drugfamilyCount)) return returnList;
-			index += 1;
-		}
-		return returnList; // this shouldn't happen
-	}
+    // returns a randomly sampled list of 2*drugfamilyCount drugs from drugfamilyCount families
+    // https://stackoverflow.com/questions/48087/select-n-random-elements-from-a-listt-in-c-sharp
+    private List<string> SampleDrugs(int drugfamilyCount)
+    {
+        List<string> returnList = new List<string>();
+        int index = 0;
+        foreach (var matchList in drugs)
+        {
+            if (Random.Range(0f, drugs.Count - index) < (drugfamilyCount - returnList.Count / 2))
+            {
+                returnList.Add(matchList[0]);
+                returnList.Add(matchList[1]);
+            }
+            if (returnList.Count >= (2 * drugfamilyCount)) return returnList;
+            index += 1;
+        }
+        return returnList; // this shouldn't happen
+    }
 
-    List<List<string>> LoadDrugs(string fp) {
+    List<List<string>> LoadDrugs(string fp)
+    {
         List<List<string>> drugs = new List<List<string>>();
         string line = "";
 
-		TextAsset theList = (TextAsset)Resources.Load(fp) as TextAsset;
+        TextAsset theList = (TextAsset)Resources.Load(fp) as TextAsset;
         string txtContent = theList.text;
 
         using (StringReader sr = new StringReader(txtContent))
@@ -151,55 +158,67 @@ public class SceneController : MonoBehaviour {
         return drugs;
     }
 
-    public void TestLoadDrugs() {
+    public void TestLoadDrugs()
+    {
         string fp = "60DrugNames";
-		if(useDebugNames) fp = "testDrugNames";
+        if (useDebugNames) fp = "testDrugNames";
         List<List<string>> testDrugs = LoadDrugs(fp);
 
-        foreach(List<string> l in testDrugs) {
+        foreach (List<string> l in testDrugs)
+        {
             string output = string.Join(",", l);
             Debug.Log(output);
         }
     }
 
-	public void Restart() {
-		SceneManager.LoadScene("Scene");
-	}
+    public void Restart()
+    {
+        SceneManager.LoadScene("Scene");
+    }
 
-	// returns number of drug "families" currently on the board.
-	protected int GetDrugFamilyCount() {
-		Dictionary<List<string>,int> counts = new Dictionary<List<string>,int>();
-		int unique = 0;
-		foreach(DrugTile tile in tilesOnScreen){
-			if (counts.ContainsKey(tile.drugMatches)){
-				counts[tile.drugMatches] = counts[tile.drugMatches]+1;
-			} else {
-				counts[tile.drugMatches] = 1;
-				unique += 1;
-			}
-		}
-		Debug.Log("Unique classes: " + unique);
-		return unique;
-	}
+    // returns number of drug "families" currently on the board.
+    protected int GetDrugFamilyCount()
+    {
+        Dictionary<List<string>, int> counts = new Dictionary<List<string>, int>();
+        int unique = 0;
+        foreach (DrugTile tile in tilesOnScreen)
+        {
+            if (counts.ContainsKey(tile.drugMatches))
+            {
+                counts[tile.drugMatches] = counts[tile.drugMatches] + 1;
+            }
+            else
+            {
+                counts[tile.drugMatches] = 1;
+                unique += 1;
+            }
+        }
+        Debug.Log("Unique classes: " + unique);
+        return unique;
+    }
 
-	// given two drug names, returns the name of the one which occurs on the board fewer times.
-	protected string FewerOccurences(string name1, string name2) {
-		int count1 = 0;
-		int count2 = 0;
+    // given two drug names, returns the name of the one which occurs on the board fewer times.
+    protected string FewerOccurences(string name1, string name2)
+    {
+        int count1 = 0;
+        int count2 = 0;
 
-		foreach(DrugTile tile in tilesOnScreen){
-			if (tile.nameLabelTMP.text == name1) {
-				count1 += 1;
-			}
-			else if (tile.nameLabelTMP.text == name2){
-				count2 += 1;
-			}
-		}
+        foreach (DrugTile tile in tilesOnScreen)
+        {
+            if (tile.nameLabelTMP.text == name1)
+            {
+                count1 += 1;
+            }
+            else if (tile.nameLabelTMP.text == name2)
+            {
+                count2 += 1;
+            }
+        }
 
-		if (count2 < count1) return name2;
-		else if (count1 < count2) return name1;
-		// if tied, pick randomly
-		else if (Random.Range(0f, 1f) > 0.5f) return name1;
-		else return name2;
-	}
+        if (count2 < count1) return name2;
+        else if (count1 < count2) return name1;
+        // if tied, pick randomly
+        else if (Random.Range(0f, 1f) > 0.5f) return name1;
+        else return name2;
+    }
 }
