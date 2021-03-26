@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -81,22 +81,7 @@ public class DrugTile : MonoBehaviour
     public bool Slide(SlideController.Direction dir)
     {
         GridPosition myPos = transform.parent.gameObject.GetComponent<GridPosition>();
-        GridPosition newPos = null;
-        switch (dir)
-        {
-            case SlideController.Direction.Up:
-                newPos = myPos.up;
-                break;
-            case SlideController.Direction.Down:
-                newPos = myPos.down;
-                break;
-            case SlideController.Direction.Left:
-                newPos = myPos.left;
-                break;
-            case SlideController.Direction.Right:
-                newPos = myPos.right;
-                break;
-        }
+        GridPosition newPos = myPos.GetNext(dir);
         if (newPos)
         {
             RectTransform newCell = newPos.GetComponent<RectTransform>();
