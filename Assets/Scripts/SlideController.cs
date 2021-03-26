@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,8 +70,34 @@ public class SlideController : SceneController
         }
     }
 
+    // returns true if a move in the given direction is valid, false otherwise
+    bool CanMove(SlideController.Direction dir)
+    {
+        foreach (Transform cell in GetCells()) // for each cell on the board
+        {
+            GridPosition pos = cell.GetComponentInParent<GridPosition>(); // get its grid position
+            if (!pos.GetNext(dir)) // if this position is on the edge (has no next cell in the passed direction)
+            {
+                for (GridPosition nextMover = pos.GetOpposite(dir); nextMover != null; nextMover = nextMover.GetOpposite(dir)) // for each position, traveling in the opposite direction
+                {
+                    DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
+                    if (tileToMove != null)
+                    {
+                        if (tileToMove.CanSlide(dir))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // slides each tile on the board in the passed direction
     void Slide(SlideController.Direction dir)
     {
+        if (!CanMove(dir)) return;
         foreach (Transform cell in GetCells()) // for each cell on the board
         {
             GridPosition pos = cell.GetComponentInParent<GridPosition>(); // get its grid position
@@ -93,6 +119,7 @@ public class SlideController : SceneController
         CreateCard(dir); // create a card at the opposite direction of the swipe
     }
 
+    // creates a card at the opposite end of dir
     void CreateCard(Direction dir)
     {
         DrugTile newCard;

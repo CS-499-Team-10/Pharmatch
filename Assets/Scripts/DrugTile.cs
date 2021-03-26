@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -98,6 +98,26 @@ public class DrugTile : MonoBehaviour
                     child.GetComponent<DrugTile>().markedToDestroy = true;
                 }
                 StartCoroutine(Wait(newCell));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // returns true if the tile can slide in the given direction, false otherwise
+    public bool CanSlide(SlideController.Direction dir)
+    {
+        GridPosition myPos = transform.parent.gameObject.GetComponent<GridPosition>();
+        GridPosition newPos = myPos.GetNext(dir);
+        if (newPos)
+        {
+            RectTransform newCell = newPos.GetComponent<RectTransform>();
+            if (newCell.childCount < 1)
+            { // if there isn't a tile in the next cell
+                return true;
+            }
+            else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>()))
+            { // if there is a tile and they match
                 return true;
             }
         }
