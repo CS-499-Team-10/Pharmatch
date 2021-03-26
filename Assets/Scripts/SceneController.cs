@@ -98,7 +98,6 @@ public class SceneController : MonoBehaviour {
 
 	public void IncrementScore(int addedScore) {
 		_score += addedScore;
-		Debug.Log(_score);
 		scoreText.text = "Score: " + _score;
 	}
 
@@ -117,7 +116,7 @@ public class SceneController : MonoBehaviour {
 			if(returnList.Count >= (2*drugfamilyCount)) return returnList;
 			index += 1;
 		}
-		return returnList;
+		return returnList; // this shouldn't happen
 	}
 
     List<List<string>> LoadDrugs(string fp) {
@@ -199,6 +198,7 @@ public class SceneController : MonoBehaviour {
 
 		if (count2 < count1) return name2;
 		else if (count1 < count2) return name1;
+		// if tied, pick randomly
 		else if (Random.Range(0f, 1f) > 0.5f) return name1;
 		else return name2;
 	}

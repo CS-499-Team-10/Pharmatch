@@ -49,25 +49,21 @@ public class SlideController : SceneController
         if(SwipeInput.swipedUp)
 		{
 			SlideUp();
-			// Invoke("CreateCard", 0.001f);
 			CreateCard();
 		}
 		if(SwipeInput.swipedDown)
 		{
 			SlideDown();
-			// Invoke("CreateCard", 0.001f);
 			CreateCard();
 		}
 		if(SwipeInput.swipedLeft)
 		{
 			SlideLeft();
-			// Invoke("CreateCard", 0.001f);
 			CreateCard();
 		}
 		if(SwipeInput.swipedRight)
 		{
 			SlideRight();
-			// Invoke("CreateCard", 0.001f);
 			CreateCard();
 		}
     }
