@@ -17,6 +17,13 @@ public class TimedTapController : SceneController
         }
         InvokeRepeating("CreateCard", 1, 1);
     }
+
+    protected override void CreateCard()
+    {
+        base.CreateCard();
+        if (tilesOnScreen.Count == GetCells().Length) GameOver();
+    }
+
     public override void CardTapped(DrugTile card)
     {
         if (firstSelected == null)

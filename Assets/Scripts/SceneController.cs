@@ -20,7 +20,7 @@ public class SceneController : MonoBehaviour
 
     [SerializeField] public AudioSource audios;
     [SerializeField] protected DrugTile drugPrefab;
-    [SerializeField] protected Transform[] cells; // list of cells on the board
+    [SerializeField] private Transform[] cells; // list of cells on the board
 
     [SerializeField] private bool useDebugNames = false; // set to true to use debug names for drugs
 
@@ -30,7 +30,7 @@ public class SceneController : MonoBehaviour
     protected Transform[] GetCells() { return cells; }
 
     // create a drug tile and place it in the game
-    public void CreateCard()
+    protected virtual void CreateCard()
     {
         DrugTile newCard;
         Transform newCell = null;
@@ -39,7 +39,7 @@ public class SceneController : MonoBehaviour
         List<Transform> activeCells = new List<Transform>();
         foreach (Transform cell in cells)
         {
-            if (cell.childCount == 0)
+            if (cell.childCount == 0 || (cell.childCount == 1 && cell.GetComponentInChildren<DrugTile>().markedToDestroy))
             {
                 activeCells.Add(cell);
             }
@@ -173,7 +173,7 @@ public class SceneController : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("Scene");
+        SceneManager.LoadScene("MatchGame");
     }
 
     // returns number of drug "families" currently on the board.
@@ -220,5 +220,10 @@ public class SceneController : MonoBehaviour
         // if tied, pick randomly
         else if (Random.Range(0f, 1f) > 0.5f) return name1;
         else return name2;
+    }
+
+    protected void GameOver()
+    {
+        Restart();
     }
 }

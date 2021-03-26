@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TapController : SceneController
 {
+    int livesLeft = 3;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -41,15 +43,23 @@ public class TapController : SceneController
             tilesOnScreen.Remove(firstSelected);
             tilesOnScreen.Remove(secondSelected);
 
+            firstSelected.markedToDestroy = true;
+            secondSelected.markedToDestroy = true;
+
             Destroy(firstSelected.gameObject);
             Destroy(secondSelected.gameObject);
 
-            Invoke("CreateCard", 0.001f);
-            Invoke("CreateCard", 0.001f);
+            CreateCard();
+            CreateCard();
         }
         else
         {
-            Debug.Log("no");
+            livesLeft -= 1;
+            Debug.Log("Lives Remaining: " + livesLeft);
+            if (livesLeft == 0)
+            {
+                GameOver();
+            }
             firstSelected.UnSelect();
             secondSelected.UnSelect();
         }

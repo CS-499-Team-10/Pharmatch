@@ -70,19 +70,45 @@ public class SlideController : SceneController
         }
     }
 
-    void Slide(SlideController.Direction dir)
+    // returns true if a move in the given direction is valid, false otherwise
+    bool CanMove(SlideController.Direction dir)
     {
-        foreach (Transform cell in GetCells())
+        foreach (Transform cell in GetCells()) // for each cell on the board
         {
-            GridPosition pos = cell.GetComponentInParent<GridPosition>();
-            if (!pos.GetNext(dir))
+            GridPosition pos = cell.GetComponentInParent<GridPosition>(); // get its grid position
+            if (!pos.GetNext(dir)) // if this position is on the edge (has no next cell in the passed direction)
             {
-                for (GridPosition nextMover = pos.GetOpposite(dir); nextMover != null; nextMover = nextMover.GetOpposite(dir))
+                for (GridPosition nextMover = pos.GetOpposite(dir); nextMover != null; nextMover = nextMover.GetOpposite(dir)) // for each position, traveling in the opposite direction
                 {
                     DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
                     if (tileToMove != null)
                     {
-                        if (tileToMove.Slide(dir))
+                        if (tileToMove.CanSlide(dir))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // slides each tile on the board in the passed direction
+    void Slide(SlideController.Direction dir)
+    {
+        if (!CanMove(dir)) return;
+        foreach (Transform cell in GetCells()) // for each cell on the board
+        {
+            GridPosition pos = cell.GetComponentInParent<GridPosition>(); // get its grid position
+            if (!pos.GetNext(dir)) // if this position is on the edge (has no next cell in the passed direction)
+            {
+                for (GridPosition nextMover = pos.GetOpposite(dir); nextMover != null; nextMover = nextMover.GetOpposite(dir)) // for each position, traveling in the opposite direction
+                {
+                    DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
+                    if (tileToMove != null)
+                    {
+                        if (tileToMove.Slide(dir)) // returns true if tile matched
                         {
                             IncrementScore(1);
                         }
@@ -91,8 +117,10 @@ public class SlideController : SceneController
             }
         }
         CreateCard(dir); // create a card at the opposite direction of the swipe
+        if (CheckGameOver()) GameOver();
     }
 
+    // creates a card at the opposite end of dir
     void CreateCard(Direction dir)
     {
         DrugTile newCard;
@@ -100,9 +128,9 @@ public class SlideController : SceneController
 
         // create a list of empty cells that can accept a new tile
         List<Transform> activeCells = new List<Transform>();
-        foreach (Transform cell in cells)
+        foreach (Transform cell in GetCells())
         {
-            if (cell.childCount == 0 && !cell.GetComponent<GridPosition>().GetOpposite(dir))
+            if (cell.childCount == 0 && !cell.GetComponent<GridPosition>().GetOpposite(dir)) // only pick cells at the opposite end from the direction
             {
                 activeCells.Add(cell);
             }
@@ -123,5 +151,15 @@ public class SlideController : SceneController
             newCard.controller = this;
             tilesOnScreen.Add(newCard);
         }
+    }
+
+    // returns true if player has no moves available
+    bool CheckGameOver()
+    {
+        foreach (Direction dir in System.Enum.GetValues(typeof(Direction)))
+        {
+            if (CanMove(dir)) return false;
+        }
+        return true;
     }
 }
