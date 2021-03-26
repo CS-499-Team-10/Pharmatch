@@ -1,9 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TapController : SceneController
 {
+    int livesLeft = 3;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -52,7 +54,12 @@ public class TapController : SceneController
         }
         else
         {
-            Debug.Log("no");
+            livesLeft -= 1;
+            Debug.Log("Lives Remaining: " + livesLeft);
+            if (livesLeft == 0)
+            {
+                GameOver();
+            }
             firstSelected.UnSelect();
             secondSelected.UnSelect();
         }
