@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,11 +41,14 @@ public class TapController : SceneController
             tilesOnScreen.Remove(firstSelected);
             tilesOnScreen.Remove(secondSelected);
 
+            firstSelected.markedToDestroy = true;
+            secondSelected.markedToDestroy = true;
+
             Destroy(firstSelected.gameObject);
             Destroy(secondSelected.gameObject);
 
-            Invoke("CreateCard", 0.001f);
-            Invoke("CreateCard", 0.001f);
+            CreateCard();
+            CreateCard();
         }
         else
         {

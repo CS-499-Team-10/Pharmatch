@@ -39,7 +39,7 @@ public class SceneController : MonoBehaviour
         List<Transform> activeCells = new List<Transform>();
         foreach (Transform cell in cells)
         {
-            if (cell.childCount == 0)
+            if (cell.childCount == 0 || (cell.childCount == 1 && cell.GetComponentInChildren<DrugTile>().markedToDestroy))
             {
                 activeCells.Add(cell);
             }
