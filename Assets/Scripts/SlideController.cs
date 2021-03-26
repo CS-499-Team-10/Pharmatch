@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -72,17 +72,17 @@ public class SlideController : SceneController
 
     void Slide(SlideController.Direction dir)
     {
-        foreach (Transform cell in GetCells())
+        foreach (Transform cell in GetCells()) // for each cell on the board
         {
-            GridPosition pos = cell.GetComponentInParent<GridPosition>();
-            if (!pos.GetNext(dir))
+            GridPosition pos = cell.GetComponentInParent<GridPosition>(); // get its grid position
+            if (!pos.GetNext(dir)) // if this position is on the edge (has no next cell in the passed direction)
             {
-                for (GridPosition nextMover = pos.GetOpposite(dir); nextMover != null; nextMover = nextMover.GetOpposite(dir))
+                for (GridPosition nextMover = pos.GetOpposite(dir); nextMover != null; nextMover = nextMover.GetOpposite(dir)) // for each position, traveling in the opposite direction
                 {
                     DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
                     if (tileToMove != null)
                     {
-                        if (tileToMove.Slide(dir))
+                        if (tileToMove.Slide(dir)) // returns true if tile matched
                         {
                             IncrementScore(1);
                         }
@@ -102,7 +102,7 @@ public class SlideController : SceneController
         List<Transform> activeCells = new List<Transform>();
         foreach (Transform cell in cells)
         {
-            if (cell.childCount == 0 && !cell.GetComponent<GridPosition>().GetOpposite(dir))
+            if (cell.childCount == 0 && !cell.GetComponent<GridPosition>().GetOpposite(dir)) // only pick cells at the opposite end from the direction
             {
                 activeCells.Add(cell);
             }
