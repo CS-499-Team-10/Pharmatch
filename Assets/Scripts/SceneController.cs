@@ -158,19 +158,6 @@ public class SceneController : MonoBehaviour
         return drugs;
     }
 
-    public void TestLoadDrugs()
-    {
-        string fp = "60DrugNames";
-        if (useDebugNames) fp = "testDrugNames";
-        List<List<string>> testDrugs = LoadDrugs(fp);
-
-        foreach (List<string> l in testDrugs)
-        {
-            string output = string.Join(",", l);
-            Debug.Log(output);
-        }
-    }
-
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
