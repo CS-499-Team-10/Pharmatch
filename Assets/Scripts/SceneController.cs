@@ -173,7 +173,7 @@ public class SceneController : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("Scene");
+        SceneManager.LoadScene("MatchGame");
     }
 
     // returns number of drug "families" currently on the board.
@@ -220,5 +220,10 @@ public class SceneController : MonoBehaviour
         // if tied, pick randomly
         else if (Random.Range(0f, 1f) > 0.5f) return name1;
         else return name2;
+    }
+
+    protected void GameOver()
+    {
+        Restart();
     }
 }

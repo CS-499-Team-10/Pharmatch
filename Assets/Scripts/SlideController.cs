@@ -117,6 +117,7 @@ public class SlideController : SceneController
             }
         }
         CreateCard(dir); // create a card at the opposite direction of the swipe
+        if (CheckGameOver()) GameOver();
     }
 
     // creates a card at the opposite end of dir
@@ -150,5 +151,15 @@ public class SlideController : SceneController
             newCard.controller = this;
             tilesOnScreen.Add(newCard);
         }
+    }
+
+    // returns true if player has no moves available
+    bool CheckGameOver()
+    {
+        foreach (Direction dir in System.Enum.GetValues(typeof(Direction)))
+        {
+            if (CanMove(dir)) return false;
+        }
+        return true;
     }
 }
