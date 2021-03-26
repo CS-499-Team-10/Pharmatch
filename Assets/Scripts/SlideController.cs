@@ -56,132 +56,39 @@ public class SlideController : SceneController
     {
         if (SwipeInput.swipedUp)
         {
-            SlideUp();
+            Slide(DrugTile.Direction.Up);
             CreateCard();
         }
         if (SwipeInput.swipedDown)
         {
-            SlideDown();
+            Slide(DrugTile.Direction.Down);
             CreateCard();
         }
         if (SwipeInput.swipedLeft)
         {
-            SlideLeft();
+            Slide(DrugTile.Direction.Left);
             CreateCard();
         }
         if (SwipeInput.swipedRight)
         {
-            SlideRight();
+            Slide(DrugTile.Direction.Right);
             CreateCard();
         }
     }
 
-    void Slide(Direction dir)
+    void Slide(DrugTile.Direction dir)
     {
         foreach (Transform cell in GetCells())
         {
             GridPosition pos = cell.GetComponentInParent<GridPosition>();
-            switch (dir)
+            if (!pos.GetNext(dir))
             {
-
-                default:
-            }
-            if (!pos.up)
-            {
-                for (GridPosition nextMover = pos.down; nextMover != null; nextMover = nextMover.down)
+                for (GridPosition nextMover = pos.GetOpposite(dir); nextMover != null; nextMover = nextMover.GetOpposite(dir))
                 {
                     DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
                     if (tileToMove != null)
                     {
-                        if (tileToMove.Slide(DrugTile.Direction.Up))
-                        {
-                            IncrementScore(1);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    void SlideUp()
-    {
-        foreach (Transform cell in GetCells())
-        {
-            GridPosition pos = cell.GetComponentInParent<GridPosition>();
-            if (!pos.up)
-            {
-                for (GridPosition nextMover = pos.down; nextMover != null; nextMover = nextMover.down)
-                {
-                    DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
-                    if (tileToMove != null)
-                    {
-                        if (tileToMove.Slide(DrugTile.Direction.Up))
-                        {
-                            IncrementScore(1);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    void SlideDown()
-    {
-        foreach (Transform cell in GetCells())
-        {
-            GridPosition pos = cell.GetComponentInParent<GridPosition>();
-            if (!pos.down)
-            {
-                for (GridPosition nextMover = pos.up; nextMover != null; nextMover = nextMover.up)
-                {
-                    DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
-                    if (tileToMove != null)
-                    {
-                        if (tileToMove.Slide(DrugTile.Direction.Down))
-                        {
-                            IncrementScore(1);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    void SlideRight()
-    {
-        foreach (Transform cell in GetCells())
-        {
-            GridPosition pos = cell.GetComponentInParent<GridPosition>();
-            if (!pos.right)
-            {
-                for (GridPosition nextMover = pos.left; nextMover != null; nextMover = nextMover.left)
-                {
-                    DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
-                    if (tileToMove != null)
-                    {
-                        if (tileToMove.Slide(DrugTile.Direction.Right))
-                        {
-                            IncrementScore(1);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    void SlideLeft()
-    {
-        foreach (Transform cell in GetCells())
-        {
-            GridPosition pos = cell.GetComponentInParent<GridPosition>();
-            if (!pos.left)
-            {
-                for (GridPosition nextMover = pos.right; nextMover != null; nextMover = nextMover.right)
-                {
-                    DrugTile tileToMove = nextMover.gameObject.transform.GetComponentInChildren<DrugTile>();
-                    if (tileToMove != null)
-                    {
-                        if (tileToMove.Slide(DrugTile.Direction.Left))
+                        if (tileToMove.Slide(dir))
                         {
                             IncrementScore(1);
                         }
