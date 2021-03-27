@@ -3,8 +3,8 @@
     "m_SelectedPackage": {
         "deviceId": "01CAY1T4SZ",
         "name": "com.DefaultCompany.com.unity.template.mobile2D",
-        "processId": 7384,
-        "exited": true
+        "processId": 18387,
+        "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
@@ -25,6 +25,24 @@
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 7384,
             "exited": true
+        },
+        {
+            "deviceId": "01CAY1T4SZ",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 9522,
+            "exited": true
+        },
+        {
+            "deviceId": "01CAY1T4SZ",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 16936,
+            "exited": true
+        },
+        {
+            "deviceId": "01CAY1T4SZ",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 18387,
+            "exited": false
         }
     ],
     "m_Tags": {
