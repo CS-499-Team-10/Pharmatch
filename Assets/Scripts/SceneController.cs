@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 //stream reader/IO stuff
 using System.IO;
 using System;
@@ -17,6 +18,8 @@ public class SceneController : MonoBehaviour
     public List<DrugTile> tilesOnScreen = new List<DrugTile>(); // list of all the tiles currently in the game
 
     protected Dictionary<string, List<string>> drugnameToMatches = new Dictionary<string, List<string>>(); // maps a string containing a drug name to a list of its matches
+
+    protected Dictionary<string, Color> drugnameToColor = new Dictionary<string, Color>(); // maps a string containing a drug name to a color
 
     [SerializeField] public AudioSource audios;
     [SerializeField] protected DrugTile drugPrefab;
@@ -72,6 +75,7 @@ public class SceneController : MonoBehaviour
         if (currentDrugs.Count == 0) currentDrugs = SampleDrugs(8);
         newTile.nameLabelTMP.text = newName;
         newTile.drugMatches = drugnameToMatches[newName];
+        newTile.gameObject.GetComponent<Image>().color = drugnameToColor[newName];
     }
 
     // Use this for initialization
@@ -88,6 +92,7 @@ public class SceneController : MonoBehaviour
             foreach (var drug in list)
             {
                 drugnameToMatches.Add(drug, list);
+                drugnameToColor.Add(drug, Color.HSVToRGB(Random.value, 30f / 255f, 1f));
             }
         }
 

@@ -17,7 +17,7 @@ public class SwipeInput : MonoBehaviour
 
     // Factor of the screen width that we consider a swipe
     // 0.17 works well for portrait mode 16:9 phone
-    public const float MIN_SWIPE_DISTANCE = 0.17f;
+    public const float MIN_SWIPE_DISTANCE = 0.085f;
 
     public static bool swipedRight = false;
     public static bool swipedLeft = false;
