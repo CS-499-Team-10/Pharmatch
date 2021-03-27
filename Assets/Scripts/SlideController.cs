@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SlideController : SceneController
 {
+    [SerializeField] int maxDrugFamilies = 5;
+
     public enum Direction
     {
         Up,
@@ -24,7 +26,7 @@ public class SlideController : SceneController
     protected override void PopulateTile(DrugTile newTile)
     {
         // with a % chance, or always if either the board is empty or the number of drug families is greater than a certain amount
-        if ((Random.Range(0f, 1f) > 0.5f && tilesOnScreen.Count != 0) || (GetDrugFamilyCount() > 4))
+        if ((Random.Range(0f, 1f) > 0.5f && tilesOnScreen.Count != 0) || (GetDrugFamilyCount() > maxDrugFamilies))
         {
             // create a unique set of tiles on the board
             List<string> names = new List<string>();
