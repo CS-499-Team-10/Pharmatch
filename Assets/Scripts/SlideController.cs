@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlideController : SceneController
 {
@@ -42,12 +43,14 @@ public class SlideController : SceneController
             string newName = names[Random.Range(0, names.Count)];
             newTile.drugMatches = drugnameToMatches[newName];
             newTile.nameLabelTMP.text = FewerOccurrences(newTile.drugMatches[0], newTile.drugMatches[1]);
+            newTile.gameObject.GetComponent<Image>().color = drugnameToColor[newTile.nameLabelTMP.text];
         }
         else //otherwise add a random card
         {
             List<string> drugFamily = drugs[Random.Range(0, drugs.Count)];
             newTile.drugMatches = drugFamily;
             newTile.nameLabelTMP.text = drugFamily[Random.Range(0, drugFamily.Count)];
+            newTile.gameObject.GetComponent<Image>().color = drugnameToColor[newTile.nameLabelTMP.text];
         }
     }
 
