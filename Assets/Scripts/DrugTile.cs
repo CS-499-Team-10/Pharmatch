@@ -85,12 +85,12 @@ public class DrugTile : MonoBehaviour
         if (newPos)
         {
             RectTransform newCell = newPos.GetComponent<RectTransform>();
-            if (newCell.childCount < 1)
-            { // if there isn't a tile in the next cell
+            if (newCell.childCount < 1) // if there isn't a tile in the next cell
+            {
                 transform.parent = newCell;
             }
-            else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>()))
-            { // if there is a tile and they match
+            else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) // if there is a tile and they match
+            {
                 transform.parent = newCell;
                 foreach (Transform child in newCell)
                 {
@@ -112,12 +112,12 @@ public class DrugTile : MonoBehaviour
         if (newPos)
         {
             RectTransform newCell = newPos.GetComponent<RectTransform>();
-            if (newCell.childCount < 1)
-            { // if there isn't a tile in the next cell
+            if (newCell.childCount < 1) // if there isn't a tile in the next cell
+            {
                 return true;
             }
-            else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>()))
-            { // if there is a tile and they match
+            else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) // if there is a tile and they match
+            {
                 return true;
             }
         }

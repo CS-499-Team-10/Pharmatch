@@ -7,6 +7,7 @@ public class SlideController : SceneController
 {
     [SerializeField] int maxDrugFamilies = 5;
 
+    // the directions in which a tile can slide
     public enum Direction
     {
         Up,
