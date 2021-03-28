@@ -43,15 +43,14 @@ public class SlideController : SceneController
             string newName = names[Random.Range(0, names.Count)];
             newTile.drugMatches = drugnameToMatches[newName];
             newTile.nameLabelTMP.text = FewerOccurrences(newTile.drugMatches[0], newTile.drugMatches[1]);
-            SetColor(newTile);
         }
         else //otherwise add a random card
         {
             List<string> drugFamily = drugs[Random.Range(0, drugs.Count)];
             newTile.drugMatches = drugFamily;
             newTile.nameLabelTMP.text = drugFamily[Random.Range(0, drugFamily.Count)];
-            SetColor(newTile);
         }
+        SetColor(newTile);
     }
 
     // Update is called once per frame
@@ -128,9 +127,6 @@ public class SlideController : SceneController
     // creates a card at the opposite end of dir
     void CreateCard(Direction dir)
     {
-        DrugTile newCard;
-        Transform newCell = null;
-
         // create a list of empty cells that can accept a new tile
         List<Transform> activeCells = new List<Transform>();
         foreach (Transform cell in GetCells())
@@ -140,22 +136,7 @@ public class SlideController : SceneController
                 activeCells.Add(cell);
             }
         }
-
-        // if there is space to generate a new card, pick an index
-        if (activeCells.Count > 0)
-        {
-            int whichCell = Random.Range(0, activeCells.Count);
-            newCell = activeCells[whichCell];
-        }
-
-        if (newCell != null)
-        {
-            newCard = Instantiate(drugPrefab, newCell) as DrugTile;
-            newCard.transform.localScale = Vector3.zero; // start the scale at 0 and grow from there
-            PopulateTile(newCard);
-            newCard.controller = this;
-            tilesOnScreen.Add(newCard);
-        }
+        base.CreateCard(activeCells);
     }
 
     // returns true if player has no moves available

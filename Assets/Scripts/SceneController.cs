@@ -32,27 +32,36 @@ public class SceneController : MonoBehaviour
 
     protected Transform[] GetCells() { return cells; }
 
-    // create a drug tile and place it in the game
-    protected virtual void CreateCard()
+    List<Transform> GetEmptyCells()
     {
-        DrugTile newCard;
-        Transform newCell = null;
-
         // create a list of empty cells that can accept a new tile
-        List<Transform> activeCells = new List<Transform>();
+        List<Transform> emptyCells = new List<Transform>();
         foreach (Transform cell in cells)
         {
             if (cell.childCount == 0 || (cell.childCount == 1 && cell.GetComponentInChildren<DrugTile>().markedToDestroy))
             {
-                activeCells.Add(cell);
+                emptyCells.Add(cell);
             }
         }
+        return emptyCells;
+    }
+
+    // create a drug tile and place it in the game
+    protected virtual void CreateCard(List<Transform> cells = null)
+    {
+        if (cells == null)
+        {
+            cells = GetEmptyCells();
+        }
+
+        DrugTile newCard;
+        Transform newCell = null;
 
         // if there is space to generate a new card, pick an index
-        if (activeCells.Count > 0)
+        if (cells.Count > 0)
         {
-            int whichCell = Random.Range(0, activeCells.Count);
-            newCell = activeCells[whichCell];
+            int whichCell = Random.Range(0, cells.Count);
+            newCell = cells[whichCell];
         }
 
         if (newCell != null)
