@@ -75,7 +75,7 @@ public class SceneController : MonoBehaviour
         if (currentDrugs.Count == 0) currentDrugs = SampleDrugs(8);
         newTile.nameLabelTMP.text = newName;
         newTile.drugMatches = drugnameToMatches[newName];
-        newTile.gameObject.GetComponent<Image>().color = drugnameToColor[newName];
+        SetColor(newTile);
     }
 
     // Use this for initialization
@@ -217,5 +217,10 @@ public class SceneController : MonoBehaviour
     protected void GameOver()
     {
         Restart();
+    }
+
+    public void SetColor(DrugTile tile)
+    {
+        tile.GetComponent<Image>().color = drugnameToColor[tile.nameLabelTMP.text];
     }
 }

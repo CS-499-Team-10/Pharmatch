@@ -64,7 +64,7 @@ public class DrugTile : MonoBehaviour
 
     public void UnSelect()
     {
-        GetComponent<Image>().color = new Color(186F / 255F, 195F / 255F, 121F / 255F);
+        controller.SetColor(this);
     }
 
     IEnumerator Wait(RectTransform newCell)
