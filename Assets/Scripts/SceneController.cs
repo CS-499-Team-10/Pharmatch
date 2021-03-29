@@ -28,6 +28,10 @@ public class SceneController : MonoBehaviour
     [SerializeField] private bool useDebugNames = false; // set to true to use debug names for drugs
 
     private int _score = 0;
+    public int score
+    {
+        get { return _score; }
+    }
     [SerializeField] private TMP_Text scoreText;
 
     protected Transform[] GetCells() { return cells; }
