@@ -266,8 +266,11 @@ MonoBehaviour:
   - {fileID: 787754518}
   - {fileID: 578332806}
   - {fileID: 329282020}
-  useDebugNames: 1
+  useDebugNames: 0
   scoreText: {fileID: 1516131442}
+  spawnCooldown: 2
+  timeSinceSpawn: 0
+  currentMax: 4
 --- !u!4 &212828944
 Transform:
   m_ObjectHideFlags: 0

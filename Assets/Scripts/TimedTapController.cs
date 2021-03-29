@@ -24,12 +24,6 @@ public class TimedTapController : SceneController
         }
     }
 
-    // maps a value from one range to another
-    float MapRange(float value, float oldMin, float oldMax, float newMin, float newMax)
-    {
-        return newMin + (value - oldMin) * (newMax - newMin) / (oldMax - oldMin);
-    }
-
     void Update()
     {
         timeSinceSpawn += Time.deltaTime; // update timer
@@ -39,6 +33,13 @@ public class TimedTapController : SceneController
         }
     }
 
+    // maps a value from one range to another
+    float MapRange(float value, float oldMin, float oldMax, float newMin, float newMax)
+    {
+        return newMin + (value - oldMin) * (newMax - newMin) / (oldMax - oldMin);
+    }
+
+    // refresh spawn time depending on score and number of tiles on screen
     void UpdateSpawnTime()
     {
         // scale max spawn time based on current score
