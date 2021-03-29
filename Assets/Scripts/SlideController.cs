@@ -34,22 +34,22 @@ public class SlideController : SceneController
             List<string> names = new List<string>();
             foreach (DrugTile tile in tilesOnScreen)
             {
-                if (!names.Contains(tile.nameLabelTMP.text))
+                if (!names.Contains(tile.drugName))
                 {
-                    names.Add(tile.nameLabelTMP.text);
+                    names.Add(tile.drugName);
                 }
             }
 
             // pick a name from the set
             string newName = names[Random.Range(0, names.Count)];
             newTile.drugMatches = drugnameToMatches[newName];
-            newTile.nameLabelTMP.text = FewerOccurrences(newTile.drugMatches[0], newTile.drugMatches[1]);
+            newTile.drugName = FewerOccurrences(newTile.drugMatches[0], newTile.drugMatches[1]);
         }
         else //otherwise add a random card
         {
             List<string> drugFamily = drugs[Random.Range(0, drugs.Count)];
             newTile.drugMatches = drugFamily;
-            newTile.nameLabelTMP.text = drugFamily[Random.Range(0, drugFamily.Count)];
+            newTile.drugName = drugFamily[Random.Range(0, drugFamily.Count)];
         }
         SetColor(newTile);
     }

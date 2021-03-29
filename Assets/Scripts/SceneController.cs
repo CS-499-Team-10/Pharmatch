@@ -86,7 +86,7 @@ public class SceneController : MonoBehaviour
         string newName = currentDrugs[index];
         currentDrugs.RemoveAt(index);
         if (currentDrugs.Count == 0) currentDrugs = SampleDrugs(8);
-        newTile.nameLabelTMP.text = newName;
+        newTile.drugName = newName;
         newTile.drugMatches = drugnameToMatches[newName];
         SetColor(newTile);
     }
@@ -210,11 +210,11 @@ public class SceneController : MonoBehaviour
 
         foreach (DrugTile tile in tilesOnScreen)
         {
-            if (tile.nameLabelTMP.text == name1)
+            if (tile.drugName == name1)
             {
                 count1 += 1;
             }
-            else if (tile.nameLabelTMP.text == name2)
+            else if (tile.drugName == name2)
             {
                 count2 += 1;
             }
@@ -234,6 +234,6 @@ public class SceneController : MonoBehaviour
 
     public void SetColor(DrugTile tile)
     {
-        tile.GetComponent<Image>().color = drugnameToColor[tile.nameLabelTMP.text];
+        tile.GetComponent<Image>().color = drugnameToColor[tile.drugName];
     }
 }

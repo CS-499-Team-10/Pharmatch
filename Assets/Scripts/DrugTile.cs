@@ -6,7 +6,13 @@ using TMPro;
 
 public class DrugTile : MonoBehaviour
 {
-    public TMP_Text nameLabelTMP; // label containing drug name
+    [SerializeField] private TMP_Text nameLabelTMP; // label containing drug name
+    public string drugName
+    {
+        get { return nameLabelTMP.text; }
+        set { nameLabelTMP.text = value; }
+    }
+
     [SerializeField] public List<string> drugMatches; // list of drugs that this drug matches with
     [SerializeField] public SceneController controller; // controller managing gameplay
 
