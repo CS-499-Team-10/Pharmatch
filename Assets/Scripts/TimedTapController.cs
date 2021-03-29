@@ -37,7 +37,10 @@ public class TimedTapController : SceneController
         {
             CreateCard();
         }
+    }
 
+    void UpdateSpawnTime()
+    {
         // scale max spawn time based on current score
         currentMax = maxSpawnTime - (0.4f * Mathf.Log(score, 2));
         if (currentMax == Mathf.Infinity) currentMax = maxSpawnTime;
@@ -51,6 +54,7 @@ public class TimedTapController : SceneController
     {
         if (tilesOnScreen.Count == GetCells().Length) GameOver();
         timeSinceSpawn = 0;
+        UpdateSpawnTime();
         base.CreateCard();
     }
 
@@ -69,11 +73,18 @@ public class TimedTapController : SceneController
         }
     }
 
+    public override void IncrementScore(int addedScore)
+    {
+        base.IncrementScore(addedScore);
+        UpdateSpawnTime();
+    }
+
     protected void TryMatch()
     {
         if (firstSelected.CheckMatch(secondSelected))
         {
             IncrementScore(1);
+            UpdateSpawnTime();
 
             tilesOnScreen.Remove(firstSelected);
             tilesOnScreen.Remove(secondSelected);

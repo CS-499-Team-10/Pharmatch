@@ -118,7 +118,7 @@ public class SceneController : MonoBehaviour
         Debug.Log("wrong");
     }
 
-    public void IncrementScore(int addedScore)
+    public virtual void IncrementScore(int addedScore)
     {
         _score += addedScore;
         scoreText.text = "Score: " + _score;
