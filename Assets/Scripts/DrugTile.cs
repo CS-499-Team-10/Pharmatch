@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -98,6 +98,12 @@ public class DrugTile : MonoBehaviour
         yield return 0;
     }
 
+    private void ChangeParent(RectTransform newParentCell)
+    {
+        transform.parent = newParentCell;
+        StartCoroutine(MoveTowards(transform, Vector3.zero, SlideController.SLIDE_TIME));
+    }
+
     // slides a tile in given SlideController.Direction
     // returns true if the tile slides into a match, false otherwise
     public bool Slide(SlideController.Direction dir)
@@ -109,13 +115,11 @@ public class DrugTile : MonoBehaviour
             RectTransform newCell = newPos.GetComponent<RectTransform>();
             if (newCell.childCount < 1) // if there isn't a tile in the next cell
             {
-                transform.parent = newCell;
-                StartCoroutine(MoveTowards(transform, Vector3.zero, 0.15f));
+                ChangeParent(newCell);
             }
             else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) // if there is a tile and they match
             {
-                transform.parent = newCell;
-                StartCoroutine(MoveTowards(transform, Vector3.zero, 0.15f));
+                ChangeParent(newCell);
                 foreach (Transform child in newCell)
                 {
                     controller.tilesOnScreen.Remove(child.GetComponent<DrugTile>()); //remove this tile from the list of active tiles

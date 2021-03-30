@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class SlideController : SceneController
 {
     [SerializeField] int maxDrugFamilies = 5;
+
+    // time it takes for a tile to slide
+    public const float SLIDE_TIME = 0.15f;
+    float timeSinceSlide = SLIDE_TIME;
 
     // the directions in which a tile can slide
     public enum Direction
