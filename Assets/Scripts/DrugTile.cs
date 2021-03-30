@@ -24,12 +24,6 @@ public class DrugTile : MonoBehaviour
 
     private void Update()
     {
-        // // update position of tile when it is moved/changes parent
-        // if (transform.localPosition != Vector3.zero)
-        // {
-        //     transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);
-        // }
-
         // tiles are spawned at scale 0 and grow to 1
         if (!markedToDestroy && (transform.localScale != Vector3.one))
         {
@@ -48,20 +42,6 @@ public class DrugTile : MonoBehaviour
             GameObject.Destroy(this.gameObject);
         }
     }
-
-    // IEnumerator LerpPosition(Vector3 targetPosition, float duration)
-    // {
-    //     float time = 0;
-    //     Vector3 startPosition = transform.localPosition;
-
-    //     while (time < duration)
-    //     {
-    //         transform.localPosition = Vector3.Lerp(startPosition, targetPosition, time / duration);
-    //         time += Time.deltaTime;
-    //         yield return null;
-    //     }
-    //     transform.localPosition = Vector3.zero;
-    // }
 
     IEnumerator MoveTowards(Transform objectToMove, Vector3 toPosition, float duration)
     {
