@@ -24,11 +24,12 @@ public class DrugTile : MonoBehaviour
 
     private void Update()
     {
-        // update position of tile when it is moved/changes parent
-        if (transform.localPosition != Vector3.zero)
-        {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);
-        }
+        // // update position of tile when it is moved/changes parent
+        // if (transform.localPosition != Vector3.zero)
+        // {
+        //     transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);
+        // }
+
         // tiles are spawned at scale 0 and grow to 1
         if (!markedToDestroy && (transform.localScale != Vector3.one))
         {
@@ -46,6 +47,39 @@ public class DrugTile : MonoBehaviour
         {
             GameObject.Destroy(this.gameObject);
         }
+    }
+
+    // IEnumerator LerpPosition(Vector3 targetPosition, float duration)
+    // {
+    //     float time = 0;
+    //     Vector3 startPosition = transform.localPosition;
+
+    //     while (time < duration)
+    //     {
+    //         transform.localPosition = Vector3.Lerp(startPosition, targetPosition, time / duration);
+    //         time += Time.deltaTime;
+    //         yield return null;
+    //     }
+    //     transform.localPosition = Vector3.zero;
+    // }
+
+    IEnumerator MoveTowards(Transform objectToMove, Vector3 toPosition, float duration)
+    {
+        float counter = 0;
+
+        while (counter < duration)
+        {
+            counter += Time.deltaTime;
+            Vector3 currentPos = objectToMove.localPosition;
+
+            float time = Vector3.Distance(currentPos, toPosition) / (duration - counter) * Time.deltaTime;
+
+            objectToMove.localPosition = Vector3.MoveTowards(currentPos, toPosition, time);
+
+            Debug.Log(counter + " / " + duration);
+            yield return null;
+        }
+        objectToMove.localPosition = Vector3.zero;
     }
 
     public void Tapped()
@@ -94,10 +128,12 @@ public class DrugTile : MonoBehaviour
             if (newCell.childCount < 1) // if there isn't a tile in the next cell
             {
                 transform.parent = newCell;
+                StartCoroutine(MoveTowards(transform, Vector3.zero, 0.15f));
             }
             else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) // if there is a tile and they match
             {
                 transform.parent = newCell;
+                StartCoroutine(MoveTowards(transform, Vector3.zero, 0.15f));
                 foreach (Transform child in newCell)
                 {
                     controller.tilesOnScreen.Remove(child.GetComponent<DrugTile>()); //remove this tile from the list of active tiles
