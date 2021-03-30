@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -61,21 +61,25 @@ public class SlideController : SceneController
     // Update is called once per frame
     void Update()
     {
-        if (SwipeInput.swipedUp)
+        timeSinceSlide += Time.deltaTime;
+        if (timeSinceSlide >= (SLIDE_TIME * 1.01))
         {
-            Slide(SlideController.Direction.Up);
-        }
-        if (SwipeInput.swipedDown)
-        {
-            Slide(SlideController.Direction.Down);
-        }
-        if (SwipeInput.swipedLeft)
-        {
-            Slide(SlideController.Direction.Left);
-        }
-        if (SwipeInput.swipedRight)
-        {
-            Slide(SlideController.Direction.Right);
+            if (SwipeInput.swipedUp)
+            {
+                Slide(SlideController.Direction.Up);
+            }
+            if (SwipeInput.swipedDown)
+            {
+                Slide(SlideController.Direction.Down);
+            }
+            if (SwipeInput.swipedLeft)
+            {
+                Slide(SlideController.Direction.Left);
+            }
+            if (SwipeInput.swipedRight)
+            {
+                Slide(SlideController.Direction.Right);
+            }
         }
     }
 
@@ -106,6 +110,7 @@ public class SlideController : SceneController
     // slides each tile on the board in the passed direction
     void Slide(SlideController.Direction dir)
     {
+        timeSinceSlide = 0f;
         if (!CanMove(dir)) return;
         foreach (Transform cell in GetCells()) // for each cell on the board
         {
