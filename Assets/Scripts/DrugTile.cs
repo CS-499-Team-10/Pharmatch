@@ -58,7 +58,7 @@ public class DrugTile : MonoBehaviour
 
             objectToMove.localPosition = Vector3.MoveTowards(currentPos, toPosition, time);
 
-            Debug.Log(counter + " / " + duration);
+            // Debug.Log(counter + " / " + duration);
             yield return null;
         }
         objectToMove.localPosition = Vector3.zero;
