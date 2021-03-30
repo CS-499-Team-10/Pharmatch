@@ -43,6 +43,8 @@ public class DrugTile : MonoBehaviour
         }
     }
 
+    // wrapper for MoveTowards to use as a coroutine
+    // edited from https://stackoverflow.com/a/51166030
     IEnumerator MoveTowards(Transform objectToMove, Vector3 toPosition, float duration)
     {
         float counter = 0;
