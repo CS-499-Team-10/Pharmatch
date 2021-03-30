@@ -34,6 +34,15 @@ public class SceneController : MonoBehaviour
     }
     [SerializeField] private TMP_Text scoreText;
 
+    // used for other text elements, such as lives
+    [SerializeField] private TMP_Text secondaryTMP;
+
+    public string secondaryText
+    {
+        get { return secondaryTMP.text; }
+        set { secondaryTMP.text = value; }
+    }
+
     protected Transform[] GetCells() { return cells; }
 
     List<Transform> GetEmptyCells()
@@ -111,6 +120,8 @@ public class SceneController : MonoBehaviour
 
         currentDrugs = SampleDrugs(8);
         Debug.Log(currentDrugs.Count);
+
+        secondaryText = "";
     }
 
     public virtual void CardTapped(DrugTile card)

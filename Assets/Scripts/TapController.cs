@@ -14,6 +14,7 @@ public class TapController : SceneController
         {
             CreateCard();
         }
+        secondaryText = "Lives: " + livesLeft;
     }
 
     protected DrugTile firstSelected;
@@ -56,6 +57,7 @@ public class TapController : SceneController
         {
             livesLeft -= 1;
             Debug.Log("Lives Remaining: " + livesLeft);
+            secondaryText = "Lives: " + livesLeft;
             if (livesLeft == 0)
             {
                 GameOver();
