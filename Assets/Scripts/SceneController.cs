@@ -11,7 +11,7 @@ using System.Text;
 
 using Random = UnityEngine.Random; //to distinguish between UnityEngine.Random and System.Random
 
-public class SceneController : MonoBehaviour
+public abstract class SceneController : MonoBehaviour
 {
     protected List<List<string>> drugs = new List<List<string>>(); // master list of all drugs loaded in from the .csv
     [SerializeField] private List<string> currentDrugs = new List<string>(); // subset of drugs to cycle through for tapping games
