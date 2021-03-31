@@ -9,40 +9,40 @@ namespace Tests
 {
     public class BasicTests
     {
-        // A Test behaves as an ordinary method
-        [Test]
-        public void BasicTestsSimplePasses()
+        [UnityTest]
+        public IEnumerator FindSceneController()
         {
-            // Use the Assert class to test conditions
-            SceneManager.LoadScene("MatchGame");
+            const string sceneName = "MatchGame";
+            SceneManager.LoadScene(sceneName);
+            // wait for the scene to load before proceeding
+            while (SceneManager.GetActiveScene().name != sceneName)
+            {
+                yield return null;
+            }
             GameObject sceneController = GameObject.Find("SceneController");
             if (sceneController == null)
             {
                 Assert.Fail();
             }
+            // yield return null;
         }
 
-        // A Test behaves as an ordinary method
-        [Test]
-        public void BasicTestsSimpleFails()
+        [UnityTest]
+        public IEnumerator FailToFindGameObject()
         {
-            // Use the Assert class to test conditions
-            SceneManager.LoadScene("MatchGame");
-            GameObject sceneController = GameObject.Find("UI");
-            if (sceneController == null)
+            const string sceneName = "MatchGame";
+            SceneManager.LoadScene(sceneName);
+            // wait for the scene to load before proceeding
+            while (SceneManager.GetActiveScene().name != sceneName)
+            {
+                yield return null;
+            }
+            GameObject obj = GameObject.Find("NotHere");
+            if (obj != null)
             {
                 Assert.Fail();
             }
+            // yield return null;
         }
-
-        // // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-        // // `yield return null;` to skip a frame.
-        // [UnityTest]
-        // public IEnumerator BasicTestsWithEnumeratorPasses()
-        // {
-        //     // Use the Assert class to test conditions.
-        //     // Use yield to skip a frame.
-        //     yield return null;
-        // }
     }
 }
