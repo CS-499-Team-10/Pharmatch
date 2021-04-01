@@ -16,12 +16,14 @@ public class PauseMenu : MonoBehaviour
     {
         if (!_isPaused)
         {
+            Time.timeScale = 0;
             menuPanel.SetActive(true);
             gameGrid.SetActive(false);
             _isPaused = !_isPaused;
         }
         else
         {
+            Time.timeScale = 1;
             menuPanel.SetActive(false);
             gameGrid.SetActive(true);
             _isPaused = !_isPaused;
