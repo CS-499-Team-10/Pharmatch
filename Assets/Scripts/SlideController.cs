@@ -89,7 +89,7 @@ public class SlideController : SceneController
         foreach (Transform cell in GetCells()) // for each cell on the board
         {
             GridPosition pos = cell.GetComponentInParent<GridPosition>(); // get its grid position
-            if (!pos.GetNext(dir)) // if this position is on the edge (has no next cell in the passed direction)
+            if (pos && !pos.GetNext(dir)) // if this position is on the edge (has no next cell in the passed direction)
             {
                 for (GridPosition nextMover = pos.GetOpposite(dir); nextMover != null; nextMover = nextMover.GetOpposite(dir)) // for each position, traveling in the opposite direction
                 {
