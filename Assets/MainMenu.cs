@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        ModeSelector.mode = ModeSelector.Mode.Timed; // set a certain game mode
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
