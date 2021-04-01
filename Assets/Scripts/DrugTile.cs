@@ -43,6 +43,11 @@ public class DrugTile : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        transform.localPosition = Vector3.zero;
+    }
+
     // wrapper for MoveTowards to use as a coroutine
     // edited from https://stackoverflow.com/a/51166030
     IEnumerator MoveTowards(Transform objectToMove, Vector3 toPosition, float duration)
