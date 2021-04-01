@@ -11,7 +11,7 @@ public class ModeSelector : MonoBehaviour
         Slide
     }
 
-    [SerializeField] public static Mode mode = Mode.Tap;
+    [SerializeField] public static Mode mode = Mode.Slide;
 
     // Start is called before the first frame update
     void Start()
