@@ -6,21 +6,25 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject menuPanel;
     [SerializeField] GameObject gameGrid;
-    bool isPaused = false;
+    static bool _isPaused = false;
+    public static bool isPaused
+    {
+        get { return _isPaused; }
+    }
 
     public void PauseButton()
     {
-        if (!isPaused)
+        if (!_isPaused)
         {
             menuPanel.SetActive(true);
             gameGrid.SetActive(false);
-            isPaused = !isPaused;
+            _isPaused = !_isPaused;
         }
         else
         {
             menuPanel.SetActive(false);
             gameGrid.SetActive(true);
-            isPaused = !isPaused;
+            _isPaused = !_isPaused;
         }
     }
 }
