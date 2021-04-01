@@ -6,9 +6,19 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    public void PlayGame()
+    public void PlayTapGame()
     {
         ModeSelector.mode = ModeSelector.Mode.Tap; // set a certain game mode
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void PlayTimedGame()
+    {
+        ModeSelector.mode = ModeSelector.Mode.Timed; // set a certain game mode
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void PlaySlideGame()
+    {
+        ModeSelector.mode = ModeSelector.Mode.Slide; // set a certain game mode
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

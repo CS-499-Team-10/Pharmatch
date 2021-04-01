@@ -241,6 +241,7 @@ public abstract class SceneController : MonoBehaviour
     protected void GameOver()
     {
         Restart();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void SetColor(DrugTile tile)
