@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,5 +28,10 @@ public class PauseMenu : MonoBehaviour
             gameGrid.SetActive(true);
             _isPaused = !_isPaused;
         }
+    }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }
