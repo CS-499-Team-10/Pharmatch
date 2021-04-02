@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject menuPanel;
     [SerializeField] GameObject gameGrid;
+    [SerializeField] GameObject backgroundMusic;
+    [SerializeField] GameObject soundEffect;
     static bool _isPaused = false;
     public static bool isPaused
     {
@@ -42,5 +44,15 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void ToggleSFX(bool value)
+    {
+        soundEffect.SetActive(!soundEffect.activeSelf);
+    }
+
+    public void ToggleMusic(bool value)
+    {
+        backgroundMusic.SetActive(!backgroundMusic.activeSelf);
     }
 }
