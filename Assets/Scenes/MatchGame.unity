@@ -895,7 +895,7 @@ GameObject:
   - component: {fileID: 536822493}
   - component: {fileID: 536822492}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: MatchSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1488,7 +1488,7 @@ GameObject:
   - component: {fileID: 1025888903}
   - component: {fileID: 1025888902}
   m_Layer: 0
-  m_Name: Audio Source (1)
+  m_Name: BGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
