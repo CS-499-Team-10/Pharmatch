@@ -47,6 +47,7 @@ public class TapController : SceneController
             firstSelected.markedToDestroy = true;
             secondSelected.markedToDestroy = true;
 
+            audios.Play();
             Destroy(firstSelected.gameObject);
             Destroy(secondSelected.gameObject);
 
