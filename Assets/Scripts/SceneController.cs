@@ -13,6 +13,8 @@ using Random = UnityEngine.Random; //to distinguish between UnityEngine.Random a
 
 public abstract class SceneController : MonoBehaviour
 {
+
+    protected bool hintMode;
     protected List<List<string>> drugs = new List<List<string>>(); // master list of all drugs loaded in from the .csv
     [SerializeField] private List<string> currentDrugs = new List<string>(); // subset of drugs to cycle through for tapping games
     public List<DrugTile> tilesOnScreen = new List<DrugTile>(); // list of all the tiles currently in the game
@@ -105,19 +107,27 @@ public abstract class SceneController : MonoBehaviour
     {
         // //temporary addition to test LoadDrugs
         // TestLoadDrugs();
-
+        hintMode = Convert.ToBoolean((PlayerPrefs.GetInt("HintMode")));
         string fp = "60DrugNames";
         if (useDebugNames) fp = "testDrugNames";
         drugs = LoadDrugs(fp);
-        foreach (var list in drugs)
-        {
-            foreach (var drug in list)
-            {
-                drugnameToMatches.Add(drug, list);
-                drugnameToColor.Add(drug, Color.HSVToRGB(Random.value, 30f / 255f, 1f));
+        if (hintMode) {
+            foreach (var list in drugs) {
+                Color drugColor = Color.HSVToRGB(Random.value, 30f / 255f, 1f);
+                foreach (var drug in list) {
+                    drugnameToMatches.Add(drug, list);
+                    drugnameToColor.Add(drug, drugColor);
+                }
             }
         }
-
+        else {
+            foreach (var list in drugs) {
+                foreach (var drug in list) {
+                    drugnameToMatches.Add(drug, list);
+                    drugnameToColor.Add(drug, Color.HSVToRGB(Random.value, 30f / 255f, 1f));
+                }
+            }
+        }
         currentDrugs = SampleDrugs(8);
         Debug.Log(currentDrugs.Count);
 
