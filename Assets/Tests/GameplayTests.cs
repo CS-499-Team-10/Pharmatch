@@ -24,5 +24,31 @@ namespace Tests
                 yield return null; // wait for the scene to load
             Assert.True(SceneManager.GetActiveScene().name == "GameMenu");
         }
+
+        [UnityTest]
+        public IEnumerator CheckMatchesAvailable()
+        {
+            ModeSelector.mode = ModeSelector.Mode.Tap;
+            SceneManager.LoadScene("MatchGame");
+            while (SceneManager.GetActiveScene().name != "MatchGame")
+                yield return null; // wait for the scene to load
+
+            GameObject sceneController = GameObject.Find("SceneController");
+            SceneController controllerComponent = sceneController.GetComponent<TapController>();
+            Assert.True(controllerComponent.tilesOnScreen.Count == 16);
+            // check that each tile has a match available
+            foreach (var tile in controllerComponent.tilesOnScreen)
+            {
+                bool foundMatch = false;
+                foreach (var otherTile in controllerComponent.tilesOnScreen)
+                {
+                    if (tile.CheckMatch(otherTile))
+                    {
+                        foundMatch = true;
+                    }
+                }
+                Assert.True(foundMatch);
+            }
+        }
     }
 }
