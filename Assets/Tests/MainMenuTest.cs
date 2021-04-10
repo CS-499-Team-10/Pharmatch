@@ -35,7 +35,60 @@ namespace Tests
             Assert.IsFalse(controllerComponent.enabled);
             controllerComponent = sceneController.GetComponent<SlideController>();
             Assert.IsFalse(controllerComponent.enabled);
+        }
 
+        [UnityTest]
+        public IEnumerator LoadSlide()
+        {
+            SceneManager.LoadScene("GameMenu");
+            while (SceneManager.GetActiveScene().name != "GameMenu")
+                yield return null; // wait for the scene to load
+
+            // get and press play button
+            GameObject playButtonObject = GameObject.Find("PlaySlideButton");
+            var playButton = playButtonObject.GetComponent<Button>();
+            playButton.onClick.Invoke();
+
+            // did correct scene load?
+            while (SceneManager.GetActiveScene().name != "MatchGame")
+                yield return null; // wait for the scene to load
+            Assert.IsTrue(SceneManager.GetActiveScene().name == "MatchGame");
+
+            // check game mode
+            GameObject sceneController = GameObject.Find("SceneController");
+            SceneController controllerComponent = sceneController.GetComponent<TimedTapController>();
+            Assert.IsFalse(controllerComponent.enabled);
+            controllerComponent = sceneController.GetComponent<TapController>();
+            Assert.IsFalse(controllerComponent.enabled);
+            controllerComponent = sceneController.GetComponent<SlideController>();
+            Assert.IsTrue(controllerComponent.enabled);
+        }
+
+        [UnityTest]
+        public IEnumerator LoadTap()
+        {
+            SceneManager.LoadScene("GameMenu");
+            while (SceneManager.GetActiveScene().name != "GameMenu")
+                yield return null; // wait for the scene to load
+
+            // get and press play button
+            GameObject playButtonObject = GameObject.Find("PlayTapButton");
+            var playButton = playButtonObject.GetComponent<Button>();
+            playButton.onClick.Invoke();
+
+            // did correct scene load?
+            while (SceneManager.GetActiveScene().name != "MatchGame")
+                yield return null; // wait for the scene to load
+            Assert.IsTrue(SceneManager.GetActiveScene().name == "MatchGame");
+
+            // check game mode
+            GameObject sceneController = GameObject.Find("SceneController");
+            SceneController controllerComponent = sceneController.GetComponent<TimedTapController>();
+            Assert.IsFalse(controllerComponent.enabled);
+            controllerComponent = sceneController.GetComponent<TapController>();
+            Assert.IsTrue(controllerComponent.enabled);
+            controllerComponent = sceneController.GetComponent<SlideController>();
+            Assert.IsFalse(controllerComponent.enabled);
         }
     }
 }
