@@ -203,10 +203,10 @@ public abstract class SceneController : MonoBehaviour
         return drugs;
     }
 
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    // public void Restart()
+    // {
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    // }
 
     // returns number of drug "families" currently on the board.
     protected int GetDrugFamilyCount()
@@ -256,7 +256,7 @@ public abstract class SceneController : MonoBehaviour
 
     protected void GameOver()
     {
-        Restart();
+        // Restart();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
