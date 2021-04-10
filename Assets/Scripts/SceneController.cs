@@ -111,18 +111,24 @@ public abstract class SceneController : MonoBehaviour
         string fp = "60DrugNames";
         if (useDebugNames) fp = "testDrugNames";
         drugs = LoadDrugs(fp);
-        if (hintMode) {
-            foreach (var list in drugs) {
+        if (hintMode)
+        {
+            foreach (var list in drugs)
+            {
                 Color drugColor = Color.HSVToRGB(Random.value, 30f / 255f, 1f);
-                foreach (var drug in list) {
+                foreach (var drug in list)
+                {
                     drugnameToMatches.Add(drug, list);
                     drugnameToColor.Add(drug, drugColor);
                 }
             }
         }
-        else {
-            foreach (var list in drugs) {
-                foreach (var drug in list) {
+        else
+        {
+            foreach (var list in drugs)
+            {
+                foreach (var drug in list)
+                {
                     drugnameToMatches.Add(drug, list);
                     drugnameToColor.Add(drug, Color.HSVToRGB(Random.value, 30f / 255f, 1f));
                 }
