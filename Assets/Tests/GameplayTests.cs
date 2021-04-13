@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -22,6 +22,7 @@ namespace Tests
             while (SceneManager.GetActiveScene().name != "GameMenu")
                 yield return null; // wait for the scene to load
             Assert.True(SceneManager.GetActiveScene().name == "GameMenu");
+            Time.timeScale = 1.0f;
         }
 
         [UnityTest]
