@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class ReturnToCenter : MonoBehaviour
 {
     void Awake()
     {
-        StartCoroutine(MoveTowards(transform, new Vector3(transform.localPosition.x, 0f, 0f), 0.25f));
+        StartCoroutine(MoveTowards(transform, new Vector3(-105f, 0f, 0f), 0.25f));
     }
 
     // wrapper for MoveTowards to use as a coroutine
