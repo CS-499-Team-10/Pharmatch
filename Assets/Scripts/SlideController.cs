@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SlideController : SceneController
 {
-    [SerializeField] int maxDrugFamilies = 5;
+    [SerializeField] int maxDrugFamilies = 6;
 
     // time it takes for a tile to slide
     public const float SLIDE_TIME = 0.15f;
@@ -62,7 +62,7 @@ public class SlideController : SceneController
     void Update()
     {
         timeSinceSlide += Time.deltaTime;
-        if (timeSinceSlide >= (SLIDE_TIME * 1.01))
+        if (timeSinceSlide >= (SLIDE_TIME * 1.01)) // wait a little longer than the slide time before allowing another slide
         {
             if (SwipeInput.swipedUp)
             {
