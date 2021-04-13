@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -18,8 +18,6 @@ namespace Tests
             while (SceneManager.GetActiveScene().name != "MatchGame")
                 yield return null; // wait for the scene to load
 
-            GameObject sceneController = GameObject.Find("SceneController");
-            SceneController controllerComponent = sceneController.GetComponent<TimedTapController>();
             Time.timeScale = 99.0f; // speed up and wait for game to end
             while (SceneManager.GetActiveScene().name != "GameMenu")
                 yield return null; // wait for the scene to load
