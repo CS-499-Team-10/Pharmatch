@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject menuPanel;
     [SerializeField] GameObject gameGrid;
-    [SerializeField] GameObject backgroundMusic;
+    GameObject backgroundMusic;
     [SerializeField] GameObject soundEffect;
     static bool _isPaused = false;
     public static bool isPaused
@@ -21,6 +21,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         menuPanel.SetActive(false);
         gameGrid.SetActive(true);
+    }
+
+    void Awake()
+    {
+        backgroundMusic = GameObject.Find("BGM");
     }
 
     public void PauseButton()
