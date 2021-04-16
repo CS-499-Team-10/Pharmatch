@@ -47,7 +47,9 @@ public class TapController : SceneController
             firstSelected.markedToDestroy = true;
             secondSelected.markedToDestroy = true;
 
-            audios.Play();
+            MatchSFX.Play();
+            firstSelected.GenerateMatchParticles();
+            secondSelected.GenerateMatchParticles();
             Destroy(firstSelected.gameObject);
             Destroy(secondSelected.gameObject);
 

@@ -7,6 +7,7 @@ using TMPro;
 public class DrugTile : MonoBehaviour
 {
     [SerializeField] private TMP_Text nameLabelTMP; // label containing drug name
+    [SerializeField] private ParticleSystem matchParticles;
     public string drugName
     {
         get { return nameLabelTMP.text; }
@@ -96,7 +97,7 @@ public class DrugTile : MonoBehaviour
 
     IEnumerator Wait(RectTransform newCell)
     {
-        controller.audios.Play();
+        controller.MatchSFX.Play();
         yield return new WaitForEndOfFrame();
         this.controller.tilesOnScreen.Remove(this); //remove this card from the list of active cards
         markedToDestroy = true;
@@ -105,7 +106,8 @@ public class DrugTile : MonoBehaviour
 
     private void ChangeParent(RectTransform newParentCell)
     {
-        transform.parent = newParentCell;
+        // transform.parent = newParentCell;
+        transform.SetParent(newParentCell);
         StartCoroutine(MoveTowards(transform, Vector3.zero, SlideController.SLIDE_TIME));
     }
 
@@ -124,6 +126,7 @@ public class DrugTile : MonoBehaviour
             }
             else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) // if there is a tile and they match
             {
+                Instantiate(matchParticles, newCell.position - new Vector3(0, 0, 20), Quaternion.identity);
                 ChangeParent(newCell);
                 foreach (Transform child in newCell)
                 {
@@ -155,5 +158,10 @@ public class DrugTile : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void GenerateMatchParticles()
+    {
+        Instantiate(matchParticles, transform.position - new Vector3(0, 0, 20), Quaternion.identity);
     }
 }
