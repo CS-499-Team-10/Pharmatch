@@ -106,7 +106,8 @@ public class DrugTile : MonoBehaviour
 
     private void ChangeParent(RectTransform newParentCell)
     {
-        transform.parent = newParentCell;
+        // transform.parent = newParentCell;
+        transform.SetParent(newParentCell);
         StartCoroutine(MoveTowards(transform, Vector3.zero, SlideController.SLIDE_TIME));
     }
 
@@ -125,6 +126,7 @@ public class DrugTile : MonoBehaviour
             }
             else if (newCell.GetComponentInChildren<DrugTile>() && CheckMatch(newCell.GetComponentInChildren<DrugTile>())) // if there is a tile and they match
             {
+                Instantiate(matchParticles, newCell.position - new Vector3(0, 0, 20), Quaternion.identity);
                 ChangeParent(newCell);
                 foreach (Transform child in newCell)
                 {
@@ -156,5 +158,10 @@ public class DrugTile : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void GenerateMatchParticles()
+    {
+        Instantiate(matchParticles, transform.position - new Vector3(0, 0, 20), Quaternion.identity);
     }
 }

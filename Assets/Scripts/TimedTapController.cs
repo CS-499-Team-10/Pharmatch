@@ -94,6 +94,8 @@ public class TimedTapController : SceneController
             tilesOnScreen.Remove(secondSelected);
 
             MatchSFX.Play();
+            firstSelected.GenerateMatchParticles();
+            secondSelected.GenerateMatchParticles();
             Destroy(firstSelected.gameObject);
             Destroy(secondSelected.gameObject);
         }

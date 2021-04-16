@@ -277,6 +277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameLabelTMP: {fileID: 5662546079893590980}
+  matchParticles: {fileID: 7716914346385984310, guid: 65dc411c01438544e82c77bf38f6137c,
+    type: 3}
   drugMatches: []
   controller: {fileID: 0}
   markedToDestroy: 0
