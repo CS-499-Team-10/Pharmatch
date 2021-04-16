@@ -93,7 +93,7 @@ public class TimedTapController : SceneController
             tilesOnScreen.Remove(firstSelected);
             tilesOnScreen.Remove(secondSelected);
 
-            audios.Play();
+            MatchSFX.Play();
             Destroy(firstSelected.gameObject);
             Destroy(secondSelected.gameObject);
         }

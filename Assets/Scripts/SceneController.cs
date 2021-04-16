@@ -23,7 +23,7 @@ public abstract class SceneController : MonoBehaviour
 
     protected Dictionary<string, Color> drugnameToColor = new Dictionary<string, Color>(); // maps a string containing a drug name to a color
 
-    [SerializeField] public AudioSource audios;
+    [SerializeField] public AudioSource MatchSFX;
     [SerializeField] protected DrugTile drugPrefab;
     [SerializeField] private Transform[] cells; // list of cells on the board
 
