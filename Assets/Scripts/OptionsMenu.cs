@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OptionsMenu : MonoBehaviour
 {
+    
 
     public void ChangeHintModeValue() {
         //testing
