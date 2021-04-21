@@ -1,4 +1,6 @@
-# Pharmasweep
+# Pharmatch
+
+Play online [here!](https://cs-499-team-10.github.io/Pharmatch/)
 
 ## Resource Attributions
 
