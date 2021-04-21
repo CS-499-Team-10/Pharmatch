@@ -58,12 +58,14 @@ public class TapController : SceneController
         }
         else
         {
-            livesLeft -= 1;
-            Debug.Log("Lives Remaining: " + livesLeft);
-            secondaryText = "Lives: " + livesLeft;
-            if (livesLeft == 0)
+            if (firstSelected.drugName != secondSelected.drugName)
             {
-                GameOver();
+                livesLeft -= 1;
+                secondaryText = "Lives: " + livesLeft;
+                if (livesLeft == 0)
+                {
+                    GameOver();
+                }
             }
             firstSelected.UnSelect();
             secondSelected.UnSelect();
