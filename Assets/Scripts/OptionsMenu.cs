@@ -14,25 +14,24 @@ public class OptionsMenu : MonoBehaviour
     public void ChangeHintModeValue()
     {
         //testing
-        string output = "Hint Mode is set to: ";
-        string change = "Hint Mode Changed to: ";
+        // string output = "Hint Mode is set to: ";
+        // string change = "Hint Mode Changed to: ";
         if (toggleHints.GetComponent<Toggle>().isOn)
         {
-            output += PlayerPrefs.GetInt("HintMode");
-            Debug.Log(output);
+            // output += PlayerPrefs.GetInt("HintMode");
+            // Debug.Log(output);
             PlayerPrefs.SetInt("HintMode", 1);
-            change += PlayerPrefs.GetInt("HintMode");
-            Debug.Log(change);
+            // change += PlayerPrefs.GetInt("HintMode");
+            // Debug.Log(change);
         }
         else
         {
-            output += PlayerPrefs.GetInt("HintMode");
-            Debug.Log(output);
+            // output += PlayerPrefs.GetInt("HintMode");
+            // Debug.Log(output);
             PlayerPrefs.SetInt("HintMode", 0);
-            change += PlayerPrefs.GetInt("HintMode");
-            Debug.Log(change);
+            // change += PlayerPrefs.GetInt("HintMode");
+            // Debug.Log(change);
         }
-        // UpdateToggleSwitch();
     }
 
     void UpdateToggleSwitch()
