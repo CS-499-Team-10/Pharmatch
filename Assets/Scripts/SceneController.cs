@@ -135,14 +135,14 @@ public abstract class SceneController : MonoBehaviour
             }
         }
         currentDrugs = SampleDrugs(8);
-        Debug.Log(currentDrugs.Count);
+        // Debug.Log(currentDrugs.Count);
 
         secondaryText = "";
     }
 
     public virtual void CardTapped(DrugTile card)
     {
-        Debug.Log("wrong");
+        // Debug.Log("wrong");
     }
 
     public virtual void IncrementScore(int addedScore)
@@ -225,7 +225,7 @@ public abstract class SceneController : MonoBehaviour
                 unique += 1;
             }
         }
-        Debug.Log("Unique classes: " + unique);
+        // Debug.Log("Unique classes: " + unique);
         return unique;
     }
 

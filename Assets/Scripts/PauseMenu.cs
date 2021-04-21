@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,10 +10,25 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject gameGrid;
     GameObject backgroundMusic;
     [SerializeField] GameObject soundEffect;
+    [SerializeField] GameObject toggleBGM;
+    [SerializeField] GameObject toggleSFX;
     static bool _isPaused = false;
     public static bool isPaused
     {
         get { return _isPaused; }
+    }
+    GameObject FindBGM()
+    {
+        List<GameObject> objectsInScene = new List<GameObject>();
+
+        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+        {
+            if (go.name == "BGM")
+            {
+                return go;
+            }
+        }
+        return null;
     }
 
     private void Start()
@@ -25,7 +41,7 @@ public class PauseMenu : MonoBehaviour
 
     void Awake()
     {
-        backgroundMusic = GameObject.Find("BGM");
+        backgroundMusic = FindBGM();
     }
 
     public void PauseButton()
@@ -51,13 +67,14 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    public void ToggleSFX(bool value)
+    public void ToggleSFX()
     {
-        soundEffect.SetActive(!soundEffect.activeSelf);
+        soundEffect.SetActive(toggleSFX.GetComponent<Toggle>().isOn);
     }
 
-    public void ToggleMusic(bool value)
+    public void ToggleMusic()
     {
-        backgroundMusic.SetActive(!backgroundMusic.activeSelf);
+        // Debug.Log("turning musing to: " + value);
+        backgroundMusic.SetActive(toggleBGM.GetComponent<Toggle>().isOn);
     }
 }

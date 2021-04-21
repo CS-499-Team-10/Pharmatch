@@ -481,6 +481,8 @@ MonoBehaviour:
   menuPanel: {fileID: 500532856}
   gameGrid: {fileID: 213624137}
   soundEffect: {fileID: 536822491}
+  toggleBGM: {fileID: 2112341374}
+  toggleSFX: {fileID: 646019957}
 --- !u!1 &213624137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,7 +1548,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 212828949}
         m_MethodName: ToggleSFX
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4184,14 +4186,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 212828949}
         m_MethodName: ToggleMusic
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   m_IsOn: 1
 --- !u!1 &2113969868
