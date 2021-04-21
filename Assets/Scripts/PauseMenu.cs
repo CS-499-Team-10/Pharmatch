@@ -42,6 +42,8 @@ public class PauseMenu : MonoBehaviour
     void Awake()
     {
         backgroundMusic = FindBGM();
+        toggleBGM.GetComponent<Toggle>().isOn = backgroundMusic.activeInHierarchy;
+        toggleSFX.GetComponent<Toggle>().isOn = soundEffect.activeInHierarchy;
     }
 
     public void PauseButton()
