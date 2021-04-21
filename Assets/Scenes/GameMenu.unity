@@ -4953,6 +4953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cd45e3d19fe1b479939969df5238b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggleHints: {fileID: 2137203690}
 --- !u!1 &1838645410
 GameObject:
   m_ObjectHideFlags: 0
