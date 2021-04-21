@@ -15,6 +15,8 @@ public class TapController : SceneController
             CreateCard();
         }
         secondaryText = "Lives: " + livesLeft;
+
+        base.ShowHighScore(0);
     }
 
     protected DrugTile firstSelected;
@@ -64,7 +66,7 @@ public class TapController : SceneController
                 secondaryText = "Lives: " + livesLeft;
                 if (livesLeft == 0)
                 {
-                    GameOver();
+                    GameOver(0);
                 }
             }
             firstSelected.UnSelect();
@@ -72,5 +74,13 @@ public class TapController : SceneController
         }
         firstSelected = null;
         secondSelected = null;
+    }
+
+    int GetHighScore() {
+        return PlayerPrefs.GetInt("TapHigh");
+    }
+
+    void SetHighScore(int newHigh) {
+        PlayerPrefs.SetInt("TapHigh", newHigh);
     }
 }

@@ -22,6 +22,8 @@ public class TimedTapController : SceneController
         {
             CreateCard();
         }
+
+        base.ShowHighScore(1);
     }
 
     void Update()
@@ -55,7 +57,7 @@ public class TimedTapController : SceneController
     {
         if (!PauseMenu.isPaused)
         {
-            if (tilesOnScreen.Count == GetCells().Length) GameOver();
+            if (tilesOnScreen.Count == GetCells().Length) GameOver(1);
             timeSinceSpawn = 0;
             UpdateSpawnTime();
             base.CreateCard();
@@ -107,5 +109,13 @@ public class TimedTapController : SceneController
         }
         firstSelected = null;
         secondSelected = null;
+    }
+
+    int GetHighScore() {
+        return PlayerPrefs.GetInt("TimedHigh");
+    }
+
+    void SetHighScore(int newHigh) {
+        PlayerPrefs.SetInt("TimedHigh", newHigh);
     }
 }
