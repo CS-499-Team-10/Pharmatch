@@ -1,3 +1,5 @@
+name: Upload web build
+on:
   push:
     branches:
       - master
