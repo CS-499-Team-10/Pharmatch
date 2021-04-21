@@ -904,8 +904,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 480, y: 450}
+  m_AnchoredPosition: {x: 0.7, y: 11.25}
+  m_SizeDelta: {x: 481.34937, y: 427.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &299502665
 MonoBehaviour:
@@ -926,10 +926,29 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Menu Background Image:
+  m_text: 'Created by:
 
-    https://www.freepik.com/vectors/medical Medical
-    vector created by macrovector - www.freepik.com'
+    Gerard (Jed) Mijares
+
+    Michael Schardein
+
+    Cameron
+    Ritenour
+
+    Matt Szarek
+
+    Jake Breunig
+
+
+    Resources:
+
+    Design vector
+    created by freepik - www.freepik.com
+
+    Checked free vector icons designed
+    by Roundicons via @flaticon
+
+    Medical vector created by macrovector - www.freepik.com'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -963,7 +982,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
