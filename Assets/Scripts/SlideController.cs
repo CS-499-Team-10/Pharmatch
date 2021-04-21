@@ -27,6 +27,8 @@ public class SlideController : SceneController
         {
             CreateCard();
         }
+
+        base.ShowHighScore(2);
     }
 
     protected override void PopulateTile(DrugTile newTile)
@@ -131,7 +133,7 @@ public class SlideController : SceneController
             }
         }
         CreateCard(dir); // create a card at the opposite direction of the swipe
-        if (CheckGameOver()) GameOver();
+        if (CheckGameOver()) GameOver(2);
     }
 
     // creates a card at the opposite end of dir
@@ -157,5 +159,13 @@ public class SlideController : SceneController
             if (CanMove(dir)) return false;
         }
         return true;
+    }
+
+    int GetHighScore() {
+        return PlayerPrefs.GetInt("SlideHigh");
+    }
+
+    void SetHighScore(int newHigh) {
+        PlayerPrefs.SetInt("SlideHigh", newHigh);
     }
 }

@@ -30,11 +30,14 @@ public abstract class SceneController : MonoBehaviour
     [SerializeField] private bool useDebugNames = false; // set to true to use debug names for drugs
 
     private int _score = 0;
+    private int _highScore = 0;
     public int score
     {
         get { return _score; }
     }
     [SerializeField] private TMP_Text scoreText;
+
+    [SerializeField] private TMP_Text highScoreText;
 
     // used for other text elements, such as lives
     [SerializeField] private TMP_Text secondaryTMP;
@@ -107,7 +110,7 @@ public abstract class SceneController : MonoBehaviour
     {
         // //temporary addition to test LoadDrugs
         // TestLoadDrugs();
-        hintMode = Convert.ToBoolean((PlayerPrefs.GetInt("HintMode")));
+        hintMode = Convert.ToBoolean((PlayerPrefs.GetInt("HintMode"))); //get player hint mode preferences
         string fp = "60DrugNames";
         if (useDebugNames) fp = "testDrugNames";
         drugs = LoadDrugs(fp);
@@ -138,6 +141,7 @@ public abstract class SceneController : MonoBehaviour
         // Debug.Log(currentDrugs.Count);
 
         secondaryText = "";
+        highScoreText.text = "";
     }
 
     public virtual void CardTapped(DrugTile card)
@@ -254,14 +258,42 @@ public abstract class SceneController : MonoBehaviour
         else return name2;
     }
 
-    protected void GameOver()
+    protected void GameOver(int gameMode)
     {
         // Restart();
+        UpdateHighScore(gameMode);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
+    }
+
+
+    public void UpdateHighScore(int gameMode) {
+        if(gameMode == 0) {
+            PlayerPrefs.SetInt("TapHigh", _score);
+        }
+        else if (gameMode == 1) {
+            PlayerPrefs.SetInt("TimedHigh", _score);
+        }
+        else if (gameMode == 2) {
+            PlayerPrefs.SetInt("SlideHigh", _score);
+        }
+    }
+
+    public void ShowHighScore(int gameMode) {
+        if (gameMode == 0) {
+            highScoreText.text = "High Score: " + PlayerPrefs.GetInt("TapHigh");
+        }
+        else if (gameMode == 1) {
+            highScoreText.text = "High Score: " + PlayerPrefs.GetInt("TimedHigh");
+        }
+        else if (gameMode == 2) {
+            highScoreText.text = "High Score: " + PlayerPrefs.GetInt("SlideHigh");
+        }
     }
 
     public void SetColor(DrugTile tile)
     {
         tile.GetComponent<Image>().color = drugnameToColor[tile.drugName];
     }
+
 }
