@@ -12,12 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-#           - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-#           - StandaloneWindows # Build a Windows standalone.
-#           - StandaloneWindows64 # Build a Windows 64-bit standalone.
-#           - StandaloneLinux64 # Build a Linux 64-bit standalone.
-#           - iOS # Build an iOS player.
-#           - Android # Build an Android .apk standalone app.
           - WebGL # WebGL.
     steps:
       - uses: actions/checkout@v2
@@ -41,4 +35,4 @@ jobs:
       - uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: build/${{ matrix.targetPlatform }} # The folder the action should deploy.
+          folder: build/WebGL # The folder the action should deploy.
