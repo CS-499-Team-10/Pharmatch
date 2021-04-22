@@ -1,7 +1,7 @@
 {
 "companyName": "CS 499 Team 10",
 "productName": "Pharmatch",
-"productVersion": "0.0.252",
+"productVersion": "0.0.253",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
 "wasmFrameworkUrl": "WebGL.wasm.framework.unityweb",
