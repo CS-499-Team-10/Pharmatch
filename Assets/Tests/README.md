@@ -2,7 +2,7 @@
 
 ## System Test Plan
 
-Our testing plan will likely differ a bit from a typical software package. The user is never prompted to provide any data to be validated, and as such the input they provide is rather limited. Additionally, randomness is a major factor in many aspects of our game, making it more difficult to craft any sort of deterministic test for gameplay purposes. We also believe that graphical and audio glitches are more relevant for game testing, and these can be harder to automatically detect. As such, we have found that simply playtesting the game and using exploratory testing were invaluable in finding and fixing bugs. Still, we were able to also implement automatic testing for some cases.
+Our testing plan will likely differ a bit from a typical software package. The user is never prompted to provide any data to be validated, and the input they do provide is relatively simple. Additionally, randomness is a major factor in many aspects of our game, making it more difficult to craft any sort of deterministic test for gameplay purposes. We also believe that graphical and audio glitches are more relevant for game testing, and these can be more difficult to automatically detect. As such, we have found that simply playtesting the game and using exploratory testing were invaluable in finding and addressing bugs. Still, we were able to also implement automatic testing for some cases.
 
 Our automatic tests use the Unity Test Framework, which consists of a Unity integration of the NUnit testing library. Additionally, GitHub Actions were added to automatically run all our tests and build the project whenever code is pushed. This makes it practically a trivial matter to run all our automatic tests regularly.
 
@@ -22,8 +22,12 @@ We found pair programming very helpful in hashing out the core mechanics of our 
 
 ## Coding Standards
 
-VS Code's C# extension was used to format code regularly. This helped keep code looking uniform throughout the codebase.
+VS Code's C# extension was used to format code regularly. This helped keep code looking uniform throughout the codebase. We also made an effort to adhere to general Unity style guidelines, such as using PascalCase for method names.
 
 ## Prototyping and Sponsor Feedback
 
 We were able to quickly hack together a few prototypes to make sure the core mechanics of our game were fun and functional. By presenting these to our sponsor every sprint, we could discuss changes to the game and get feedback on what we had implemented. This helped us stay focused on making improvements that they saw as most important and change what they weren't so fond of.
+
+## Issue Tracking
+
+Each sprint, we met and planned out what tasks to focus on. We plotted out all these tasks as stories on a Jira board, and kept a record of which tasks got completed and which would need to continue to the next sprint.
