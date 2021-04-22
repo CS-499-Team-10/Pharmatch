@@ -133,7 +133,13 @@ public class SlideController : SceneController
             }
         }
         CreateCard(dir); // create a card at the opposite direction of the swipe
-        if (CheckGameOver()) GameOver(2);
+        if (CheckGameOver()) Invoke("GameOver", 1);
+    }
+
+    protected override void GameOver()
+    {
+        UpdateHighScore("SlideHigh");
+        base.GameOver();
     }
 
     // creates a card at the opposite end of dir
@@ -161,11 +167,13 @@ public class SlideController : SceneController
         return true;
     }
 
-    int GetHighScore() {
-        return PlayerPrefs.GetInt("SlideHigh");
-    }
+    // int GetHighScore()
+    // {
+    //     return PlayerPrefs.GetInt("SlideHigh");
+    // }
 
-    void SetHighScore(int newHigh) {
-        PlayerPrefs.SetInt("SlideHigh", newHigh);
-    }
+    // void SetHighScore(int newHigh)
+    // {
+    //     PlayerPrefs.SetInt("SlideHigh", newHigh);
+    // }
 }

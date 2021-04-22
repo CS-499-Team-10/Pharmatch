@@ -29,7 +29,7 @@ public abstract class SceneController : MonoBehaviour
 
     [SerializeField] private bool useDebugNames = false; // set to true to use debug names for drugs
 
-    private int _score = 0;
+    protected int _score = 0;
     private int _highScore = 0;
     public int score
     {
@@ -258,35 +258,29 @@ public abstract class SceneController : MonoBehaviour
         else return name2;
     }
 
-    protected void GameOver(int gameMode)
+    protected virtual void GameOver()
     {
-        // Restart();
-        UpdateHighScore(gameMode);
+        // UpdateHighScore(gameMode);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-
+    }
+    public void UpdateHighScore(string gameMode)
+    {
+        if (PlayerPrefs.GetInt(gameMode) < _score)
+            PlayerPrefs.SetInt(gameMode, _score);
     }
 
-
-    public void UpdateHighScore(int gameMode) {
-        if(gameMode == 0) {
-            PlayerPrefs.SetInt("TapHigh", _score);
-        }
-        else if (gameMode == 1) {
-            PlayerPrefs.SetInt("TimedHigh", _score);
-        }
-        else if (gameMode == 2) {
-            PlayerPrefs.SetInt("SlideHigh", _score);
-        }
-    }
-
-    public void ShowHighScore(int gameMode) {
-        if (gameMode == 0) {
+    public void ShowHighScore(int gameMode)
+    {
+        if (gameMode == 0)
+        {
             highScoreText.text = "High Score: " + PlayerPrefs.GetInt("TapHigh");
         }
-        else if (gameMode == 1) {
+        else if (gameMode == 1)
+        {
             highScoreText.text = "High Score: " + PlayerPrefs.GetInt("TimedHigh");
         }
-        else if (gameMode == 2) {
+        else if (gameMode == 2)
+        {
             highScoreText.text = "High Score: " + PlayerPrefs.GetInt("SlideHigh");
         }
     }

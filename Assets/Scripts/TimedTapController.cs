@@ -57,11 +57,17 @@ public class TimedTapController : SceneController
     {
         if (!PauseMenu.isPaused)
         {
-            if (tilesOnScreen.Count == GetCells().Length) GameOver(1);
+            if (tilesOnScreen.Count == GetCells().Length) GameOver();
             timeSinceSpawn = 0;
             UpdateSpawnTime();
             base.CreateCard();
         }
+    }
+
+    protected override void GameOver()
+    {
+        UpdateHighScore("TimedHigh");
+        base.GameOver();
     }
 
     public override void CardTapped(DrugTile card)
@@ -111,11 +117,13 @@ public class TimedTapController : SceneController
         secondSelected = null;
     }
 
-    int GetHighScore() {
-        return PlayerPrefs.GetInt("TimedHigh");
-    }
+    // int GetHighScore()
+    // {
+    //     return PlayerPrefs.GetInt("TimedHigh");
+    // }
 
-    void SetHighScore(int newHigh) {
-        PlayerPrefs.SetInt("TimedHigh", newHigh);
-    }
+    // void SetHighScore(int newHigh)
+    // {
+    //     PlayerPrefs.SetInt("TimedHigh", newHigh);
+    // }
 }

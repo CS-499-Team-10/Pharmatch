@@ -66,7 +66,7 @@ public class TapController : SceneController
                 secondaryText = "Lives: " + livesLeft;
                 if (livesLeft == 0)
                 {
-                    GameOver(0);
+                    Invoke("GameOver", 1);
                 }
             }
             firstSelected.UnSelect();
@@ -76,11 +76,19 @@ public class TapController : SceneController
         secondSelected = null;
     }
 
-    int GetHighScore() {
-        return PlayerPrefs.GetInt("TapHigh");
+    protected override void GameOver()
+    {
+        UpdateHighScore("TapHigh");
+        base.GameOver();
     }
 
-    void SetHighScore(int newHigh) {
-        PlayerPrefs.SetInt("TapHigh", newHigh);
-    }
+    // int GetHighScore()
+    // {
+    //     return PlayerPrefs.GetInt("TapHigh");
+    // }
+
+    // void SetHighScore(int newHigh)
+    // {
+    //     PlayerPrefs.SetInt("TapHigh", newHigh);
+    // }
 }
