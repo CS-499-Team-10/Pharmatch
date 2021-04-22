@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     public void Awake()
     {
         music = GameObject.Find("BGM");
-        if(music.GetComponent<AudioSource>().clip != tap)
+        if(music != null && music.GetComponent<AudioSource>().clip != tap)
         {
             music.GetComponent<AudioSource>().clip = tap;
             music.GetComponent<AudioSource>().Play();
@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
     public void PlayTapGame()
     {
         ModeSelector.mode = ModeSelector.Mode.Tap; // set a certain game mode
-        if (music.GetComponent<AudioSource>().clip != tap)
+        if (music != null && music.GetComponent<AudioSource>().clip != tap)
         {
             music.GetComponent<AudioSource>().clip = tap;
             music.GetComponent<AudioSource>().Play();
@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
     public void PlayTimedGame()
     {
         ModeSelector.mode = ModeSelector.Mode.Timed; // set a certain game mode
-        if (music.GetComponent<AudioSource>().clip != timed)
+        if (music != null && music.GetComponent<AudioSource>().clip != timed)
         {
             music.GetComponent<AudioSource>().clip = timed;
             music.GetComponent<AudioSource>().Play();
@@ -44,7 +44,7 @@ public class MainMenu : MonoBehaviour
     public void PlaySlideGame()
     {
         ModeSelector.mode = ModeSelector.Mode.Slide; // set a certain game mode
-        if (music.GetComponent<AudioSource>().clip != slide)
+        if (music != null && music.GetComponent<AudioSource>().clip != slide)
         {
             music.GetComponent<AudioSource>().clip = slide;
             music.GetComponent<AudioSource>().Play();
