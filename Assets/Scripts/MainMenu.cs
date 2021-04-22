@@ -11,9 +11,23 @@ public class MainMenu : MonoBehaviour
 
     private GameObject music;
 
+    GameObject FindBGM()
+    {
+        List<GameObject> objectsInScene = new List<GameObject>();
+
+        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+        {
+            if (go.name == "BGM")
+            {
+                return go;
+            }
+        }
+        return null;
+    }
+
     public void Awake()
     {
-        music = GameObject.Find("BGM");
+        music = FindBGM();
         if(music != null && music.GetComponent<AudioSource>().clip != tap)
         {
             music.GetComponent<AudioSource>().clip = tap;
